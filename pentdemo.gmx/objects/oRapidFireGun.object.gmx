@@ -77,7 +77,7 @@ if mouse_check_button(mb_left) and SecondsSinceLastShot &gt;= SecondsBetweenShot
 //Reset the timer...
     SecondsSinceLastShot = 0
     
-      MyFlash = instance_create(x,y,oMFGun)
+    MyFlash = instance_create(x,y,oMFGun)
     MyFlash.direction = image_angle
     MyFlash.speed = 200 / room_speed
     MyFlash.image_angle = image_angle
@@ -90,11 +90,13 @@ if mouse_check_button(mb_left) and SecondsSinceLastShot &gt;= SecondsBetweenShot
     MyBullet.speed = 600 / room_speed
     MyBullet.image_angle = image_angle
     
-    Kick = 300 / room_speed
+    Kick = 50 / room_speed
     KickDirection = image_angle + 180
     
     Owner.xShunt = lengthdir_x(Kick,KickDirection)
     Owner.yShunt = lengthdir_y(Kick,KickDirection)
+    
+    ResetShunts()
     
     ScreenShake(25)
     

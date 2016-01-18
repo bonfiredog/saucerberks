@@ -1,6 +1,6 @@
 
 //Set how many blocks we want
-NumberOfBlocks = irandom_range(25,40)
+NumberOfBlocks = irandom_range(40,60)
 //How many times we will try to place the blocks
 NumberOfAttempts = NumberOfBlocks * 100
 Attempt = 0
@@ -24,7 +24,7 @@ Attempt = Attempt + 1
 }
 
 //Set how many blocks we want
-NumberOfClutter = irandom_range(1000,2000)
+NumberOfClutter = irandom_range(1500,2500)
 //How many times we will try to place the blocks
 NumberOfCAttempts = NumberOfClutter * 100
 CAttempt = 0
@@ -69,11 +69,7 @@ SAttempt = SAttempt +1
 
 
 //Do the same with boomers.
-if oCurrentScore.CurrentScore < 10 {
 NumberOfBoomers = irandom_range(3,7)
-} else if oCurrentScore.CurrentScore >= 10 {
-NumberOfBoomers = irandom_range(6,12)
-}
 
 global.NumberOfBoomersRemaining = NumberOfBoomers
 NumberOfAttempts = NumberOfBoomers * 100
@@ -104,8 +100,7 @@ NewTint.image_blend = choose(Colour1,Colour2)
 
 //... And with stars.
 
-NumberOfStars = irandom_range (900,1500)
-
+NumberOfStars = irandom_range (1000,1600)
 
 while instance_number(oStar) < NumberOfStars {
 NewStar = instance_create(random(room_width),random(room_height),oStar)

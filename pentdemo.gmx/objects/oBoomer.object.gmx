@@ -44,6 +44,8 @@ ThingsEaten = 0
 HasBeenHit = false
 
 BoomerShot = false
+
+CurrentSetBoomerSpeed = 100 / room_speed
 </string>
           </argument>
         </arguments>
@@ -66,16 +68,39 @@ BoomerShot = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-if oMenu.Mode = "Pause" {
-oBoomer.speed = 0
-oBoomer.image_speed = 0
+            <string>if oMenu.Mode = "Pause" {
+speed = 0
+image_speed = 0
 
 } else {
 
-oBoomer.speed = 100 / room_speed
-oBoomer.image_speed = 5 / room_speed
+speed = CurrentSetBoomerSpeed
+image_speed = 5 / room_speed
 }
+
+
+/* Collision */
+//If a block is about to touch enemy, it's big enough to collide with...
+SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
+
+if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.9 {
+//Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
+OriginalSpeed = CurrentSetBoomerSpeed
+//Change the player's direction to almost the opposite of what they hit, and set them as 'in the process of colliding'.
+
+if speed &gt; 0 {
+direction = direction - random_range(130,220)
+} else if speed &lt;= 0 {
+direction = point_distance(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
+}
+speed = OriginalSpeed
+Colliding = true
+}
+
+
+
+
+
 
 /*Eat Globs From Wave Gun */
 DetectionRange = 400
@@ -134,11 +159,9 @@ image_angle = direction
 
 /* Bouncing */
 
-EnemyCollisionWithSolids()
 StayInsideRoom()
 
 /* Damage */
-
 
 if instance_exists(oPlayer) and oPlayer.Stage = "Boomers" and place_meeting(x,y,oBullet) {
 BoomerShot = true
@@ -146,7 +169,7 @@ BoomerShot = true
 
 
 
-if place_meeting(x,y,oBullet) and ThingsEaten = 0 {
+if place_meeting(x,y,oBullet) and ThingsEaten &lt;= 0 {
 audio_play_sound(aNegShot,1,false)
 HasBeenHit = true
 sprite_index = sEnemyFlash

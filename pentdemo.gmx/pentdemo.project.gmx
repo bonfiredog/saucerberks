@@ -19,6 +19,7 @@
       <sound>sound\aPlayerReform</sound>
       <sound>sound\aTutWarp</sound>
       <sound>sound\aTextChange</sound>
+      <sound>sound\sound31</sound>
     </sounds>
     <sounds name="Weapons">
       <sound>sound\aLiquidShot</sound>
@@ -128,6 +129,9 @@
     </sprites>
     <sprites name="Meta">
       <sprite>sprites\sTitle</sprite>
+      <sprite>sprites\sLogoScreen</sprite>
+      <sprite>sprites\sBonfireDogLogo</sprite>
+      <sprite>sprites\sInstructLogo</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -186,7 +190,9 @@
     <font>fonts\fHighScoreBigFlash</font>
     <font>fonts\fTutorialTitle</font>
     <font>fonts\fBoomersRemaining</font>
+    <font>fonts\fFieldName</font>
     <font>fonts\fBoomersRemainingBig</font>
+    <font>fonts\fFieldNameBig</font>
   </fonts>
   <objects name="objects">
     <objects name="Meta">
@@ -197,6 +203,9 @@
       <object>objects\oMenu</object>
       <object>objects\oCurrentScore</object>
       <object>objects\oUI2</object>
+      <object>objects\oLogoScreen</object>
+      <object>objects\oBonfireDogLogo</object>
+      <object>objects\oInstructLogo</object>
     </objects>
     <objects name="Level">
       <object>objects\oStar</object>

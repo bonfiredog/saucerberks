@@ -90,6 +90,11 @@ SoundPlay7 = false
 SoundPlay8 = false
 SoundPlay9 = false
 
+image_xscale = 1.5
+image_yscale = image_xscale
+
+DriftMinimum = 0.5
+
 </string>
           </argument>
         </arguments>
@@ -112,9 +117,24 @@ SoundPlay9 = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>if keyboard_check(ord('W')) = false and keyboard_check(ord('S')) = false and keyboard_check(ord('A')) = false and keyboard_check(ord('D')) = false and speed &gt; 0 {
+DriftSpeed = 10 / room_speed
+speed = speed - DriftSpeed
+}
 
-/*Stay inside the room */
+//No matter whether the player is docked or not, stop immediately if the game is paused.
+if oMenu.Mode = "Pause" {
+oPlayer.speed = 0
+} 
+
+/* ------------------------------------------------------------------------------------------------------ */
+
+//The following applies if the player is not docked (i.e. if they have control).
+if Docked = false {
+//Create a wake if the player is moving (once per step).
+if speed &gt; 0 {
+instance_create(x,y,oPlayerWake)
+}
 
 //Put the player back into the room if they stray beyond it.
 if x &lt; 0 {x = 0}
@@ -124,6 +144,32 @@ if x &gt; room_width {x = room_width}
 if y &gt; room_height {y = room_height}
 
 
+/* -------------------------------------------------------------------------------------------------------- */
+
+//The following only occurs if the game is not paused and the player is not docked.
+if oMenu.Mode != "Pause" and Undocking = false {
+
+
+/* Collision */
+//If a block is about to touch us, it's big enough to collide with, and we aren't already colliding with something else...
+SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
+
+if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.9{
+//Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
+OriginalSpeed = 350 / room_speed
+ScreenShake(25)
+//Change the player's direction to almost the opposite of what they hit, and set them as 'in the process of colliding'.
+if speed &gt; 0 {
+direction = direction - random_range(130,220)
+} else if speed &lt;= 0 {
+direction = point_direction(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
+}
+speed = OriginalSpeed
+Colliding = true
+}
+}
+
+//If the player is 'in the process of colliding, set a deceleration rate, and have it decelerate by that amount.
 if Colliding = true {
 Deceleration = 0.5
 if speed &gt; 0 {
@@ -133,93 +179,71 @@ Colliding = false
 }
 }
 
-
-//Stop the player immediately if the game is paused.
-if oMenu.Mode = "Pause" {
-oPlayer.speed = 0
-}
+/* ---------------------------------------------------------------------------------------------- */
 
 
-if Docked = false {
+//The following only occurs if the game is not paused, and the player is not 'in the process of colliding', and they are not docked.
+if oMenu.Mode != "Pause" and Colliding = false and Undocking = false{
 
-if speed &gt; 0 {
-instance_create(x,y,oPlayerWake)
-}
-
-if oMenu.Mode != "Pause" 
-and Colliding = false 
-and Undocking = false
-{
 /* Movement */
-
 //Speed
 MySpeed = 350 / room_speed
-speed = 0
 
 //Up
 if keyboard_check(ord('W')) {
 vspeed = -MySpeed
-
 }
+
 
 //Down
 if keyboard_check(ord('S')) {
 vspeed = MySpeed
 }
 
+
 //Left
 if keyboard_check(ord('A')) {
 hspeed = -MySpeed
 }
+
 
 //Right
 if keyboard_check(ord('D')) {
 hspeed = MySpeed
 }
 
+
+
 //If there is a Shunt happening, let it happen and then reset.
 hspeed = hspeed + xShunt
 vspeed = vspeed + yShunt
 ResetShunts()
 
-//If we are ABOUT to hit a block, stop.
-
-SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
-
-if instance_exists(SolidTouching)  
-and Colliding = false
-and SolidTouching.image_xscale &gt; 0.7
-{
-OriginalSpeed = speed
-ScreenShake(25)
-direction = direction + random_range(130,220)
-speed = OriginalSpeed
-Colliding = true
-}
 
 /* Facing */
-
 Facing = point_direction(x,y,mouse_x,mouse_y)
 
-/* Death */
 
+
+/* ----------------------------------------------------------------------------------------------------------- */
+
+
+
+/* Death */
 //If an enemy class is touching the player...
 EnemyTouchingMe = instance_place(x,y,oEnemy)
-
 if instance_exists(EnemyTouchingMe) or place_meeting(x,y,oGrenadeTargetExplosion) or place_meeting(x,y,oGrenadeBit) or place_meeting(x,y,oTurretDetTurretBolt) {
 ScreenShake(80)
-
 with oSwarmer {
 direction = point_direction(oPlayer.x,oPlayer.y,x,y)
+RunAwaySpeed = true
+RunAwayCountdown = random_range(120,240)
 }
-
-
 //...Explode into chunks, with how many bits the player is made of, using the player chunk object.
 global.PlayerLives = global.PlayerLives - 1
 with oBaitGun { instance_destroy() }
 with oRapidFireGun { instance_destroy() }
 if instance_exists(oGrenadeGun) { with oGrenadeGun { instance_destroy() } } 
-
 ExplodeIntoANumberOfChunks(oGame.NumberOfBitsThePlayerIsMadeOf, oBit)  
 //Play the player death sound.
 audio_play_sound(aPlayerDeath, 1, false) 
@@ -288,12 +312,6 @@ image_blend = c_white
 Undocking = false
 }
 }
-
-
-
-
-
-
 </string>
           </argument>
         </arguments>

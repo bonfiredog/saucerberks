@@ -26,15 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>//Set it going!
-if oCurrentScore.CurrentScore &lt;= 5 {
-InitialiseEnemyCollision(30, random(360))}
-else if oCurrentScore.CurrentScore &gt;= 6 &lt;= 10 {
-InitialiseEnemyCollision(40, random(360))}
-else if oCurrentScore.CurrentScore &gt;= 11 &lt;= 15 {
-InitialiseEnemyCollision(45, random(360))}
-else if oCurrentScore.CurrentScore &gt;= 16 {
-InitialiseEnemyCollision(55, random(360))}
 
+InitialiseEnemyCollision(30, random(360))
 
 State = "Idle"
 
@@ -44,6 +37,11 @@ image_yscale = image_xscale
 Eater = noone
 
 depth = -11
+
+CurrentSetSwarmerSpeed = 30 / room_speed
+
+RunAwaySpeed = false
+RunAwayCountdown = 0
 </string>
           </argument>
         </arguments>
@@ -66,13 +64,21 @@ depth = -11
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>if oMenu.Mode = "Pause" {
+speed = 0 } 
+else {
+if RunAwaySpeed = false {
+speed = CurrentSetSwarmerSpeed
+} else if RunAwaySpeed = true {
+speed = CurrentSetSwarmerSpeed * 1.5
+}
+} 
 
-
-
-
-if oMenu.Mode = "Pause" {
-oSwarmer.speed = 0 } else {oSwarmer.speed = 30 / room_speed}
+if RunAwayCountdown &gt; 0 {
+RunAwayCountdown = RunAwayCountdown - 1
+} else if RunAwayCountdown &lt;= 0 {
+RunAwaySpeed = false
+}
 
 
 /* A.I. Stuff */
@@ -81,8 +87,6 @@ if State = "Idle" {
 
 
 sprite_index = sExplodingEnemy
-
-
 if instance_exists(Eater) {
 State = "Eaten"
 } else if IHaveLineOfSightTo(oPlayer) and oPlayer.Docked = false {
@@ -141,19 +145,33 @@ image_angle = direction
 
 /* Bouncing */
 
-EnemyCollisionWithSolids()
-
 StayInsideRoom()
+/* Collision */
+//If a block is about to touch enemy, it's big enough to collide with...
+SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
+if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.9 {
+//Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
+OriginalSpeed = CurrentSetSwarmerSpeed
+//Change the player's direction to almost the opposite of what they hit, and set them as 'in the process of colliding'.
+speed = OriginalSpeed
+if speed &gt; 0 {
+direction = direction - random_range(130,220)
+} else if speed &lt;= 0 {
+direction = point_distance(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
+}
+}
+
+
+
 
 /* Damage */
 
 if HitByProjectile() or (place_meeting(x,y,oPlayer) and oPlayer.Undocking = true) or place_meeting(x,y,oGrenadeTargetExplosion){
 
-ScreenShake(15)
+    ScreenShake(15)
 ExplodeIntoANumberOfChunks(35, oSwarmerChunk)
 audio_play_sound(aDeath,1,false)
 }
-
 </string>
           </argument>
         </arguments>

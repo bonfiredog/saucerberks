@@ -55,6 +55,9 @@ global.HighScore = 0
 
 global.PlayerLives = 3
 
+TitleAlpha = 0
+image_alpha = 0
+
 </string>
           </argument>
         </arguments>
@@ -78,6 +81,20 @@ global.PlayerLives = 3
           <argument>
             <kind>1</kind>
             <string>//If we press the escape key, bring up the title screen, or remove it. 
+
+
+if room = rStart and oLogoScreen.TitlePageFadeIn = true {
+if TitleAlpha &lt; 1 {
+image_alpha = TitleAlpha + 0.01 
+}
+}
+
+
+if room = rStart and oLogoScreen.TitlePageFadeIn = true {
+if TitleAlpha &lt; 1 {
+TitleAlpha = TitleAlpha + 0.01 
+}
+}
 
 if room != rStart {
 if keyboard_check_pressed(vk_escape) {
@@ -145,6 +162,8 @@ Mode = "Lose"
 
 if Mode = "Titles" {
 
+draw_set_alpha(TitleAlpha)
+
 
 if file_exists("HighScore.txt") {
     x = room_width - 200
@@ -154,7 +173,7 @@ if file_exists("HighScore.txt") {
     draw_set_color(c_white)
     
     draw_set_font(fHighScore)
-    draw_text(x,y,"Most Fields Cleared:           " )
+    draw_text(x,y,"Most Dignities Restored:           " )
      draw_set_font(fHighScoreBig)
     y = 38
     HighScoreFlash = draw_text(x,y, global.HighScore)
@@ -171,8 +190,10 @@ if file_exists("HighScore.txt") {
     y = y + 150
     
     draw_set_font(fSubtitle)
-    draw_set_color(c_lime)
-    draw_text(x,y,"Calling all Saucerberks: Clear the debris field of morally-exempt aliens!")
+    if room = rStart {draw_set_color(c_lime)} else if room = rLevel1 or room = rTutorial {draw_set_color(c_yellow)}
+    draw_text(x,y,"Detritus of battles and wrecks past litter the spaceways... memorials to the dead.")
+    y = y + 50
+    draw_text(x,y,"Restore their dignity, Saucerberk! Remove the alien desecration!!")
 
     CurrentY = CurrentY + 280
     

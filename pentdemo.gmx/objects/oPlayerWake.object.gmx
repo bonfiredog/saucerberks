@@ -25,10 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>direction = oPlayer.image_angle - 180
+            <string>direction = oPlayer.direction - 180
 image_angle = oPlayer.image_angle
 
+speed = 100 / room_speed
+
 SecondsUntilFadeOut = 3
+
+image_xscale = 1.5
+image_yscale = image_xscale
 </string>
           </argument>
         </arguments>
@@ -51,7 +56,12 @@ SecondsUntilFadeOut = 3
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/* delete bullet when outside of room */
+            <string>if instance_exists(oPlayer) {
+direction = oPlayer.direction - 180
+image_angle = oPlayer.image_angle
+}
+
+/* delete bullet when outside of room */
 
 if x &lt; 0 or y &lt; 0 or x &gt; room_width or y &gt; room_height {
 

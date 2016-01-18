@@ -99,18 +99,17 @@ y = view_hport[0] / 2
 draw_set_alpha(TextAlpha)
 
 draw_set_font(fBoomersRemaining)
-draw_set_color(c_lime)
+draw_set_color(c_yellow)
 draw_set_halign(fa_center)
 draw_text(x,y,"There are")
 y = y + 80
-draw_set_color(c_red)
+draw_set_color(c_yellow)
 draw_set_font(fBoomersRemainingBig)
 draw_text(x,y,global.NumberOfBoomersRemaining)
-y = y + 80
-draw_set_color(c_lime)
+y = y + 100
+draw_set_color(c_yellow)
 draw_set_font(fBoomersRemaining) 
 draw_text(x,y,"remaining!")
-
 }
 
 
@@ -124,14 +123,14 @@ y = view_hport[0] / 2
 
 draw_set_alpha(TextAlpha)
 
-draw_set_font (fBoomersRemaining)
-draw_set_color(c_lime)
+draw_set_font (fFieldName)
+draw_set_color(c_yellow)
 draw_set_halign(fa_center)
 draw_text(x,y,"Now Entering")
 y = y + 100
-draw_set_color(c_red)
+draw_set_color(c_yellow)
 draw_set_halign(fa_center)
-draw_set_font(fBoomersRemainingBig)
+draw_set_font(fFieldNameBig)
 draw_text(x,y,global.CurrentGalaxyName)
 
 }
