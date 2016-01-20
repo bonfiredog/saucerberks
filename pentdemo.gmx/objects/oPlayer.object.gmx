@@ -93,7 +93,14 @@ SoundPlay9 = false
 image_xscale = 1.5
 image_yscale = image_xscale
 
-DriftMinimum = 0.5
+GrenadePickUpFlash = false
+NumberOfFlashes = 3
+TimeInBetweenFlashes = 15
+TimeOfEachFlash = 6
+
+TimeToDisplay = 180
+
+CollisionSoundPlayed = false
 
 </string>
           </argument>
@@ -154,10 +161,16 @@ if oMenu.Mode != "Pause" and Undocking = false {
 //If a block is about to touch us, it's big enough to collide with, and we aren't already colliding with something else...
 SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
 
-if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.9{
+if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.8{
 //Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
 OriginalSpeed = 350 / room_speed
 ScreenShake(25)
+if CollisionSoundPlayed = false {
+audio_sound_pitch(aCollision,random_range(0.8,2))
+audio_play_sound(aCollision,1,false)
+CollisionSoundPlayed = true
+}
+instance_create(x + hspeed,y + vspeed,oContactFlash)
 //Change the player's direction to almost the opposite of what they hit, and set them as 'in the process of colliding'.
 if speed &gt; 0 {
 direction = direction - random_range(130,220)
@@ -166,8 +179,9 @@ direction = point_direction(x,y,SolidTouching.x,SolidTouching.y) - random_range(
 }
 speed = OriginalSpeed
 Colliding = true
+CollisionSoundPlayed = false
 }
-}
+
 
 //If the player is 'in the process of colliding, set a deceleration rate, and have it decelerate by that amount.
 if Colliding = true {
@@ -177,6 +191,8 @@ speed = speed - Deceleration
 } else if speed &lt;= 0 {
 Colliding = false
 }
+}
+
 }
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -243,13 +259,39 @@ RunAwayCountdown = random_range(120,240)
 global.PlayerLives = global.PlayerLives - 1
 with oBaitGun { instance_destroy() }
 with oRapidFireGun { instance_destroy() }
-if instance_exists(oGrenadeGun) { with oGrenadeGun { instance_destroy() } } 
+if instance_exists(oGrenadeGun) and oGrenadeGun.Owner = oPlayer.id { with oGrenadeGun { instance_destroy() } } 
 ExplodeIntoANumberOfChunks(oGame.NumberOfBitsThePlayerIsMadeOf, oBit)  
 //Play the player death sound.
 audio_play_sound(aPlayerDeath, 1, false) 
 instance_create(x,y,oPlayerExplosion)
 }
 }
+
+//If not picked up, flash yellow.
+
+if GrenadePickUpFlash = true {
+if NumberOfFlashes &gt; 0 {
+if TimeInBetweenFlashes &gt; 0 {
+TimeInBetweenFlashes = TimeInBetweenFlashes - 1
+} else if TimeInBetweenFlashes &lt;= 0 {
+if TimeOfEachFlash &gt; 0 {
+TimeOfEachFlash = TimeOfEachFlash - 1
+image_blend = c_lime
+} else if TimeOfEachFlash &lt;= 0 {
+audio_sound_pitch(aFlashBeep, 1.8)
+audio_play_sound(aFlashBeep,1,false)
+image_blend = c_white
+NumberOfFlashes = NumberOfFlashes - 1
+TimeInBetweenFlashes = 15
+TimeOfEachFlash = 6
+}
+}
+} else if NumberOfFlashes &lt;= 0 {
+GrenadePickUpFlash = false
+}
+}
+
+
 
 
 //If we touch the Player Docking object, remove all functionality.
@@ -598,6 +640,26 @@ draw_text(posx + 80,posy + 80,"Fly into that little purple number when you're re
 }
 
 }
+}
+}
+
+
+
+//When first picked up, display a message about the GrenadeGun.
+
+if instance_exists(oGrenadeGun) and oGrenadeGun.PickUpMessage = true {
+
+posx = x - view_xview[0]
+posy = y - view_yview[0]
+
+if TimeToDisplay &gt; 0 {
+TimeToDisplay = TimeToDisplay - 1 
+draw_set_font(fTutorial)
+draw_set_colour(c_lime)
+draw_text(posx,posy - 100,"A Reaper bomb module! A real antique!")
+} else if TimeToDisplay &lt;= 0 {
+TimeToDisplay = 180
+oGrenadeGun.PickUpMessage = false
 }
 }
 

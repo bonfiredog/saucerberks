@@ -32,6 +32,10 @@ Owner = noone
 Flash = false
 TimeBetweenWink = 60
 TimeBetweenWinkDefault = 60 
+PickUpMessage = false
+TimeInBetweenFlashes = 90
+TimeOfEachFlash = 30
+
 </string>
           </argument>
         </arguments>
@@ -54,10 +58,8 @@ TimeBetweenWinkDefault = 60
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-//If the gun has an owner...
+            <string>//If the gun has an owner...
 if instance_exists(Owner)
-
 //Make it 'stick' to the owner's position, and face the way they are facing.
 {
 vspeed = Owner.vspeed
@@ -67,69 +69,87 @@ x = Owner.x
 y = Owner.y
 image_angle = Owner.Facing - 180
 
-
-
 if oMenu.Mode != "Pause" and oPlayer.Docked = false{
 //Fire a bullet, and send it out into the room, kick the gun back and the owner, as well as playing a sound.
-if mouse_check_button_pressed (mb_middle) {
+if mouse_check_button_pressed(mb_middle) {
         
-    MyGrenade = instance_create(x,y,oGrenade)
+MyGrenade = instance_create(x,y,oGrenade)
     
-    MyGrenade.direction = image_angle + random_range(-3,3)
-    MyGrenade.speed = random_range (300,700) / room_speed
-    MyGrenade.image_angle = MyGrenade.direction
-
-    
-    audio_play_sound(aGrenadeLaunch, 1, false)
-    
+MyGrenade.direction = image_angle + random_range(-3,3)
+MyGrenade.speed = random_range (300,700) / room_speed
+MyGrenade.image_angle = MyGrenade.direction
+audio_play_sound(aGrenadeLaunch, 1, false)    
 }
 
-if mouse_check_button_pressed (mb_middle) {
-
+if mouse_check_button_pressed(mb_middle) {
 sprite_index = sGrenadeGunFlash
-
 } else {
-
 sprite_index = sGrenadeGun
-
-}
-
-
-}
-
-
-}
-
-
-if Owner = noone {
-if TimeBetweenWink &gt; 0 {
-TimeBetweenWink = TimeBetweenWink - 1
-} else if TimeBetweenWink &lt; 20 and TimeBetweenWink &gt; 0 {
-image_blend = c_yellow
-TimeBetweenWink = TimeBetweenWink - 1 
-} else if TimeBetweenWink &lt;= 0 {
-TimeBetweenWink = TimeBetweenWinkDefault
 }
 }
-
-
-
-
-if instance_exists(Owner) = false and place_meeting(x,y,oPlayer) {
-audio_play_sound(aGrenadeGunPickup, 1, false)
-}
-
-
 
 if global.PlayerLives &lt;= 0 {
 instance_destroy()
+global.GrenadeGunGot = false
+}
 }
 
 
-CanBePickedUp()
+//If not picked up, flash yellow.
+
+if instance_exists(Owner) = false {
+
+if TimeInBetweenFlashes &gt; 0 {
+TimeInBetweenFlashes = TimeInBetweenFlashes - 1
+} else if TimeInBetweenFlashes &lt;= 0 {
+if TimeOfEachFlash &gt; 0 {
+TimeOfEachFlash = TimeOfEachFlash - 1
+image_blend = c_lime
+} else if TimeOfEachFlash &lt;= 0 {
+audio_play_sound(aFlashBeep,1,false)
+image_blend = c_white
+TimeInBetweenFlashes = 90
+TimeOfEachFlash = 30
+}
+}
+}
 
 
+if instance_exists(Owner) = false and place_meeting(x,y,oPlayer) {
+global.GrenadeGunGot = true
+audio_play_sound(aGrenadeGunPickup, 1, false)
+oPlayer.GrenadePickUpFlash = true
+image_blend = c_white
+PickUpMessage = true
+Owner = oPlayer.id
+depth = -121
+}
+
+
+StayInsideRoom()
 </string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string></string>
           </argument>
         </arguments>
       </action>

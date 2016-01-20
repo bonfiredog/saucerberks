@@ -12,6 +12,7 @@
   <showcolour>-1</showcolour>
   <code>instance_create(x,y,oCurrentScore)
 instance_create(x,y,oMenu)
+global.GrenadeGunGot = false 
 InitialiseRoom()
 GenerateLevel()
 instance_create(x,y,oLogoScreen)</code>

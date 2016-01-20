@@ -33,7 +33,7 @@ ThisGrenadeGun = instance_create(x,y,oGrenadeGun)
 with ThisGrenadeGun {
 direction = random(360)
 image_angle = random(360)
-speed = 50 / room_speed
+speed = 25 / room_speed
 SetSpinning(-1,1,1,1)
 }
 depth = -28

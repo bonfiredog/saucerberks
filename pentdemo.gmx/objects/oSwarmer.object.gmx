@@ -64,11 +64,21 @@ RunAwayCountdown = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if oMenu.Mode = "Pause" {
+            <string>PlayerInRangeDist = 300
+NearestSwarmer = instance_nearest(x,y,oSwarmer)
+PlayerSpeedIncreaseRange = 200
+
+
+
+if oMenu.Mode = "Pause" {
 speed = 0 } 
 else {
 if RunAwaySpeed = false {
+if instance_exists(oPlayer) and point_distance(x,y,oPlayer.x,oPlayer.y) &lt;= 200 {
+speed = CurrentSetSwarmerSpeed * 1.5 }
+else {
 speed = CurrentSetSwarmerSpeed
+}
 } else if RunAwaySpeed = true {
 speed = CurrentSetSwarmerSpeed * 1.5
 }
@@ -81,56 +91,81 @@ RunAwaySpeed = false
 }
 
 
+
+
+
+
+
 /* A.I. Stuff */
 
 if State = "Idle" {
 
 
+
 sprite_index = sExplodingEnemy
 if instance_exists(Eater) {
 State = "Eaten"
-} else if IHaveLineOfSightTo(oPlayer) and oPlayer.Docked = false {
-//Wander around aimlessly, as by default! But...
+} 
 
-//If we're looking generally in the player's direction and have line of sight.
-
-    //Set the direction (as an point in 360 degrees) of the player from the enemy
-    DirectionToPlayer = point_direction(x,y,oPlayer.x,oPlayer.y)
-    //Find out the angle between the direction we are facing and the player.
-    RelativeDirectionToPlayer = abs(image_angle - DirectionToPlayer)
-    //Set, in degrees, half of our field of view.
-    HalfFieldOfView = 45
-    
-    //If the angle between the enemy view and the player is less than 45 degrees, or close enough to a full revolution, set it to 'Alert'.
-    if RelativeDirectionToPlayer &lt; HalfFieldOfView or 
-    RelativeDirectionToPlayer &lt; 360 - HalfFieldOfView {
-    
-    State = "Alert"
+ 
+PlayerInRangeDist = 100
+if instance_exists(oPlayer) {
+if oPlayer.Docked = false {
+if point_distance(x,y,oPlayer.x,oPlayer.y) &lt; PlayerInRangeDist {
+State = "Alert"
+}
 }
 }
 
-    } else if State = "Alert" {
-    
-    sprite_index = sExplodingEnemyAlert
-    
-   if instance_exists(Eater) {
-    
-    State = "Eaten"
-    //Seek the player
 
-    } else if IHaveLineOfSightTo(oPlayer) {
-    //Go towards player
-    direction = point_direction(x,y,oPlayer.x,oPlayer.y)
-    } else {
-    State = "Idle"
-    }
+NearestSwarmer = instance_nearest(x,y,oSwarmer)
+if instance_exists(NearestSwarmer){
+if point_distance(x,y,NearestSwarmer.x,NearestSwarmer.y) &lt; 20 {
+if NearestSwarmer.State = "Alert" {
+State = "Alert"
+}
+}
+}
+
+
+if instance_exists(oPlayer) and IHaveLineOfSightTo(oPlayer) and oPlayer.Docked = false {    
+State = "Alert"
+}
+
+
+} else if State = "Alert" {
+    
+sprite_index = sExplodingEnemyAlert
+    
+if instance_exists(Eater) {
+State = "Eaten"
+}
+
+if instance_exists(NearestSwarmer) and point_distance(x,y,NearestSwarmer.x,NearestSwarmer.y) &lt; 50 and NearestSwarmer.State = "Alert" {
+if instance_exists(oPlayer) {
+direction = point_direction(x,y,oPlayer.x,oPlayer.y)
+}
+}
+
+
+else if instance_exists(oPlayer) and oPlayer.Docked = false and point_distance(x,y,oPlayer.x,oPlayer.y) &lt; PlayerInRangeDist {
+direction = point_direction(x,y,oPlayer.x,oPlayer.y)
+}
+
+
+else if instance_exists(oPlayer) and IHaveLineOfSightTo(oPlayer) and oPlayer.Docked = false {
+direction = point_direction(x,y,oPlayer.x,oPlayer.y)
+} 
+
+else {
+State = "Idle"
+direction = random(360)
+}
     
 } else if State = "Eaten" {
-
 if instance_exists(Eater) {
 
 //Move with the enemy that ate us
-
 x = Eater.x
 y = Eater.y
 } else {

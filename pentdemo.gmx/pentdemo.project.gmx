@@ -31,6 +31,7 @@
       <sound>sound\aNegShot</sound>
       <sound>sound\aItemPickup</sound>
       <sound>sound\aGrenadeGunPickup</sound>
+      <sound>sound\aFlashBeep</sound>
     </sounds>
     <sounds name="Meta">
       <sound>sound\aMenu</sound>
@@ -38,6 +39,7 @@
       <sound>sound\aSaucerberks</sound>
       <sound>sound\aLose</sound>
       <sound>sound\aVictory</sound>
+      <sound>sound\aSelect</sound>
     </sounds>
     <sounds name="Furniture">
       <sound>sound\aDock</sound>
@@ -46,6 +48,7 @@
       <sound>sound\aRockBreak</sound>
       <sound>sound\aGrenadeTargetExplosion</sound>
       <sound>sound\aGrenadeTargetHit</sound>
+      <sound>sound\aCollision</sound>
     </sounds>
   </sounds>
   <sprites name="sprites">
@@ -120,6 +123,7 @@
       <sprite>sprites\sTurretDetTurret</sprite>
       <sprite>sprites\sSpecialSmoke</sprite>
       <sprite>sprites\sSpecialSpark</sprite>
+      <sprite>sprites\sContactFlash</sprite>
       <sprite>sprites\sTurretDetTurretBolt</sprite>
       <sprite>sprites\sTurretDetTurretPulse</sprite>
       <sprite>sprites\sDockedRing</sprite>
@@ -280,6 +284,7 @@
       <object>objects\oParticle</object>
       <object>objects\oGrenadeTargetExplosion</object>
       <object>objects\oClutterEmitter</object>
+      <object>objects\oContactFlash</object>
     </objects>
   </objects>
   <rooms name="rooms">

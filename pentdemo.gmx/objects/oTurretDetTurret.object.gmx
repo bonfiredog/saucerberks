@@ -159,8 +159,8 @@ ThisPulse.image_angle = image_angle
 } 
 
 } else if AlertType = "Player" {
-direction = point_direction(x,y,PlayerInRange.x,PlayerInRange.y)
-if IHaveLineOfSightTo(PlayerInRange)  and Cooldown &lt;= 0 { //need to put in delay here, to make sure the turret is facing its target
+if instance_exists(oPlayer){direction = point_direction(x,y,PlayerInRange.x,PlayerInRange.y)}
+if instance_exists(oPlayer) and IHaveLineOfSightTo(PlayerInRange)  and Cooldown &lt;= 0 { //need to put in delay here, to make sure the turret is facing its target
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)
 ThisPulse.direction = direction
 ThisPulse.image_angle = image_angle

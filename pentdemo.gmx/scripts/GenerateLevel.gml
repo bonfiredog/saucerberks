@@ -53,7 +53,11 @@ SpawnOrNot = choose(true,false)
 
 if SpawnOrNot = true{
 while instance_number(oSpecialSolid) < 1 {
+if global.GrenadeGunGot = false {
 NewSpecial = instance_create(random_range(0 + SBlockSize,room_width - SBlockSize),random_range(0 + SBlockSize,room_height - SBlockSize), choose(oGrenadeDet2,oHidingDet,oTurretDet))
+} else if global.GrenadeGunGot = true {
+NewSpecial = instance_create(random_range(0 + SBlockSize,room_width - SBlockSize),random_range(0 + SBlockSize,room_height - SBlockSize), choose(oHidingDet,oTurretDet))
+}
 //choose(oHidingDet,oGrenadeDet2, oTurretDet)
 NewSpecial.x = (NewSpecial.x div SBlockSize) * SBlockSize
 NewCBlock.y = (NewCBlock.y div SBlockSize) * SBlockSize

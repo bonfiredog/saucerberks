@@ -58,6 +58,10 @@ global.PlayerLives = 3
 TitleAlpha = 0
 image_alpha = 0
 
+TitlePageFadeIn = false
+
+global.PlayedSoundYet = false
+
 </string>
           </argument>
         </arguments>
@@ -83,14 +87,14 @@ image_alpha = 0
             <string>//If we press the escape key, bring up the title screen, or remove it. 
 
 
-if room = rStart and oLogoScreen.TitlePageFadeIn = true {
+if room = rStart and TitlePageFadeIn = true {
 if TitleAlpha &lt; 1 {
 image_alpha = TitleAlpha + 0.01 
 }
 }
 
 
-if room = rStart and oLogoScreen.TitlePageFadeIn = true {
+if room = rStart and TitlePageFadeIn = true {
 if TitleAlpha &lt; 1 {
 TitleAlpha = TitleAlpha + 0.01 
 }
