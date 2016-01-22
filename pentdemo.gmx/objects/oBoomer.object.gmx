@@ -117,7 +117,7 @@ DistanceToGlob = point_distance(x,y,NearestGlob.x,NearestGlob.y)
 if DistanceToGlob &lt; DetectionRange {
 //Can I reach it?
 
-if IHaveLineOfSightTo(NearestGlob) {
+if BoomerHaveLineOfSightTo(NearestGlob) {
     //Go towards it!
     direction = point_direction(x,y,NearestGlob.x,NearestGlob.y)
     

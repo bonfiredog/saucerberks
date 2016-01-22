@@ -98,6 +98,10 @@ if room = rStart and TitlePageFadeIn = true {
 if TitleAlpha &lt; 1 {
 TitleAlpha = TitleAlpha + 0.01 
 }
+} 
+
+if room = rLevel1 or room = rTutorial {
+TitleAlpha = 1.0
 }
 
 if room != rStart {

@@ -59,12 +59,15 @@ SecondsSinceLastShot = SecondsBetweenShots
             <string>//If the gun has been picked up...
 if instance_exists(Owner)
 
+
+
 //Make the gun 'stick' to its owner, and face in the same direction...
 {
 x = Owner.x
 y = Owner.y
 image_angle = Owner.Facing
 SecondsBetweenShots = 1 / 10
+
 
 
 //Increment Timer
@@ -81,6 +84,7 @@ if mouse_check_button(mb_left) and SecondsSinceLastShot &gt;= SecondsBetweenShot
     MyFlash.direction = image_angle
     MyFlash.speed = 200 / room_speed
     MyFlash.image_angle = image_angle
+
 
     //Fire a bullet at a certain speed, in the direction we are facing, 
     //play a sound, and create a kickback on the player and the gun.

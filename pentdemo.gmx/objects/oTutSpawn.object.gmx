@@ -28,6 +28,8 @@
             <string>image_alpha = 0
 Mode = "Growing"
 depth = -12
+audio_sound_pitch(aTutSpawn,random_range(0.6,1.4))
+audio_play_sound(aTutSpawn,1,false)
 </string>
           </argument>
         </arguments>

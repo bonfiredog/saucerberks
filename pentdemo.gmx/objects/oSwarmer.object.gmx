@@ -128,7 +128,7 @@ State = "Alert"
 }
 
 
-if instance_exists(oPlayer) and IHaveLineOfSightTo(oPlayer) and oPlayer.Docked = false {    
+if instance_exists(oPlayer) and SwarmerHaveLineOfSightTo(oPlayer) and oPlayer.Docked = false {    
 State = "Alert"
 }
 
@@ -153,7 +153,7 @@ direction = point_direction(x,y,oPlayer.x,oPlayer.y)
 }
 
 
-else if instance_exists(oPlayer) and IHaveLineOfSightTo(oPlayer) and oPlayer.Docked = false {
+else if instance_exists(oPlayer) and SwarmerHaveLineOfSightTo(oPlayer) and oPlayer.Docked = false {
 direction = point_direction(x,y,oPlayer.x,oPlayer.y)
 } 
 

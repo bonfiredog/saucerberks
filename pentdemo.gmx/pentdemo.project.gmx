@@ -19,7 +19,7 @@
       <sound>sound\aPlayerReform</sound>
       <sound>sound\aTutWarp</sound>
       <sound>sound\aTextChange</sound>
-      <sound>sound\sound31</sound>
+      <sound>sound\aTutSpawn</sound>
     </sounds>
     <sounds name="Weapons">
       <sound>sound\aLiquidShot</sound>
@@ -76,6 +76,8 @@
       <sprite>sprites\sPlayerExplosion</sprite>
       <sprite>sprites\sUndockingExplosion</sprite>
       <sprite>sprites\sPlayerJets</sprite>
+      <sprite>sprites\sPlayerFireGun</sprite>
+      <sprite>sprites\sPlayerFireBait</sprite>
       <sprite>sprites\sMFGun</sprite>
       <sprite>sprites\sMFBlob</sprite>
       <sprite>sprites\sBit</sprite>
@@ -150,6 +152,8 @@
       <script>scripts\HitByProjectile.gml</script>
       <script>scripts\ScreenShake.gml</script>
       <script>scripts\IHaveLineOfSightTo.gml</script>
+      <script>scripts\SwarmerHaveLineOfSightTo.gml</script>
+      <script>scripts\BoomerHaveLineOfSightTo.gml</script>
     </scripts>
     <scripts name="Scoring">
       <script>scripts\LoadHighScore.gml</script>

@@ -134,6 +134,21 @@ if oMenu.Mode = "Pause" {
 oPlayer.speed = 0
 } 
 
+
+if oMenu.Mode != "Pause" and Undocking = false {
+if instance_exists(oRapidFireGun) and mouse_check_button(mb_left) {
+sprite_index = sPlayerFireGun
+} else if instance_exists(oBaitGun) and mouse_check_button(mb_right) {
+sprite_index = sPlayerFireBait
+} else {
+sprite_index = sPlayerJets
+}
+}
+
+
+
+
+
 /* ------------------------------------------------------------------------------------------------------ */
 
 //The following applies if the player is not docked (i.e. if they have control).
