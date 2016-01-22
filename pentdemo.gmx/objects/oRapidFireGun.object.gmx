@@ -65,7 +65,7 @@ if instance_exists(Owner)
 {
 x = Owner.x
 y = Owner.y
-image_angle = Owner.Facing
+image_angle = Owner.image_angle
 SecondsBetweenShots = 1 / 10
 
 

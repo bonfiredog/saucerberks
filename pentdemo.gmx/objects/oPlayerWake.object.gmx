@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>direction = oPlayer.direction - 180
+            <string>direction = oPlayer.image_angle - 180
 image_angle = oPlayer.image_angle
 
 speed = 100 / room_speed
@@ -57,7 +57,7 @@ image_yscale = image_xscale
           <argument>
             <kind>1</kind>
             <string>if instance_exists(oPlayer) {
-direction = oPlayer.direction - 180
+direction = oPlayer.image_angle - 180
 image_angle = oPlayer.image_angle
 }
 

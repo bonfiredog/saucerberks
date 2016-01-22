@@ -33,8 +33,6 @@ SelectedWeaponIndex = 0
 
 depth = -11
 
-//Set Facing to 0
-Facing = 0
 //Set initial power to 5, define the maximum
 Power = 5
 PowerMax = 50
@@ -125,7 +123,7 @@ CollisionSoundPlayed = false
           <argument>
             <kind>1</kind>
             <string>if keyboard_check(ord('W')) = false and keyboard_check(ord('S')) = false and keyboard_check(ord('A')) = false and keyboard_check(ord('D')) = false and speed &gt; 0 {
-DriftSpeed = 10 / room_speed
+DriftSpeed = 8 / room_speed
 speed = speed - DriftSpeed
 }
 
@@ -251,8 +249,7 @@ vspeed = vspeed + yShunt
 ResetShunts()
 
 
-/* Facing */
-Facing = point_direction(x,y,mouse_x,mouse_y)
+image_angle = point_direction(x,y,mouse_x,mouse_y)
 
 
 
@@ -677,34 +674,6 @@ TimeToDisplay = 180
 oGrenadeGun.PickUpMessage = false
 }
 }
-
-
-
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>
-draw_sprite_ext(sprite_index, image_index, x, y, image_xscale, image_yscale, Facing, image_blend, image_alpha)
 
 
 
