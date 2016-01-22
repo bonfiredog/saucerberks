@@ -184,16 +184,17 @@ StayInsideRoom()
 /* Collision */
 //If a block is about to touch enemy, it's big enough to collide with...
 SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
-if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.9 {
+
+if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.8 {
 //Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
 OriginalSpeed = CurrentSetSwarmerSpeed
 //Change the player's direction to almost the opposite of what they hit, and set them as 'in the process of colliding'.
-speed = OriginalSpeed
 if speed &gt; 0 {
 direction = direction - random_range(130,220)
 } else if speed &lt;= 0 {
 direction = point_distance(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
 }
+speed = OriginalSpeed
 }
 
 
