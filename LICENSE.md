@@ -10,5 +10,7 @@ This project was based on the [*Make A Game With No Experience*](http://www.pent
 The sounds in *Saucerberks* were generated using [bfxr](http://bfxr.net), a tool authored by the mystic [increpare](http://increpare.net). Thankfully, *"you have full rights to all sounds made with bfxr, and are free to use them for any purposes, commercial or otherwise."* Oh, good!
 
 In order to decompile this game you will need [Gamemaker: Studio](http://yoyogames.com), which is a commercial product by Yoyo Games. Any licensing terms relating to that software will be found either within the program itself or on the [website](http://www.yoyogames.com/studio).
-<br />
+  
+    
+    
 <p align="center"><img style = "text-align:center;width:100%;display:block;margin-left:auto;margin-right:auto;" src="https://creativecommons.org/images/deed/seal.png" /></p>
