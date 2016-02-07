@@ -5,8 +5,9 @@
 
 This assurance translates as a [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) license, which is a [Free Culture](https://creativecommons.org/freeworks/) license.
 
-<div style="text-align:center;margin-left:auto;margin-right:auto;width:99%;display:block;">Free Culture Image</div>
-
+<br />
+<p align="center"><img style = "text-align:center;width:100%;display:block;margin-left:auto;margin-right:auto;" src="https://creativecommons.org/images/deed/seal.png" /></p>
+<br />
 
 This project was based on the [*Make A Game With No Experience*](http://www.pentadact.com/2015-01-09-video-tutorial-make-a-game-with-no-experience/) video tutorial series by [Tom Francis](http://pentadact.com), aka Pentadact. I don't believe that I have directly used any of his assets or code; only his spoken guidance in the videos. However, if you do find any code or assets which are not mine in this project, please be advised that their liensing is the purview of Tom Francis; having said this, he doesn't seem to apply any stricture at all. 
 
