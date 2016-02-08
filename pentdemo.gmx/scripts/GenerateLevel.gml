@@ -51,7 +51,7 @@ SAttempt = 0
 SBlockSize = 128
 SpawnOrNot = choose(true,false)
 
-if SpawnOrNot = true{
+if SpawnOrNot = true {
 while instance_number(oSpecialSolid) < 1 {
 if global.GrenadeGunGot = false {
 NewSpecial = instance_create(random_range(0 + SBlockSize,room_width - SBlockSize),random_range(0 + SBlockSize,room_height - SBlockSize), choose(oGrenadeDet2,oHidingDet,oTurretDet))
@@ -73,7 +73,7 @@ SAttempt = SAttempt +1
 
 
 //Do the same with boomers.
-NumberOfBoomers = irandom_range(3,7)
+NumberOfBoomers = global.DiffNumberOfBoomers
 
 global.NumberOfBoomersRemaining = NumberOfBoomers
 NumberOfAttempts = NumberOfBoomers * 100

@@ -13,6 +13,7 @@
   <code>InitialiseRoom()
 GalaxyNameGeneration()
 InitialisePlayableLevel()
+Difficulty()
 GenerateLevel()
 oUI2.ShowFieldRemaining = true</code>
   <enableViews>-1</enableViews>

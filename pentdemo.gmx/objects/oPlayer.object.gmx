@@ -32,6 +32,8 @@ WeaponCount = 0
 SelectedWeaponIndex = 0
 
 depth = -11
+image_xscale = 0.8
+image_yscale = image_xscale
 
 //Set initial power to 5, define the maximum
 Power = 5

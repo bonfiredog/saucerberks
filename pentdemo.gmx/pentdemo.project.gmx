@@ -158,6 +158,7 @@
     <scripts name="Scoring">
       <script>scripts\LoadHighScore.gml</script>
       <script>scripts\SaveHighScore.gml</script>
+      <script>scripts\Difficulty.gml</script>
     </scripts>
     <scripts name="Menus">
       <script>scripts\DrawTextAndUpdateCurrentY.gml</script>

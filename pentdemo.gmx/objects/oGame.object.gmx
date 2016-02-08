@@ -28,33 +28,7 @@
             <string>//Set the Screenshake to nothing
 ScreenShakeAmount = 0
 
-
-/* Enemy Spawning */
-
-
-if oCurrentScore.CurrentScore &lt;= 5 {
-SecondsBetweenEnemySpawns = 0.08}
-else if oCurrentScore.CurrentScore &gt;= 6 &lt;= 10 {
-SecondsBetweenEnemySpawns = 0.05}
-else if oCurrentScore.CurrentScore &gt;= 11 &lt;= 15 {
-SecondsBetweenEnemySpawns = 0.002}
-else if oCurrentScore.CurrentScore &gt;= 16 {
-SecondsBetweenEnemySpawns = 0.001
-}
-
-
 SecondsSinceLastEnemySpawn = 0
-
-
-if oCurrentScore.CurrentScore &lt;= 5 {
-MaximumSwarmers = 200}
-else if oCurrentScore.CurrentScore &gt;= 6 &lt;= 10 {
-MaximumSwarmers = 400}
-else if oCurrentScore.CurrentScore &gt;= 11 &lt;= 15 {
-MaximumSwarmers = 600}
-else if oCurrentScore.CurrentScore &gt;= 16 {
-MaximumSwarmers = 1000 
-}
 
 /*Global Constants */
 
@@ -92,9 +66,9 @@ SecondsSinceLastEnemySpawn = SecondsSinceLastEnemySpawn + 1/room_speed
 
 if oMenu.Mode != "Pause" {
 
-if SecondsSinceLastEnemySpawn &gt;= SecondsBetweenEnemySpawns {
+if SecondsSinceLastEnemySpawn &gt;= global.DiffSecondsBetweenEnemySpawns {
 
-if instance_number(oSwarmer) &lt; MaximumSwarmers &amp;&amp; instance_number(oBoomer) &gt; 0 &amp;&amp; room = rLevel1{
+if instance_number(oSwarmer) &lt; global.DiffMaximumSwarmers &amp;&amp; instance_number(oBoomer) &gt; 0 &amp;&amp; room = rLevel1{
 
 if choose(true,false) {
 SpawnX = random(room_width)

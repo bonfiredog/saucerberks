@@ -31,14 +31,12 @@ InitialiseEnemyCollision(30, random(360))
 
 State = "Idle"
 
-image_xscale = 0.6
+image_xscale = 1.0
 image_yscale = image_xscale
 
 Eater = noone
 
 depth = -11
-
-CurrentSetSwarmerSpeed = 30 / room_speed
 
 RunAwaySpeed = false
 RunAwayCountdown = 0
@@ -75,12 +73,12 @@ speed = 0 }
 else {
 if RunAwaySpeed = false {
 if instance_exists(oPlayer) and point_distance(x,y,oPlayer.x,oPlayer.y) &lt;= 200 {
-speed = CurrentSetSwarmerSpeed * 1.5 }
+speed = global.DiffSwarmerSpeed * 1.5 }
 else {
-speed = CurrentSetSwarmerSpeed
+speed = global.DiffSwarmerSpeed
 }
 } else if RunAwaySpeed = true {
-speed = CurrentSetSwarmerSpeed * 1.5
+speed = global.DiffSwarmerSpeed * 1.5
 }
 } 
 
@@ -185,7 +183,7 @@ SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
 
 if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.8 {
 //Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
-OriginalSpeed = CurrentSetSwarmerSpeed
+OriginalSpeed = global.DiffSwarmerSpeed
 //Change the player's direction to almost the opposite of what they hit, and set them as 'in the process of colliding'.
 if speed &gt; 0 {
 direction = direction - random_range(130,220)
