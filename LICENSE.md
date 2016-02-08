@@ -1,7 +1,7 @@
 *Saucerberks* Project Licence Agreement v1.0
 ================================
 
-**This project, as much as it represents my work, is a rough prototype and the result of an auto-didactic process. I'm happy for you to use any or all of my code, writing and assets from this project in any way you see fit, including for commercial purposes. I don't insist that you credit me in your derivative work, but it would be interesting to see what you are working on.; if you so wish, I can be contacted by [email](mailto:rob@bonfiredog.co.uk_).** 
+**This project, as much as it represents my work, is a rough prototype and the result of an auto-didactic process. I'm happy for you to use any or all of my code, writing and assets from this project in any way you see fit, including for commercial purposes. I don't insist that you credit me in your derivative work, but it would be interesting to see what you are working on; if you so wish, I can be contacted by [email](mailto:rob@bonfiredog.co.uk_).** 
 
 This assurance translates into a [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) license, which is a [Free Culture](https://creativecommons.org/freeworks/) license as well.
 
