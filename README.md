@@ -5,7 +5,7 @@
 #Saucerberks
 *A 2D shooting game for PC & Mac that I made in order to learn how to code properly. It concerns the shooting of aliens, with an additional, translucent veneer of pathos.*
 
-You are a **Saucerberk**, some sort of commissioned official in a lime-green spaceship. I'm not sure what that regalia represents, or who commissioned you officially. Your job is to **maintain those sectors of space where great battles, awful disasters and interstellar wrecks occurred**. These dangerous zones of open vacuum are littered with debris from these past tragedies. Your most important foe, however, is not momentum, entropy or jagged hunks of floating steel, but instead the **alien creatures that infest these sites**. These are sacred places, memorials to those who died, and the presence of these aliens desecrates those memories. You must **get rid of them at all costs**.<br /><br />
+You are a **Saucerberk**, some sort of commissioned official in a lime-green spaceship. I'm not sure what that regalia represents, or who commissioned you officially. Your job is to **maintain those sectors of space where great battles, awful disasters and interstellar wrecks once occurred**. These dangerous zones of open vacuum are littered with debris from these tragedies. Your most important foe, however, is not momentum, entropy or jagged hunks of floating steel, but instead the **alien creatures that infest these sites**. These are symbolic places, memorials to those who died, and the alien's presence desecrates those memories. You must **get rid of them at all costs**.<br /><br />
 
 **Download Latest PC Version:**&nbsp;&nbsp;[`.exe`](http://bonfiredog.co.uk)&nbsp;&nbsp;&nbsp;&nbsp;[`installer`](http://bonfiredog.co.uk)
 
@@ -15,21 +15,21 @@ You are a **Saucerberk**, some sort of commissioned official in a lime-green spa
 
  * First of all, get yourself a physical, honest-to-a-god *mouse*. Not only is it, pleasingly, the same shape as your spaceship, it will make the game far more playable. You can play with a trackpad, but I make no apologies for how unpleasant an experience that will be.
  
- * `W` `A` `S` `D` - Move The Ship
+ * Move the ship with `W` `A` `S` `D`. 
  
- * `Left Mouse` - Rapid Fire Blaster
+ * Fire the Rapid Blaster with `Left Mouse Button`.
+
+ * Fire the Pheromone Gun with `Right Mouse Button`.
  
- * `Right Mouse` - Pheromone Gun
- 
- *  `Mouse` - Turn Ship
+ * Turn the ship by turning the `Mouse`.
    
  * Each level takes place at a different memorial site: the level is completed when every alien is destroyed. You have three lives.
  
- * There are two types of alien infesting the wrecks: at the risk of exposing the design, let's call these the Vandal and the Glutton. The swarming Vandals, which are antagonistic to the Saucerberk, can be easily destroyed by the blaster. However, the Glutton cannot be harmed until it has swallowed at least one Vandal. The only way to do this is to use the Pheromone Gun to lay a trail of delicious chemicals to a Vandal, inducing the Glutton to swallow it and become vulnerable to the blaster, and explosive bursting. The more Vandals are swallowed, the larger the burst will be.
+ * There are two types of alien infesting the wrecks: at the risk of exposing the design, let's call these the **Vandal** and the **Glutton**. The swarming Vandals, which are antagonistic to the Saucerberk, can be easily destroyed by the Blaster. However, the Glutton cannot be harmed until **it has swallowed at least one Vandal**. The only way to do this is to **use the Pheromone Gun to lay a trail of delicious chemicals to a Vandal**, inducing the Glutton to swallow it and become vulnerable to the Blaster, and explosive bursting. The more Vandals are swallowed, the larger the burst will be.
  
- * Until all the Gluttons are dead, more and more Vandals will be drawn to the level. 
+ * Until all the Gluttons are dead, more and more Vandals will be drawn to the memorial site. 
  
- * The debris fields holds other hazards and boons as well, but discovering is all part of the frantic, hyperventilated fun of being a Saucerberk.
+ * The debris fields hold other hazards and boons, but discovering these is all part of the frantic, hyperventilated fun of being a Saucerberk.
 
 ###Development
 
@@ -50,7 +50,7 @@ For more details, see the [`License.MD`](https://github.com/bonfiredog/saucerber
 I'm fairly certain that the game should run on any Windows PC or Mac built in the last five or six years. However, if you have any performance problems, please see the *Bugs* section below.
 
 ###Bugs
-If you experience any issues of performances, crashes, odd behaviour or the like, *please* do send me a bug report [via email](mailto:admin@bonfiredog.co.uk) with as much detail as you can manage. It really helps.
+If you experience any issues of performance, crashes, odd behaviour or the like, *please* do send me a bug report [via email](mailto:admin@bonfiredog.co.uk) with as much detail as you can manage. It really helps me see my many and deceptive mistakes.
 
 ###Contact
 Feel free to follow me here on [Github](http://github.com/bonfiredog), on [Twitter](http://twitter.com/rob_sherman) or do send me an [email](mailto:rob@bonfiredog.co.uk).
