@@ -35,7 +35,7 @@ BoltCreated = false
         </arguments>
       </action>
     </event>
-    <event eventtype="3" enumb="0">
+    <event eventtype="3" enumb="2">
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -54,13 +54,41 @@ BoltCreated = false
             <kind>1</kind>
             <string>
 
+//Make it 'stick' to the owner's position, and face the way they are facing.
+
+dist = point_distance(0,0,62,0)
+angle = point_direction(0,0,62,0)
+x = oTurretDetTurret.x + lengthdir_x(dist, angle+oTurretDetTurret.image_angle)
+y = oTurretDetTurret.y + lengthdir_y(dist, angle+oTurretDetTurret.image_angle)
+image_angle = oTurretDetTurret.image_angle
+direction = oTurretDetTurret.direction
 
 
-
-
-if image_xscale &lt; 1.5 {
-image_alpha = image_alpha + 0.1
-image_xscale = image_xscale + 0.1 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if image_xscale &lt; 1.5 {
+image_alpha = image_alpha + 0.2
+image_xscale = image_xscale + 0.2 
 image_yscale = image_xscale
 } 
 else if image_xscale &gt;= 1.5 {
@@ -70,10 +98,15 @@ ThisBolt = instance_create(x,y,oTurretDetTurretBolt)
 ThisBolt.direction = direction
 ThisBolt.image_angle = image_angle
 ThisBolt.speed = 900/room_speed
+if instance_exists(oPlayer) and point_distance(x,y,oPlayer.x,oPlayer.y) &lt; 600
 ScreenShake(20)
+}
+if instance_exists(oPlayer) = false and point_distance(x,y,(view_wport[0] / 2),(view_hport[0] / 2)) &lt; 600 {
+ScreenShake(20)
+}
 BoltCreated = true
 }
-}
+
 
 if BoltCreated = true and image_alpha &lt;= 0 {
 instance_destroy()

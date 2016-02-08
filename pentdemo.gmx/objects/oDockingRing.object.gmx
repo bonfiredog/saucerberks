@@ -31,6 +31,8 @@ Owner = noone
 depth = -12
 Growing = true
 Shrinking = false
+image_blend = c_black
+image_alpha = 0.5
 </string>
           </argument>
         </arguments>
@@ -53,8 +55,7 @@ Shrinking = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-if instance_exists(oPlayer) {
+            <string>if instance_exists(oPlayer) {
 
 //When first created, grow to a fixed size and stay there!
 if Growing = true {

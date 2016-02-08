@@ -256,18 +256,19 @@ with oTitle {instance_destroy() }
     
     draw_set_halign(fa_center)
     draw_set_font(fTitle)
-    draw_set_colour(c_lime)
-    DrawTextAndUpdateCurrentY("Debris Field Cleared!")
+    draw_set_colour(c_yellow)
+    DrawTextAndUpdateCurrentY("You Have Honoured The Memory")
+    DrawTextAndUpdateCurrentY("Of The Fallen!")
     
     draw_set_font(fHighScore)
     draw_set_colour(c_white)
     
-    DrawTextAndUpdateCurrentY("Current Fields Cleared:")
+    DrawTextAndUpdateCurrentY("Dignities Restored Today:")
     draw_set_font(fHighScoreBig)
     draw_text(x,CurrentY,oCurrentScore.CurrentScore)
     CurrentY = CurrentY + 90
     draw_set_font(fHighScore)
-    DrawTextAndUpdateCurrentY("Most Fields Cleared:")
+    DrawTextAndUpdateCurrentY("Most Dignities Restored Ever Ever:")
     draw_set_font(fHighScoreBig)
     draw_text(x,CurrentY,global.HighScore)
     CurrentY = CurrentY + 90
@@ -275,7 +276,7 @@ with oTitle {instance_destroy() }
     draw_set_font(fMenu)
     draw_set_colour(c_green)
     
-    if ButtonPressed("Next Field?") {
+    if ButtonPressed("Next?") {
     if room = rLevel1 {
     if oCurrentScore.CurrentScore &gt; global.HighScore {
     SaveHighScore()
@@ -311,7 +312,7 @@ with oTitle {instance_destroy() }
     
     draw_set_font(fSubtitle)
     draw_set_color(c_white)
-    DrawTextAndUpdateCurrentY("You're very clumsy and a failure: we could use a pilot like you...")
+    DrawTextAndUpdateCurrentY("Another Tragedy Sullied &amp; Forgotten...")
     
     CurrentY = CurrentY + 50
     CurrentY = CurrentY + Margin
@@ -319,7 +320,7 @@ with oTitle {instance_destroy() }
     draw_set_font(fMenu)
     draw_set_color(c_lime)
     
-    if ButtonPressed("Again?") {
+    if ButtonPressed("Any Other Pilots?") {
     oCurrentScore.CurrentScore = 0 
     global.PlayerLives = 3
     Mode = "Game"

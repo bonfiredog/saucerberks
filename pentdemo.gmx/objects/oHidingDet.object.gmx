@@ -82,10 +82,11 @@ NumberOfAttempts = NumberOfAttempts - 1
 
 if instance_exists(oPlayer) and oPlayer.Undocking = false {
 if oPlayer.Docked = true {
+image_alpha = oPlayer.image_alpha
 if oPlayer.TimeBetweenFlashes &gt; 0 {
-image_blend = c_dkgray
+image_blend = c_black
 } else if oPlayer.TimeBetweenFlashes &lt;= 0 {
-image_blend = c_yellow 
+image_blend = c_red
 }
 }
 } else if instance_exists(oPlayer) and oPlayer.Undocking = true {

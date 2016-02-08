@@ -33,6 +33,7 @@ TimeBeforeSpinChange = random_range(300,900)
 TimeBetweenFlashes = 120
 PlayerInRange = noone
 Cooldown = 40
+RatePerStepOfTurn = 1
 </string>
           </argument>
         </arguments>
@@ -151,29 +152,54 @@ TimeBetweenFlashes = 120
 else if State = "Alert" {
 //If something is in range, turn to face it quickly, and fire upon it if there is line of sight.
 if AlertType = "Enemy" {
-direction =  point_direction(x,y,EnemyInRange.x,EnemyInRange.y)
-if IHaveLineOfSightTo(EnemyInRange) and Cooldown &lt;= 0 {
+DirectionOfEnemy = point_direction(x,y,EnemyInRange.x,EnemyInRange.y)
+
+//Work out how many degrees it would need to turn through clockwise to reach the player's direction. 
+if direction != DirectionOfEnemy {
+//If it is more than 180 degrees, rotate counter-clockwise. If less, rotate clockwise.
+if (DirectionOfEnemy - direction) &lt; 180 {
+direction = direction + RatePerStepOfTurn
+} else if (DirectionOfEnemy - direction) &gt; 180 {
+direction = direction - RatePerStepOfTurn
+}
+} else {
+//If we are facing the player, track their movement.
+if instance_exists(EnemyInRange) {direction = DirectionOfEnemy}
+//If the player exists, is in range and we are not cooling down from a previous shot, shoot.
+if instance_exists(EnemyInRange) and Cooldown &lt;= 0 {
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)
 ThisPulse.direction = direction
 ThisPulse.image_angle = image_angle
 } 
+}
 
 } else if AlertType = "Player" {
-if instance_exists(oPlayer){direction = point_direction(x,y,PlayerInRange.x,PlayerInRange.y)}
-if instance_exists(oPlayer) and IHaveLineOfSightTo(PlayerInRange)  and Cooldown &lt;= 0 { //need to put in delay here, to make sure the turret is facing its target
+//If the player is in range, first of all work out the angle between the current position and the player's position.
+DirectionOfPlayer = point_direction(x,y,PlayerInRange.x,PlayerInRange.y)
+
+//Work out how many degrees it would need to turn through clockwise to reach the player's direction. 
+if direction != DirectionOfPlayer {
+//If it is more than 180 degrees, rotate counter-clockwise. If less, rotate clockwise.
+if (DirectionOfPlayer - direction) &lt; 180 {
+direction = direction + RatePerStepOfTurn
+} else if (DirectionOfPlayer - direction) &gt; 180 {
+direction = direction - RatePerStepOfTurn
+}
+} else {
+//If we are facing the player, track their movement.
+if instance_exists(oPlayer) and instance_exists(PlayerInRange) {direction = DirectionOfPlayer}
+//If the player exists, is in range and we are not cooling down from a previous shot, shoot.
+if instance_exists(oPlayer) and instance_exists(PlayerInRange) and Cooldown &lt;= 0 {
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)
 ThisPulse.direction = direction
 ThisPulse.image_angle = image_angle
 } 
+}
+}
+if instance_exists(oTurretLight) = false{instance_create(x,y,oTurretLight)}
 }
 
 image_angle = direction
-if instance_exists(oTurretLight) = false{instance_create(x,y,oTurretLight)}
-
-
-}
-
-
 
 if instance_exists(Owner) = false {
 if instance_exists(oTurretDet) {

@@ -101,7 +101,10 @@ draw_set_alpha(TextAlpha)
 draw_set_font(fBoomersRemaining)
 draw_set_color(c_yellow)
 draw_set_halign(fa_center)
-draw_text(x,y,"There are")
+if global.NumberOfBoomersRemaining &gt; 1 {
+draw_text(x,y,"There are") }
+else if global.NumberOfBoomersRemaining = 1 {
+draw_text(x,y,"There is") }
 y = y + 80
 draw_set_color(c_yellow)
 draw_set_font(fBoomersRemainingBig)

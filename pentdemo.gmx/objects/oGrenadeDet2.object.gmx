@@ -34,8 +34,8 @@ SecondsBetweenEmits = random_range(50,150) / room_speed
 instance_create(x,y,oGrenadeTarget)
 SetSpinning(-1,-1,1,1)
 TimeBetweenClutter = random_range(30,90)
-MSecondsBetweenClutter = random(200)
-ClutterToDistribute = random(25)
+MSecondsBetweenClutter = random(100)
+ClutterToDistribute = random(50)
 
 </string>
           </argument>
@@ -92,19 +92,19 @@ NumberOfAttempts = NumberOfAttempts - 1
 
 if MSecondsBetweenClutter &gt; 0 {
 MSecondsBetweenClutter = MSecondsBetweenClutter - 1 
-} else if MSecondsBetweenClutter &lt;- 0 {
+} else if MSecondsBetweenClutter &lt;= 0 {
 if ClutterToDistribute &gt; 0 {
 ThisClutter = instance_create(x,y,choose(oDetritus10, oDetritus6, oDetritus9, oDetritus4, oDetritus8, oDetritus7))
 with ThisClutter {
 image_angle = random(360)
-SetSpinning(-1.9,-1,1,1.9)
+SetSpinning(-2.9,-1,1,2.9)
 direction = random(360)
-speed = random_range(100,300) / room_speed
+speed = random_range(150,350) / room_speed
 }
 ClutterToDistribute = ClutterToDistribute - 1
 } else if ClutterToDistribute &lt;= 0 {
-MSecondsBetweenClutter = random(200)
-ClutterToDistribute = random(25)
+MSecondsBetweenClutter = random(100)
+ClutterToDistribute = random(50)
 }
 }
 

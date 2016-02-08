@@ -29,6 +29,7 @@
 Owner = noone
 image_alpha = 0.0
 Once = false
+image_blend = c_black
 </string>
           </argument>
         </arguments>
@@ -87,54 +88,11 @@ y = Owner.y + lengthdir_y(dist, angle+Owner.image_angle)
 image_angle = Owner.image_angle
 }
 
-if place_meeting(x,y,oPlayer) and oPlayer.Owner = noone {
-oPlayer.Owner = self.id
-audio_play_sound(aDock, 1, false)
-}
 
 if instance_exists(Owner) = false {
 if instance_exists(oHidingDet) {
 Owner = oHidingDet.id
 }
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if instance_exists(oPlayer) and oPlayer.Docked = true
-and oMenu.Mode != "Titles" and oMenu.Mode != "Pause" {
-
-posx = x - view_xview[0] + 60
-posy = y - view_yview[0]
-
-draw_set_font(fTutorial)
-
-draw_set_colour(c_red)
-draw_text(posx,posy,"What's the first letter of the best planet?")
-
-posy = posy + 30
-draw_set_colour(c_lime)
-draw_text(posx,posy,"That's how you escape!")
-
-
 }
 </string>
           </argument>

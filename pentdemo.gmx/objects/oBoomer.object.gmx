@@ -91,7 +91,7 @@ OriginalSpeed = CurrentSetBoomerSpeed
 if speed &gt; 0 {
 direction = direction - random_range(130,220)
 } else if speed &lt;= 0 {
-direction = point_distance(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
+direction = point_direction(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
 }
 speed = OriginalSpeed
 Colliding = true
