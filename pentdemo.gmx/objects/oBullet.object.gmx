@@ -25,7 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = -9
+            <string>depth = -11
 
 </string>
           </argument>
@@ -58,27 +58,11 @@ instance_destroy()
 }
 
 //Destroy when hit a wall
-if place_meeting(x,y,oSwarmer) or place_meeting(x,y,oGrenadeTarget)
-{
+if place_meeting(x,y,oSwarmer) or place_meeting(x,y,oSolid) or place_meeting(x,y,oGrenadeTarget) {
 speed = 0
 audio_play_sound(aWallHit,1,false)
 sprite_index = sGunExplosion
 }
-
-
-HitOrNotNumber = choose(1,2)
-if HitOrNotNumber = 1 {
-HitOrNot = true
-} else if HitOrNotNumber = 2 {
-HitOrNot = false
-}
-
-if place_meeting(x,y,oSolid) and HitOrNot = true {
-speed = 0
-audio_play_sound(aWallHit,1,false)
-sprite_index = sGunExplosion
-}
-
 
 if speed = 0 {
 image_alpha = image_alpha - 0.1
@@ -86,13 +70,6 @@ if image_alpha &lt;= 0 {
 instance_destroy()
 }
 }
-
-
-
-
-
-
-
 </string>
           </argument>
         </arguments>

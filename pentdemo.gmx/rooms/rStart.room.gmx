@@ -13,6 +13,9 @@
   <code>instance_create(x,y,oCurrentScore)
 instance_create(x,y,oMenu)
 global.GrenadeGunGot = false 
+global.MetGrenadeDet = false
+global.MetTurretDet = false
+global.MetHidingDet = false 
 InitialiseRoom()
 Difficulty()
 GenerateLevel()

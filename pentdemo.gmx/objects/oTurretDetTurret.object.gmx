@@ -88,7 +88,8 @@ y = Owner.y + lengthdir_y(dist, angle+Owner.image_angle)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>image_angle = direction
+
 if Cooldown &lt;= 0 {
 Cooldown = 40
 } else if Cooldown &gt; 0 {
@@ -105,9 +106,7 @@ PlayerInRange = noone
 }
 }
 
-
-
-if instance_exists(PlayerInRange) = false {
+if PlayerInRange = noone {
 if instance_exists(EnemyInRange) {
 DistanceToNearestEnemy = point_distance(x,y,EnemyInRange.x,EnemyInRange.y)
 if DistanceToNearestEnemy &lt; DetectionRange {
@@ -117,17 +116,17 @@ AlertType = "Enemy"
 State = "Idle"
 }
 }
-} else if instance_exists(PlayerInRange) {
+} else if instance_exists(oPlayer) and PlayerInRange = oPlayer.id {
 State = "Alert"
 AlertType = "Player"
 } else {
 State = "Idle" }
 
-
-
-
-
-
+if Cooldown &lt;= 0 {
+Cooldown = 40
+} else if Cooldown &gt; 0 {
+Cooldown = Cooldown - 1
+}
 
 if State = "Idle" {
 if TimeBeforeSpinChange &gt; 0 {
@@ -138,8 +137,7 @@ else if SpinDirection = 0.5 {SpinDirection = -0.5 }
 TimeBeforeSpinChange = random_range(300,900)
 }
 
-image_angle = image_angle + SpinDirection
-direction = image_angle
+direction = direction + SpinDirection
 
 if TimeBetweenFlashes &gt; 0 {
 TimeBetweenFlashes = TimeBetweenFlashes - 1}
@@ -148,46 +146,27 @@ instance_create(x,y,oTurretLight)
 TimeBetweenFlashes = 120
 }
 
-}
-else if State = "Alert" {
+} else if State = "Alert" {
 //If something is in range, turn to face it quickly, and fire upon it if there is line of sight.
 if AlertType = "Enemy" {
 DirectionOfEnemy = point_direction(x,y,EnemyInRange.x,EnemyInRange.y)
-
-//Work out how many degrees it would need to turn through clockwise to reach the player's direction. 
-if direction != DirectionOfEnemy {
-//If it is more than 180 degrees, rotate counter-clockwise. If less, rotate clockwise.
-if (DirectionOfEnemy - direction) &lt; 180 {
-direction = direction + RatePerStepOfTurn
-} else if (DirectionOfEnemy - direction) &gt; 180 {
-direction = direction - RatePerStepOfTurn
-}
-} else {
-//If we are facing the player, track their movement.
-if instance_exists(EnemyInRange) {direction = DirectionOfEnemy}
-//If the player exists, is in range and we are not cooling down from a previous shot, shoot.
+direction = DirectionOfEnemy 
+//If the enemy exists, is in range and we are not cooling down from a previous shot, shoot.
 if instance_exists(EnemyInRange) and Cooldown &lt;= 0 {
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)
 ThisPulse.direction = direction
 ThisPulse.image_angle = image_angle
 } 
-}
 
 } else if AlertType = "Player" {
+if instance_exists(oPlayer) {
 //If the player is in range, first of all work out the angle between the current position and the player's position.
 DirectionOfPlayer = point_direction(x,y,PlayerInRange.x,PlayerInRange.y)
-
-//Work out how many degrees it would need to turn through clockwise to reach the player's direction. 
-if direction != DirectionOfPlayer {
-//If it is more than 180 degrees, rotate counter-clockwise. If less, rotate clockwise.
-if (DirectionOfPlayer - direction) &lt; 180 {
-direction = direction + RatePerStepOfTurn
-} else if (DirectionOfPlayer - direction) &gt; 180 {
-direction = direction - RatePerStepOfTurn
-}
-} else {
+direction = DirectionOfPlayer
 //If we are facing the player, track their movement.
-if instance_exists(oPlayer) and instance_exists(PlayerInRange) {direction = DirectionOfPlayer}
+if instance_exists(oPlayer) and instance_exists(PlayerInRange) {
+direction = DirectionOfPlayer
+}
 //If the player exists, is in range and we are not cooling down from a previous shot, shoot.
 if instance_exists(oPlayer) and instance_exists(PlayerInRange) and Cooldown &lt;= 0 {
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)
@@ -199,12 +178,12 @@ ThisPulse.image_angle = image_angle
 if instance_exists(oTurretLight) = false{instance_create(x,y,oTurretLight)}
 }
 
-image_angle = direction
-
 if instance_exists(Owner) = false {
 if instance_exists(oTurretDet) {
-Owner = oTurretDet.id }
+Owner = oTurretDet.id 
 }
+}
+
 </string>
           </argument>
         </arguments>

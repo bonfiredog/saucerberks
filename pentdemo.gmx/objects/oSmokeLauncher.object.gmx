@@ -26,7 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>image_alpha = 0
-NumberOfSmokesRemaining = irandom_range(6,12)
+Owner = noone
+NumberOfSmokesRemaining = irandom_range(30,70)
 
 </string>
           </argument>
@@ -50,11 +51,24 @@ NumberOfSmokesRemaining = irandom_range(6,12)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if NumberOfSmokesRemaining &gt; 0 {
+            <string>if instance_exists(Owner) {
+x = Owner.x
+y = Owner.y
+vspeed = Owner.vspeed
+hspeed = Owner.hspeed
+}
+
+if NumberOfSmokesRemaining &gt; 0 {
 instance_create(x,y,oDockSmoke)
 NumberOfSmokesRemaining = NumberOfSmokesRemaining - 1
 } else if NumberOfSmokesRemaining &lt;= 0 {
 instance_destroy()
+}
+
+if Owner = noone {
+if instance_exists(oPlayerDocking) {
+Owner = oPlayerDocking
+}
 }
 </string>
           </argument>

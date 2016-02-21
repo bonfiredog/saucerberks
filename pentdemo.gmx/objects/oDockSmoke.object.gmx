@@ -29,7 +29,15 @@
 image_xscale = 0.0
 image_yscale = image_xscale
 direction = random(360)
-speed = random_range(5,10)
+speed = random_range(10,20)
+
+if instance_exists(oPlayer) {
+if oPlayer.Undocking = false {
+sprite_index = sDockSmoke
+} else if oPlayer.Undocking = true {
+sprite_index = sDockSmokeUndocking
+}
+}
 </string>
           </argument>
         </arguments>
@@ -53,9 +61,9 @@ speed = random_range(5,10)
           <argument>
             <kind>1</kind>
             <string>if image_alpha &gt; 0 {
-image_xscale = image_xscale + 0.3
+image_xscale = image_xscale + 0.7
 image_yscale = image_xscale
-image_alpha = image_alpha - 0.07
+image_alpha = image_alpha - 0.1
 speed = speed - 0.5
 } else if image_alpha &lt;= 0 {
 instance_destroy()

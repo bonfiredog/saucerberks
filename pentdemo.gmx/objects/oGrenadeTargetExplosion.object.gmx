@@ -25,8 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>audio_play_sound(aGrenadeTargetExplosion,1,false)
-image_xscale = 0
+            <string>image_xscale = 0
 image_yscale = image_xscale
 image_alpha = 1
 ThisGrenadeGun = instance_create(x,y,oGrenadeGun)
@@ -34,10 +33,12 @@ with ThisGrenadeGun {
 direction = random(360)
 image_angle = random(360)
 speed = 25 / room_speed
-SetSpinning(-1,1,1,1)
+SetSpinning(-1.6,-1.4,1.4,1.6)
 }
 depth = -28
-NumberOfParticlesRemaining = irandom_range(10,20)
+NumberOfParticlesRemaining = irandom_range(40,80)
+SoundPlayed = false
+Harmless = false
 </string>
           </argument>
         </arguments>
@@ -62,28 +63,40 @@ NumberOfParticlesRemaining = irandom_range(10,20)
             <kind>1</kind>
             <string>//Have the explosion increase in size quickly, before starting to fade quickly, and then destroying itself.
 
-if image_xscale &lt; 4.0 {
+if image_xscale &lt; 4.5 {
 image_xscale = image_xscale + 0.2
 image_yscale = image_xscale
-} else if image_xscale &gt;= 4.0 {
+} else if image_xscale &gt;= 4.5 {
 image_xscale = image_xscale + 0.1
 image_yscale = image_xscale
-image_alpha = image_alpha - 0.1
+image_alpha = image_alpha - 0.002
+Harmless = true
 if image_alpha &lt;= 0 {
 instance_destroy()
 }
 }
 
+if image_xscale &gt; 1.0 {
+if SoundPlayed = false {
+audio_play_sound(aGrenadeTargetExplosion,1,false)
+SoundPlayed = true
+}
+}
+
+
 //Explosion creates particles which fling out from its centre at a great speed, before disappearing off the screen and destroying themselves.
 
+if image_xscale &gt; 1.5 {
 if NumberOfParticlesRemaining &gt; 0 {
 ThisParticle = instance_create(x,y,oParticle)
 with ThisParticle {
-speed = 500 / room_speed
+NumberSpeed = irandom_range(600,800)
+speed = NumberSpeed / room_speed
 direction = random(360)
 SetSpinning(-6,-4,4,6)
 }
 NumberOfParticlesRemaining = NumberOfParticlesRemaining - 1
+}
 }
 </string>
           </argument>

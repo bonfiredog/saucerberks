@@ -49,14 +49,14 @@ CAttempt = CAttempt + 1
 NumberOfSAttempts = 100
 SAttempt = 0
 SBlockSize = 128
-SpawnOrNot = choose(true,false)
+SpawnOrNot = true //choose(true,false)
 
 if SpawnOrNot = true {
 while instance_number(oSpecialSolid) < 1 {
 if global.GrenadeGunGot = false {
-NewSpecial = instance_create(random_range(0 + SBlockSize,room_width - SBlockSize),random_range(0 + SBlockSize,room_height - SBlockSize), choose(oGrenadeDet2,oHidingDet,oTurretDet))
+NewSpecial = instance_create(random_range(0 + SBlockSize,room_width - SBlockSize),random_range(0 + SBlockSize,room_height - SBlockSize), oGrenadeDet2)
 } else if global.GrenadeGunGot = true {
-NewSpecial = instance_create(random_range(0 + SBlockSize,room_width - SBlockSize),random_range(0 + SBlockSize,room_height - SBlockSize), choose(oHidingDet,oTurretDet))
+NewSpecial = instance_create(random_range(0 + SBlockSize,room_width - SBlockSize),random_range(0 + SBlockSize,room_height - SBlockSize), oGrenadeDet2)
 }
 //choose(oHidingDet,oGrenadeDet2, oTurretDet)
 NewSpecial.x = (NewSpecial.x div SBlockSize) * SBlockSize

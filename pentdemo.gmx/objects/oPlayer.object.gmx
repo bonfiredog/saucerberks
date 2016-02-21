@@ -104,6 +104,8 @@ CollisionSoundPlayed = false
 
 CaptionAlpha = 0.0
 
+HidingDetDockedMessage = ""
+
 </string>
           </argument>
         </arguments>
@@ -126,8 +128,7 @@ CaptionAlpha = 0.0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-if keyboard_check(ord('W')) = false and keyboard_check(ord('S')) = false and keyboard_check(ord('A')) = false and keyboard_check(ord('D')) = false and speed &gt; 0 and Undocking = false and Docked = false {
+            <string>if keyboard_check(ord('W')) = false and keyboard_check(ord('S')) = false and keyboard_check(ord('A')) = false and keyboard_check(ord('D')) = false and speed &gt; 0 and Undocking = false and Docked = false {
 DriftSpeed = 8 / room_speed
 speed = speed - DriftSpeed
 }
@@ -138,7 +139,7 @@ oPlayer.speed = 0
 } 
 
 
-if oMenu.Mode != "Pause" and Undocking = false {
+if oMenu.Mode != "Pause" and Docked = false and Undocking = false {
 if instance_exists(oRapidFireGun) and mouse_check_button(mb_left) {
 sprite_index = sPlayerFireGun
 } else if instance_exists(oBaitGun) and mouse_check_button(mb_right) {
@@ -267,7 +268,7 @@ image_angle = point_direction(x,y,mouse_x,mouse_y)
 /* Death */
 //If an enemy class is touching the player...
 EnemyTouchingMe = instance_place(x,y,oEnemy)
-if instance_exists(EnemyTouchingMe) or place_meeting(x,y,oGrenadeTargetExplosion) or place_meeting(x,y,oGrenadeBit) or place_meeting(x,y,oTurretDetTurretBolt) {
+if instance_exists(EnemyTouchingMe) or (place_meeting(x,y,oGrenadeTargetExplosion) and oGrenadeTargetExplosion.Harmless = false) or place_meeting(x,y,oGrenadeBit) or place_meeting(x,y,oTurretDetTurretBolt) {
 ScreenShake(80)
 with oSwarmer {
 direction = point_direction(oPlayer.x,oPlayer.y,x,y)
@@ -320,11 +321,20 @@ if instance_exists(MyDock) and Undocking = false and Docked = false {
 Owner = MyDock
 audio_play_sound(aDock, 1, false)
 instance_create(x,y,oDockingRing)
+HidingDetDockedMessage = choose(
+"Where are we? It smells in here...##Maybe this button does something!##I wonder what the U stands for...",
+"An old Ark-class docking module!##What an antique!##'To eject, press the 'Smile' button'. Hmm...",
+"I don't think they can see us anymore...##How do we get out of here?##There aren't any buttons!##Just this sign on the wall!##It says, 'What's the first letter##of the seventh planet?'" 
+)
+
 instance_create(x,y,oSmokeLauncher)
+sprite_index = sPlayerDockedSprite
+oHidingDet.sprite_index = sHidingDetDocked
 Docked = true
 
 with oSwarmer {
 direction = direction - random_range(130,220)
+State = "Idle"
 }
 }
 
@@ -334,11 +344,11 @@ direction = direction - random_range(130,220)
 } else if Docked = true {
 
 if CaptionAlpha &lt; 1 {
-CaptionAlpha = CaptionAlpha + 0.01
+CaptionAlpha = CaptionAlpha + 0.005
 }
 
-if image_alpha &gt; 0.9 {
-image_alpha = image_alpha - 0.01
+if image_alpha &gt; 0.6 {
+image_alpha = image_alpha - 0.006
 }
 
 x = Owner.x
@@ -346,12 +356,18 @@ y = Owner.y
 vspeed = Owner.vspeed
 hspeed = Owner.hspeed
 direction = Owner.direction
-if instance_exists(oGrenadeGun){oGrenadeGun.depth = 82}
+oRapidFireGun.image_alpha = 0.0
+oBaitGun.image_alpha = 0.0
+if instance_exists(oGrenadeGun){
+oGrenadeGun.depth = 82
+oGrenadeGun.image_alpha = 0.0
+}
+
 depth = 81
 
 
 if TimeBetweenFlashes &gt; 0 {
-image_blend = c_black
+image_blend = c_white
 TimeBetweenFlashes = TimeBetweenFlashes - 1
 } else if TimeBetweenFlashes &lt;= 0 {
 image_blend = c_red
@@ -361,6 +377,7 @@ audio_play_sound(aBeep, 1, false)
 
 if keyboard_check(ord('U')) {
 Undocking = true
+sprite_index = sPlayerJets
 CaptionAlpha = 0.0
 oDockingRing.Growing = false
 oDockingRing.Shrinking = true
@@ -368,11 +385,17 @@ instance_create(x,y,oUndockingExplosion)
 instance_create(x,y,oSmokeLauncher)
 audio_play_sound(aUndock,1,false)
 image_alpha = 1.0
-Owner.image_alpha = 1.0
+oHidingDet.image_alpha = 1.0
+oHidingDet.sprite_index = sHidingDet
 image_blend = c_red
 depth = -11
-if instance_exists(oGrenadeGun){oGrenadeGun.depth = -121}
-speed = 1200 / room_speed
+oRapidFireGun.image_alpha = 1.0
+oBaitGun.image_alpha = 1.0
+if instance_exists(oGrenadeGun){
+oGrenadeGun.depth = -121
+oGrenadeGun.image_alpha = 1.0 
+}
+speed = 1500 / room_speed
 direction = Owner.image_angle - 180
 image_angle = random(360)
 Owner = noone
@@ -695,26 +718,6 @@ TimeToDisplay = 180
 oGrenadeGun.PickUpMessage = false
 }
 }
-
-
-
-
-if instance_exists(oPlayer) and oPlayer.Docked = true
-and oMenu.Mode != "Titles" and oMenu.Mode != "Pause" {
-
-posx = x - view_xview[0]
-posy = y - view_yview[0]
-
-draw_set_alpha(CaptionAlpha)
-
-draw_set_font(fTutorial)
-draw_set_color(c_red)
-
-draw_rectangle(posx - 100, posy + 100, posx + 100, posy - 100, true)
-draw_text(posx,posy,"RANDOM TEXT TO DISPLAY...")
-
-}
-
 
 
 

@@ -40,6 +40,8 @@ depth = -11
 
 RunAwaySpeed = false
 RunAwayCountdown = 0
+
+IsColliding = false
 </string>
           </argument>
         </arguments>
@@ -102,32 +104,31 @@ sprite_index = sExplodingEnemy
 if instance_exists(Eater) {
 State = "Eaten"
 } 
-
  
-PlayerInRangeDist = 100
 if instance_exists(oPlayer) {
-if oPlayer.Docked = false and oPlayer.Undocking = false{
+if oPlayer.Docked = false and oPlayer.Undocking = false {
 if point_distance(x,y,oPlayer.x,oPlayer.y) &lt; PlayerInRangeDist {
 State = "Alert"
 }
 }
 }
 
-
-NearestSwarmer = instance_nearest(x,y,oSwarmer)
-if instance_exists(NearestSwarmer){
+if instance_exists(oPlayer) {
+if instance_exists(NearestSwarmer) and oPlayer.Docked = false and oPlayer.Undocking = false {
 if point_distance(x,y,NearestSwarmer.x,NearestSwarmer.y) &lt; 20 {
 if NearestSwarmer.State = "Alert" {
 State = "Alert"
 }
 }
 }
-
-
-if instance_exists(oPlayer) and SwarmerHaveLineOfSightTo(oPlayer) and oPlayer.Docked = false and oPlayer.Undocking = false {    
-State = "Alert"
 }
 
+
+if instance_exists(oPlayer) {
+if SwarmerHaveLineOfSightTo(oPlayer) and oPlayer.Docked = false and oPlayer.Undocking = false {    
+State = "Alert"
+}
+}
 
 } else if State = "Alert" {
     
@@ -177,6 +178,7 @@ image_angle = direction
 /* Bouncing */
 
 StayInsideRoom()
+
 /* Collision */
 //If a block is about to touch enemy, it's big enough to collide with...
 SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
@@ -185,21 +187,38 @@ if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.8 {
 //Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
 OriginalSpeed = global.DiffSwarmerSpeed
 //Change the player's direction to almost the opposite of what they hit, and set them as 'in the process of colliding'.
+
 if speed &gt; 0 {
 direction = direction - random_range(130,220)
 } else if speed &lt;= 0 {
 direction = point_direction(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
 }
+
 speed = OriginalSpeed
 }
 
 
 
 
+
 /* Damage */
 
-if HitByProjectile() or (place_meeting(x,y,oPlayer) and oPlayer.Undocking = true) or place_meeting(x,y,oGrenadeTargetExplosion){
+if HitByProjectile() {
+ScreenShake(15)
+ExplodeIntoANumberOfChunks(35, oSwarmerChunk)
+audio_play_sound(aDeath,1,false)
+}
 
+
+if instance_exists(oPlayer) and place_meeting(x + oPlayer.hspeed,y + oPlayer.vspeed,oPlayer) and oPlayer.Undocking = true{
+ScreenShake(15)
+ExplodeIntoANumberOfChunks(35, oSwarmerChunk)
+audio_play_sound(aDeath,1,false)
+}
+ 
+
+    
+if place_meeting(x,y,oGrenadeTargetExplosion) and oGrenadeTargetExplosion.Harmless = false{
 ScreenShake(15)
 ExplodeIntoANumberOfChunks(35, oSwarmerChunk)
 audio_play_sound(aDeath,1,false)

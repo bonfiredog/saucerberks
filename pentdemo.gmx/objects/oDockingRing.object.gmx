@@ -31,8 +31,7 @@ Owner = noone
 depth = -12
 Growing = true
 Shrinking = false
-image_blend = c_black
-image_alpha = 0.5
+image_alpha = 0.3
 </string>
           </argument>
         </arguments>
@@ -61,26 +60,17 @@ image_alpha = 0.5
 if Growing = true {
 image_xscale = image_xscale + 0.05
 image_yscale = image_xscale
-if image_xscale &gt;= 5 {
+if image_xscale &gt;= 2 {
 Growing = false
 }
 }
 
 //If the player exits the pod, shrink rapidly, then destroy.
 if Shrinking = true {
-image_xscale = image_xscale - 0.1
+image_xscale = image_xscale - 0.08
 image_yscale = image_xscale
 if image_xscale &lt;= 0 {
 instance_destroy()
-}
-}
-
-//Flash in time with the player.
-if oPlayer.Docked = true {
-if oPlayer.TimeBetweenFlashes &gt; 0 {
-image_blend = c_dkgray 
-} else if oPlayer.TimeBetweenFlashes &lt;= 0 {
-image_blend = c_yellow
 }
 }
 
@@ -90,16 +80,15 @@ x = Owner.x
 y = Owner.y
 vspeed = Owner.vspeed
 hspeed = Owner.hspeed
+direction = Owner.direction
+image_angle = Owner.image_angle
 }
 
 }
-
-
-
 
 //Attach to the player as soon as created
-if instance_exists(Owner) = false and instance_exists(oPlayer){
-Owner = oPlayer
+if instance_exists(Owner) = false and instance_exists(oPlayerDocking){
+Owner = oPlayerDocking
 }
     
 </string>

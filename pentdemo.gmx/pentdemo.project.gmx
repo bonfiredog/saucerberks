@@ -76,6 +76,7 @@
       <sprite>sprites\sPlayerExplosion</sprite>
       <sprite>sprites\sUndockingExplosion</sprite>
       <sprite>sprites\sPlayerJets</sprite>
+      <sprite>sprites\sPlayerDockedSprite</sprite>
       <sprite>sprites\sPlayerFireGun</sprite>
       <sprite>sprites\sPlayerFireBait</sprite>
       <sprite>sprites\sMFGun</sprite>
@@ -117,19 +118,20 @@
     </sprites>
     <sprites name="Special Clutter">
       <sprite>sprites\sHidingDet</sprite>
+      <sprite>sprites\sHidingDetDocked</sprite>
       <sprite>sprites\sGrenadeDet</sprite>
-      <sprite>sprites\sGrenadeDet2Wake</sprite>
-      <sprite>sprites\sPlayerDocking</sprite>
       <sprite>sprites\sTurretDet</sprite>
       <sprite>sprites\sTurretLight</sprite>
       <sprite>sprites\sTurretDetTurret</sprite>
       <sprite>sprites\sSpecialSmoke</sprite>
+      <sprite>sprites\sSpecialFlame</sprite>
       <sprite>sprites\sSpecialSpark</sprite>
       <sprite>sprites\sContactFlash</sprite>
       <sprite>sprites\sTurretDetTurretBolt</sprite>
       <sprite>sprites\sTurretDetTurretPulse</sprite>
       <sprite>sprites\sDockedRing</sprite>
       <sprite>sprites\sDockSmoke</sprite>
+      <sprite>sprites\sDockSmokeUndocking</sprite>
       <sprite>sprites\sGrenadeTargetExplosion</sprite>
       <sprite>sprites\sGlint</sprite>
     </sprites>
@@ -193,6 +195,7 @@
     <font>fonts\fSubtitle</font>
     <font>fonts\fMenu</font>
     <font>fonts\fTutorial</font>
+    <font>fonts\fDockedText</font>
     <font>fonts\fDebugText</font>
     <font>fonts\fHighScore</font>
     <font>fonts\fHighScoreBig</font>
@@ -202,6 +205,7 @@
     <font>fonts\fFieldName</font>
     <font>fonts\fBoomersRemainingBig</font>
     <font>fonts\fFieldNameBig</font>
+    <font>fonts\fHidingText</font>
   </fonts>
   <objects name="objects">
     <objects name="Meta">
@@ -259,6 +263,7 @@
       <object>objects\oHidingDet</object>
       <object>objects\oSpecialSpark</object>
       <object>objects\oSpecialSmoke</object>
+      <object>objects\oSpecialFlame</object>
       <object>objects\oGrenadeDet2</object>
       <object>objects\oTurretDet</object>
       <object>objects\oSolid</object>

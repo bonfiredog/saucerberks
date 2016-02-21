@@ -90,7 +90,9 @@ if mouse_check_button(mb_left) and SecondsSinceLastShot &gt;= SecondsBetweenShot
     //play a sound, and create a kickback on the player and the gun.
     MyBullet = instance_create(x,y,oBullet)
     
-    MyBullet.direction = image_angle
+    MyBullet.Spread = random_range(-10,10)
+    
+    MyBullet.direction = image_angle + MyBullet.Spread
     MyBullet.speed = 600 / room_speed
     MyBullet.image_angle = image_angle
     

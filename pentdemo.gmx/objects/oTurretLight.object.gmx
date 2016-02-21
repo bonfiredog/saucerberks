@@ -55,13 +55,12 @@ image_yscale = image_xscale
             <string>if instance_exists(Owner){
 x = Owner.x
 y = Owner.y
-speed = Owner.speed
+vspeed = Owner.vspeed
+hspeed = Owner.hspeed
 direction = Owner.direction
 image_angle = Owner.image_angle
 
-
 if Owner.State = "Idle" {
-
 image_xscale = image_xscale + 0.3
 image_yscale = image_xscale
 image_alpha = image_alpha - 0.06

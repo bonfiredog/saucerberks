@@ -27,10 +27,10 @@
             <kind>1</kind>
             <string>depth = 11
 Owner = noone
-Damage = 0
-DamageTotal = 3
+Damage = 1
+DamageTotal = 4
 Hit = false
-HitTime = 0
+HitTime = 30
 TimeBetweenGlints = 60
 TimeToGlint = 50
 ClutterCount = irandom(50)
@@ -89,32 +89,15 @@ y = Owner.y + lengthdir_y(dist, angle+Owner.image_angle)
           <argument>
             <kind>1</kind>
             <string>if Hit = true {
+if HitTime &gt; 0 {
 HitTime = HitTime - 1
-ScreenShake(20 * Damage)
-image_blend = c_red
-if HitTime &lt;= 0 {
+image_blend = c_yellow
+} else if HitTime &lt;= 0 {
+image_blend = c_white
+HitTime = 30
 Hit = false
 }
-} 
-
-if TimeBetweenGlints &lt;= 0 {
-
-if TimeToGlint &gt; 0 {
-TimeToGlint = TimeToGlint - 1
-image_blend = c_lime
-} else if TimeToGlint &lt;= 0 {
-TimeBetweenGlints = 60
-TimeToGlint = 50
-image_blend = c_white
 }
-
-} else if TimeBetweenGlints &gt; 0 {
-TimeBetweenGlints = TimeBetweenGlints - 1
-}
-
-
-
-
 
 if instance_exists(Owner) {
 x = Owner.x
@@ -123,15 +106,29 @@ vspeed = Owner.vspeed
 hspeed = Owner.hspeed
 image_angle = Owner.image_angle
 }
+ 
+if Hit = false {
+if TimeBetweenGlints &lt;= 0 {
+if TimeToGlint &gt; 0 {
+TimeToGlint = TimeToGlint - 1
+image_blend = c_red
+} else if TimeToGlint &lt;= 0 {
+TimeBetweenGlints = 60
+TimeToGlint = 50
+image_blend = c_white
+}
+} else if TimeBetweenGlints &gt; 0 {
+TimeBetweenGlints = TimeBetweenGlints - 1
+}
+}
 
-
-
-if place_meeting(x,y,oBullet) {
+if HitByProjectile() and Hit = false {
 if Damage &lt; DamageTotal {
-if Hit = false {HitTime = 90}
 audio_play_sound(aGrenadeTargetHit, 1, false)
-Hit = true
+ScreenShake(10)
 Damage = Damage + 1
+Hit = true
+HitTime = 30
 } else if Damage &gt;= DamageTotal {
 ScreenShake(100)
 instance_create(x,y,oClutterEmitter)
@@ -146,6 +143,40 @@ if instance_exists(Owner) = false {
 if instance_exists(oGrenadeDet2) {
 Owner = oGrenadeDet2
 }
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if Hit = true {
+
+posx = x - view_xview[0]
+posy = y - view_yview[0]
+
+draw_set_halign(fa_center)
+draw_set_valign(fa_center)
+draw_set_color(c_yellow)
+draw_circle(posx,posy,45,true)
+
 }
 
 </string>

@@ -30,8 +30,19 @@ image_angle = random(360)
 instance_create(x,y,oTurretDetTurret)
 InitialiseEnemyCollision(random_range(15,30),360)
 SecondsBetweenEmits = random_range(50,250) / room_speed
-
-
+TimeToDisplayText = (60 * 120)
+MessageAlpha = 1
+MessageFlash = "Fading"
+FadeRate = 0.015
+FleetName = choose(
+" Mondrian ",
+" Haruspex ",
+" Yalt ",
+" Irontongue ",
+" Welchian ",
+" Morganian ",
+" Rekentish "
+)
 
 
 </string>
@@ -82,9 +93,71 @@ NumberOfAttempts = NumberOfAttempts - 1
 }
 }
 
+if global.MetTurretDet = false {
+if TimeToDisplayText &gt; 0 {
+TimeToDisplayText = TimeToDisplayText - 1
+} else if TimeToDisplayText &lt;= 0 {
+global.MetTurretDet = true
+}
+}
+
+if TimeToDisplayText &gt; 0 {
+if MessageFlash = "Fading" {
+if MessageAlpha &gt; 0 {
+MessageAlpha = MessageAlpha - FadeRate
+} else if MessageAlpha &lt;= 0 {
+MessageFlash = "Growing" 
+} 
+} else if MessageFlash = "Growing" {
+if MessageAlpha &lt; 1 {
+MessageAlpha = MessageAlpha + FadeRate
+} else if MessageAlpha &gt;= 1 {
+MessageFlash = "Fading"
+}
+}
+}
 
 
 
+
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if TimeToDisplayText &gt; 0 {
+
+draw_set_alpha(MessageAlpha)
+
+posx = x - view_xview[0]
+posy = y - view_yview[0]
+
+draw_set_font(fHidingText)
+draw_set_color(c_aqua)
+draw_set_halign(fa_right)
+draw_set_valign(fa_right)
+
+draw_text(posx + 500,posy,"/\...if: sys damaged#/\then:attack" + FleetName + "fleet#/\...if: no" + FleetName + "fleet#/\then:revert:hunter-killer-mode#/\executing...")
+}
 
 </string>
           </argument>
