@@ -159,7 +159,11 @@ sprite_index = sPlayerJets
 if Docked = false {
 //Create a wake if the player is moving (once per step).
 if speed &gt; 0 {
+if room = rTutorial {
+instance_create(x,y,oPlayerWake2)
+} else {
 instance_create(x,y,oPlayerWake)
+}
 }
 
 //Put the player back into the room if they stray beyond it.
@@ -281,6 +285,9 @@ with oBaitGun { instance_destroy() }
 with oRapidFireGun { instance_destroy() }
 if instance_exists(oGrenadeGun) and oGrenadeGun.Owner = oPlayer.id { with oGrenadeGun { instance_destroy() } } 
 ExplodeIntoANumberOfChunks(oGame.NumberOfBitsThePlayerIsMadeOf, oBit)  
+if room = rTutorial {
+instance_create(x,y,oTutorialDeath)
+}
 //Play the player death sound.
 audio_play_sound(aPlayerDeath, 1, false) 
 instance_create(x,y,oPlayerExplosion)
@@ -446,6 +453,7 @@ draw_set_valign(fa_center)
 
 if Stage = "Controls" {
 
+
 if WPressed = false and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
 draw_set_colour(c_red)
 draw_circle(posx,posy - 120,40,true)
@@ -492,10 +500,10 @@ DPressed = true }
 
 if WPressed and SPressed and APressed and DPressed = true and LeftClicked = false and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
 draw_set_colour(c_red)
-draw_circle(posx + 300, posy + 120, 150, true)
-draw_text(posx + 300,posy + 70,"Left Click")
+draw_circle(posx + 300, posy + 120, 130, true)
+draw_text(posx + 300,posy + 50,"Left Click")
 draw_set_colour(c_lime)
-draw_text(posx + 300,posy + 120,"Shoot a little yellow ball.#It's deadly! Sometimes.")
+draw_text(posx + 300,posy + 140,"Shoot a little yellow #ball. It's deadly!#Sometimes.")
 if mouse_check_button(mb_left) {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
@@ -521,12 +529,6 @@ audio_play_sound(aTextChange,1,false)
 SoundPlay1 = true
 }
 
-draw_set_colour(c_red)
-draw_circle(posx + 300, posy + 120, 170, true)
-draw_set_colour(c_lime)
-draw_text(posx + 300, posy + 90, "What a horrid little alien!")
-draw_text(posx + 300, posy + 120, "You had better shoot her.")
-
 //BOOMERS STAGE
 
 if instance_number(oSwarmer) &lt; 1 {
@@ -548,25 +550,12 @@ audio_play_sound(aTextChange,1,false)
 SoundPlay2 = true
 }
 
-draw_set_colour(c_red)
-draw_circle(posx + 300, posy + 120, 200, true)
-draw_set_colour(c_lime)
-draw_text(posx + 300 ,posy + 90,"There's another nasty customer.")
-draw_text(posx + 300,posy + 120,"Why don't you try and off her?")
-
 } else if oBoomer.BoomerShot = true and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
 if SoundPlay3 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
 SoundPlay3 = true
 }
-
-draw_set_colour(c_red)
-draw_circle(posx + 300, posy + 120, 200, true)
-draw_set_colour(c_lime)
-draw_text(posx + 300 ,posy + 90,"Whoops! That won't work!")
-draw_text(posx + 300,posy + 130,"Unless you can persuade her")
-draw_text(posx + 300, posy + 170, "to eat her friends...")
 
 if BoomerStageChange &gt; 0 {
 BoomerStageChange = BoomerStageChange - 1
@@ -583,19 +572,9 @@ audio_play_sound(aTextChange,1,false)
 SoundPlay4 = true
 }
 
-draw_set_colour(c_red)
-draw_circle(posx + 300, posy + 120, 200, true)
-draw_set_colour(c_lime)
-draw_text(posx + 300,posy + 70,"You'll need to attach some ")
-draw_text(posx + 300,posy + 110, "bait to her friend.")
-draw_text(posx + 300,posy + 150,"You may need to lay a")
-draw_text(posx + 300,posy + 190, "trail to attract her!")
+
 } else if TutorialBoomer.ThingsEaten = 1 and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
 
-draw_set_colour(c_red)
-draw_circle(posx + 300, posy + 120, 100, true)
-draw_set_colour(c_lime)
-draw_text(posx + 300,posy + 120,"Now give her a shot!")
 if SoundPlay5 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
@@ -606,10 +585,10 @@ SoundPlay5 = true
 if RightClicked = false and oMenu.Mode != "Pause" and oMenu.Mode != "Titles"  {
 
 draw_set_colour(c_red)
-draw_circle(posx - 300, posy - 50, 100, true)
-draw_text(posx - 300,posy - 80, "Right Click")
+draw_circle(posx - 180, posy - 110, 90, true)
+draw_text(posx - 180,posy - 130, "Right Click")
 draw_set_colour(c_lime)
-draw_text(posx - 300,posy - 50,"Shoot bait?")
+draw_text(posx - 180,posy - 100,"Shoot bait?")
 if mouse_check_button(mb_right) {RightClicked = true }
 }
 
@@ -623,6 +602,7 @@ instance_create(x + 400, y - 500 , oSwarmer)
 
 } else {
 Countdown = Countdown - 0.09
+BoomerStage = "Third"
 
 if Countdown &gt; 100 {
 if SoundPlay6 = false {
@@ -630,18 +610,24 @@ audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
 SoundPlay6 = true
 }
+
+draw_set_colour(c_red)
+draw_circle(posx + 300, posy + 120, 150, true)
 draw_set_colour(c_yellow)
-draw_text(posx + 90, posy + 60, "Well done! You're nearly ready to#tackle the debris fields...")
+draw_text(posx + 300, posy + 115, "That's it! You're#nearly ready to#tackle the debris fields...")
 }
 
-if Countdown &lt; 100 and Countdown &gt; 60 {
+if Countdown &lt; 100 and Countdown &gt; 70 {
 if SoundPlay7 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
 SoundPlay7 = true
 }
+
+draw_set_colour(c_red)
+draw_circle(posx + 300, posy + 120, 165, true)
 draw_set_colour(c_lime)
-draw_text(posx + 90, posy + 60, "Feel free to practice#until you are ready to go.#Just keep something in mind...")
+draw_text(posx + 300, posy + 110, "Feel free to practice#until you are ready#to go. Just keep#something in mind...")
 }
 
 if Countdown &lt; 100 {
@@ -663,15 +649,15 @@ audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
 SoundPlay8 = true
 }
-if instance_exists(oTutEnd) {
-if oTutEnd.PlayerTouch = false {
+
+draw_set_colour(c_red)
+draw_circle(posx + 300, posy + 120, 145, true)
 draw_set_colour(c_lime)
-draw_text(posx + 80,posy + 80,"You're going to be seeing#a lot of mess...")
-} else if instance_exists(oTutEnd) = false { 
-draw_set_colour(c_lime)
-draw_text(posx + 80,posy + 80,"You're going to be seeing#a lot of mess...")
-}
-}
+draw_text(posx + 300,posy + 120,"You're going to be seeing#a lot of mess...")
+
+
+
+
 if TutDebrisSpawn = false {
 if TutDebCount &gt; 0 {
 ThisDebrisSpawnyNegative = random_range(-30,-800)
@@ -691,6 +677,8 @@ TutDebrisSpawn = true
 }
 }
 
+
+
 if Countdown &lt; 60 and Countdown &gt; 40 {
 if TutEndSpawn = false {
 instance_create(oPlayer.x + 480, oPlayer.y + 200, oTutSpawn)
@@ -698,18 +686,17 @@ instance_create(oPlayer.x - 480, oPlayer.y + 200, oTutEnd)
 TutEndSpawn = true }
 }
 
-if Countdown &lt; 40 {
+if Countdown &lt; 35 and Countdown &gt; 0 {
 if SoundPlay9 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
 SoundPlay9 = true
 }
-if oTutEnd.PlayerTouch = false {
+if instance_exists(oTutEnd) and oTutEnd.PlayerTouch = false {
 draw_set_colour(16711935)
-draw_text(posx + 80,posy + 80,"Fly into that little purple number#when you're ready to go!")
-} else if instance_exists(oTutEnd) = false { 
-draw_set_colour(c_lime)
-draw_text(posx + 80,posy + 80,"Fly into that little purple number#when you're ready to go!")
+draw_circle(posx + 300, posy + 120, 150, true)
+draw_text(posx + 300,posy + 110,"Fly into that little#purple number when#you're ready to go!")
+
 }
 }
 
