@@ -209,6 +209,7 @@
     <font>fonts\fBoomersRemainingBig</font>
     <font>fonts\fFieldNameBig</font>
     <font>fonts\fHidingText</font>
+    <font>fonts\fDebug</font>
   </fonts>
   <objects name="objects">
     <objects name="Meta">
@@ -222,6 +223,7 @@
       <object>objects\oLogoScreen</object>
       <object>objects\oBonfireDogLogo</object>
       <object>objects\oInstructLogo</object>
+      <object>objects\oNewDebugText</object>
     </objects>
     <objects name="Level">
       <object>objects\oStar</object>

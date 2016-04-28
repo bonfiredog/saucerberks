@@ -1,0 +1,8 @@
+Name Generator Rejig
+Enemy Collision (Swarmer) -- physics application
+Player Collision -- physics application
+Shooting of grenadedet 
+Increase destrution radius when shooting out of 
+Stop quicker when firing out
+Move enemies away more quickly once slowed down enough
+Fix rotation on turretdet

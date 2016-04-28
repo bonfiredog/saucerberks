@@ -15,7 +15,8 @@ GalaxyNameGeneration()
 InitialisePlayableLevel()
 Difficulty()
 GenerateLevel()
-oUI2.ShowFieldRemaining = true</code>
+oUI2.ShowFieldRemaining = true
+instance_create(x,y,oNewDebugText)</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>
