@@ -25,12 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Give it a random speed and direction.
-speed = random_range(1000,2000) / room_speed
-direction = random(360)
+            <string>//Give it a random direction (and set it to a slightly bigger size,
+//as the sprite is a bit small).
 
+DirectionOfTravel = random(360)
 image_xscale =  1.2
 image_yscale = image_xscale
+
+
 </string>
           </argument>
         </arguments>
@@ -53,28 +55,7 @@ image_yscale = image_xscale
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Set its decleration.
-Deceleration = 2000 / (room_speed * room_speed)
-
-
-//If it has not decelerated enough, send
-//it in a random direction but slow it down each
-//frame.
-
-if speed &gt; Deceleration {
-image_angle = random(360)
-speed = speed - Deceleration
-
- }
- 
- //Otherwise stop it dead.
- 
- else {
-
-speed = 0
- }
- 
- //Shrink over time
+            <string>  //Shrink over time
  image_xscale = image_xscale - (1.5 / room_speed) //1 second shrink to nothing
  image_yscale = image_xscale //Does the same for the image's height.
  
@@ -85,16 +66,25 @@ speed = 0
       </action>
     </event>
   </events>
-  <PhysicsObject>0</PhysicsObject>
+  <PhysicsObject>-1</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
-  <PhysicsObjectShape>0</PhysicsObjectShape>
-  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
+  <PhysicsObjectShape>2</PhysicsObjectShape>
+  <PhysicsObjectDensity>0.200000002980232</PhysicsObjectDensity>
   <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
-  <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
-  <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
+  <PhysicsObjectLinearDamping>0.400000005960464</PhysicsObjectLinearDamping>
+  <PhysicsObjectAngularDamping>0.400000005960464</PhysicsObjectAngularDamping>
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>4,0</point>
+    <point>14,0</point>
+    <point>16,2</point>
+    <point>18,10</point>
+    <point>16,18</point>
+    <point>6,20</point>
+    <point>0,14</point>
+    <point>0,4</point>
+  </PhysicsShapePoints>
 </object>
