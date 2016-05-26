@@ -1,8 +1,5 @@
 ///InitialiseEnemyCollision(Normal Speed, Direction)
 
-//Set an enemy's speed.
-NormalSpeed = argument0 / room_speed
-speed = NormalSpeed
 //Change an enemy's direction to a random direction. 
 direction = random(argument1)
 
@@ -13,4 +10,4 @@ x = x + 64
 y = y + 64
 }
 
-ResetShunts()
+
