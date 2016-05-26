@@ -224,6 +224,8 @@
       <object>objects\oBonfireDogLogo</object>
       <object>objects\oInstructLogo</object>
       <object>objects\oNewDebugText</object>
+      <object>objects\oStaticObjectParent</object>
+      <object>objects\oDynamicObjectParent</object>
     </objects>
     <objects name="Level">
       <object>objects\oStar</object>
