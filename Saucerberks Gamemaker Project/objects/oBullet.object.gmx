@@ -57,18 +57,54 @@ instance_destroy()
 
 }
 
+
 //Destroy when hit a wall
-if place_meeting(x,y,oSwarmer) or place_meeting(x,y,oSolid) or place_meeting(x,y,oGrenadeTarget) {
-speed = 0
+
+if place_meeting(phy_position_x,phy_position_y,oSwarmer) or place_meeting(phy_position_x,phy_position_y,oSolid) or place_meeting(phy_position_x,phy_position_y,oGrenadeTarget) {
+phy_speed_x = 0
+phy_speed_y = 0
 audio_play_sound(aWallHit,1,false)
 sprite_index = sGunExplosion
 }
 
-if speed = 0 {
-image_alpha = image_alpha - 0.1
+if phy_speed_x = 0 {
+image_alpha = image_alpha - 0.01
 if image_alpha &lt;= 0 {
 instance_destroy()
 }
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_sprite(sBullet,-1,x,y)
+
+
+CollideWithBoomer = instance_place(phy_position_x,phy_position_y, oBoomer)
+
+if CollideWithBoomer = true and CollideWithBoomer.ThingsEaten &lt;= 0 {
+draw_set_colour(c_blue)
+} else {
+draw_set_colour(c_white)
 }
 </string>
           </argument>
@@ -76,16 +112,19 @@ instance_destroy()
       </action>
     </event>
   </events>
-  <PhysicsObject>0</PhysicsObject>
+  <PhysicsObject>-1</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
-  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
+  <PhysicsObjectDensity>0.100000001490116</PhysicsObjectDensity>
   <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
-  <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
-  <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
-  <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
+  <PhysicsObjectLinearDamping>0</PhysicsObjectLinearDamping>
+  <PhysicsObjectAngularDamping>0</PhysicsObjectAngularDamping>
+  <PhysicsObjectFriction>0.100000001490116</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints/>
+  <PhysicsShapePoints>
+    <point>8,8</point>
+    <point>8,8</point>
+  </PhysicsShapePoints>
 </object>

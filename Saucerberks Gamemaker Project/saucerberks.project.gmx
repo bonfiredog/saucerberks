@@ -241,8 +241,8 @@
     </objects>
     <objects name="Weapons &amp; Combat">
       <object>objects\oBullet</object>
-      <object>objects\oGrenadeGun</object>
       <object>objects\oRapidFireGun</object>
+      <object>objects\oGrenadeGun</object>
       <object>objects\oGrenadeBit</object>
       <object>objects\oProjectile</object>
       <object>objects\oGlob</object>
@@ -263,12 +263,16 @@
       <object>objects\oTutSpawn</object>
     </objects>
     <objects name="Furniture">
-      <object>objects\oDetritus10</object>
       <object>objects\oClutter</object>
       <object>objects\oDetritus6</object>
+      <object>objects\oDetritus10</object>
+      <object>objects\oDetritus8</object>
+      <object>objects\oDetritus4</object>
+      <object>objects\oDetritus9</object>
+      <object>objects\oDetritus3</object>
+      <object>objects\oDetritus7</object>
       <object>objects\oSpecialSolid</object>
       <object>objects\oPlayerDocking</object>
-      <object>objects\oDetritus9</object>
       <object>objects\oHidingDet</object>
       <object>objects\oSpecialSpark</object>
       <object>objects\oSpecialSmoke</object>
@@ -276,13 +280,9 @@
       <object>objects\oGrenadeDet2</object>
       <object>objects\oTurretDet</object>
       <object>objects\oSolid</object>
-      <object>objects\oDetritus4</object>
       <object>objects\oTurretDetTurret</object>
       <object>objects\oDetritus5</object>
       <object>objects\oDetritus2</object>
-      <object>objects\oDetritus3</object>
-      <object>objects\oDetritus8</object>
-      <object>objects\oDetritus7</object>
       <object>objects\oSpecialWake</object>
       <object>objects\oDetritus1</object>
       <object>objects\oDetritus11</object>

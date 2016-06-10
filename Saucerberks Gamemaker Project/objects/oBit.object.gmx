@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>oProjectile</parentName>
+  <parentName>self</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -29,12 +29,18 @@
 Reassembling = false
 //...Nor has it stopped exploded (or indeed even started)
 InPosition = false
-//It has a random speed &amp; direction.
-speed = random_range(750,1500) / room_speed
-direction = random(360)
-//And the game remembers where it was created (at the player).
+
 OriginalX = x
 OriginalY = y
+
+RotateLeft = random_range(350,500)
+RotateRight = random_range(-350,-500)
+
+direction = point_direction(x,y,random_range(0,room_width),random_range(0,room_height))
+
+physics_apply_torque(choose(RotateLeft,RotateRight))
+phy_speed_x = lengthdir_x(400,direction)
+phy_speed_y = lengthdir_y(400,direction)
 
 </string>
           </argument>
@@ -58,74 +64,57 @@ OriginalY = y
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Set the acceleration and deceleration for later.
-Acceleration = 5 / room_speed
-Deceleration = 25 / room_speed
-
-
-
-
-
-
-if global.PlayerLives &gt; 0 {
-
-//If the bit has not started reassembling yet,
-//And it has not slowed down sufficiently, 
-//Throw it out in a random direction.
-//Otherwise, if it has slowed down enough,
-//tell it to begin reassembling, stop it dead
-//and turn it 180 degrees.
+            <string>if global.PlayerLives &gt; 0 {
 if Reassembling = false {
-    if speed &gt; Deceleration {
-    speed = speed - Deceleration
-    image_angle = random(360)
-    }
-    else {
-    Reassembling = true
-   direction = direction + 180
-   speed = 0
-    }
-} else {
 
-//Have it accelerate again
-    speed = speed + Acceleration
+if phy_speed_x = 0 and phy_speed_y = 0 {
+direction = point_direction(x,y,OriginalX,OriginalY)
+phy_speed_x = lengthdir_x(500,direction)
+phy_speed_y = lengthdir_y(500,direction)
+physics_apply_torque(choose(RotateLeft,RotateRight))
+Reassembling = true
+}
+} else if Reassembling = true {
+if phy_position_x = OriginalX and phy_position_y = OriginalY {
+phy_speed_x = 0
+phy_speed_y = 0
+}
 
-    if point_distance(x,y,OriginalX,OriginalY) &lt; speed {
-    
-//We've reached our original position,
-//So stop it.
-    speed = 0
-    if InPosition = false {
-    //Set it to be in position and increase the number of bits reassembled.
-    oGame.BitsReassembled = oGame.BitsReassembled + 1 
-    InPosition = true
-    audio_sound_pitch(aBitUnite, oGame.CurrentPitch)
-    audio_play_sound(aBitUnite, 1, false)
-    oGame.CurrentPitch = oGame.CurrentPitch + 0.4
-    }
-    //When all the bits are in position, recreate the player, 
-    //destroy all the bits, and set the bits reassembled to 0.
-    if oGame.BitsReassembled &gt;= oGame.NumberOfBitsThePlayerIsMadeOf {
-    instance_create(x,y,oPlayer)
-    audio_play_sound(aPlayerReform, 1, false)
-    oGame.CurrentPitch = 0
-    with oBit { instance_destroy() }
-    oGame.BitsReassembled = 0
-    }
+if phy_speed_x = 0 and phy_speed_y = 0 {
+if InPosition = false {
+//Set it to be in position and increase the number of bits reassembled.
+oGame.BitsReassembled = oGame.BitsReassembled + 1 
+InPosition = true
+audio_sound_pitch(aBitUnite, oGame.CurrentPitch)
+audio_play_sound(aBitUnite, 1, false)
+oGame.CurrentPitch = oGame.CurrentPitch + 0.4
+}
+}
+
+//When all the bits are in position, recreate the player, 
+//destroy all the bits, and set the bits reassembled to 0.
+if oGame.BitsReassembled &gt;= oGame.NumberOfBitsThePlayerIsMadeOf {
+instance_create(x,y,oPlayer)
+audio_play_sound(aPlayerReform, 1, false)
+oGame.CurrentPitch = 0
+with oBit { instance_destroy() }
+oGame.BitsReassembled = 0
+}
 }   
 }
 
-} else {
 
- if speed &gt; Deceleration {
-    speed = speed - Deceleration
-    image_angle = random(360)
-    }
-    else {
-   speed = 0
-    }
-    
-    }
+
+
+
+
+
+
+
+
+
+
+
 </string>
           </argument>
         </arguments>
@@ -135,11 +124,11 @@ if Reassembling = false {
   <PhysicsObject>-1</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
-  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
-  <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
+  <PhysicsObjectDensity>0.100000001490116</PhysicsObjectDensity>
+  <PhysicsObjectRestitution>0</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
-  <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
-  <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
+  <PhysicsObjectLinearDamping>2.5</PhysicsObjectLinearDamping>
+  <PhysicsObjectAngularDamping>2</PhysicsObjectAngularDamping>
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
