@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>oDynamicObjectParent</parentName>
+  <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -32,23 +32,32 @@ WeaponCount = 0
 SelectedWeaponIndex = 0
 
 depth = -11
-image_xscale = 1.5
+image_xscale = 0.8
 image_yscale = image_xscale
 
+//Set initial power to 5, define the maximum
+Power = 5
+PowerMax = 50
+
 Countdown = 120
+
+//Make sure there is no shunt on the player
+ResetShunts()
 
 instance_create(x,y,oRapidFireGun)
 instance_create(x,y,oBaitGun)
 instance_create(x,y,oTutSpawn)
 
 Docked = false
+
 Owner = noone
+
 TimeBetweenFlashes = 120
+
+Colliding = false
+
 Undocking = false
 
-
-
-//Tutorial Specifics 
 WPressed = false
 SPressed = false
 APressed = false
@@ -56,11 +65,21 @@ DPressed = false
 LeftClicked = false
 Stage = "Controls"
 RightClicked = false
+
+
+WDrifting = false
+SDrifting = false
+ADrifting  = false
+DDrifting = false
+
 BoomerStage = "First"
+
 BoomerStageChange = 240
+
 TutDebrisSpawn = false
 TutDebCount = irandom_range(40,80)
 TutEndSpawn = false
+
 SoundPlay1 = false
 SoundPlay2 = false
 SoundPlay3 = false
@@ -71,6 +90,8 @@ SoundPlay7 = false
 SoundPlay8 = false
 SoundPlay9 = false
 
+image_xscale = 1.5
+image_yscale = image_xscale
 
 GrenadePickUpFlash = false
 NumberOfFlashes = 3
@@ -85,30 +106,6 @@ CaptionAlpha = 0.0
 
 HidingDetDockedMessage = ""
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="2">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>x = phy_position_x
-y = phy_position_y
 </string>
           </argument>
         </arguments>
@@ -131,7 +128,16 @@ y = phy_position_y
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Change player sprite if firing guns
+            <string>if keyboard_check(ord('W')) = false and keyboard_check(ord('S')) = false and keyboard_check(ord('A')) = false and keyboard_check(ord('D')) = false and speed &gt; 0 and Undocking = false and Docked = false {
+DriftSpeed = 8 / room_speed
+speed = speed - DriftSpeed
+}
+
+//No matter whether the player is docked or not, stop immediately if the game is paused.
+if oMenu.Mode = "Pause" {
+oPlayer.speed = 0
+} 
+
 
 if oMenu.Mode != "Pause" and Docked = false and Undocking = false {
 if instance_exists(oRapidFireGun) and mouse_check_button(mb_left) {
@@ -143,12 +149,16 @@ sprite_index = sPlayerJets
 }
 }
 
+
+
+
+
 /* ------------------------------------------------------------------------------------------------------ */
 
 //The following applies if the player is not docked (i.e. if they have control).
 if Docked = false {
 //Create a wake if the player is moving (once per step).
-if phy_speed &gt; 1.5 {
+if speed &gt; 0 {
 if room = rTutorial {
 instance_create(x,y,oPlayerWake2)
 } else {
@@ -169,10 +179,16 @@ if y &gt; room_height {y = room_height}
 //The following only occurs if the game is not paused and the player is not docked.
 if oMenu.Mode != "Pause" and Undocking = false and Docked = false {
 
+
 /* Collision */
 
+
+//If a block is about to touch us, it's big enough to collide with, and we aren't already colliding with something else...
 SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
+
 if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.8{
+//Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
+OriginalSpeed = 350 / room_speed
 ScreenShake(25)
 if CollisionSoundPlayed = false {
 audio_sound_pitch(aCollision,random_range(0.8,2))
@@ -180,45 +196,74 @@ audio_play_sound(aCollision,1,false)
 CollisionSoundPlayed = true
 }
 instance_create(x + hspeed,y + vspeed,oContactFlash)
+//Change the player's direction to almost the opposite of what they hit, and set them as 'in the process of colliding'.
+if speed &gt; 0 {
+direction = direction - random_range(130,220)
+} else if speed &lt;= 0 {
+direction = point_direction(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
+}
+speed = OriginalSpeed
+Colliding = true
 CollisionSoundPlayed = false
 }
+
+
+//If the player is 'in the process of colliding, set a deceleration rate, and have it decelerate by that amount.
+if Colliding = true {
+Deceleration = 0.5
+if speed &gt; 0 {
+speed = speed - Deceleration
+} else if speed &lt;= 0 {
+Colliding = false
+}
+}
+
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 
 
 //The following only occurs if the game is not paused, and the player is not 'in the process of colliding', and they are not docked.
-if oMenu.Mode != "Pause" and Undocking = false and Docked = false{
+if oMenu.Mode != "Pause" and Colliding = false and Undocking = false and Docked = false{
 
 /* Movement */
-
 //Speed
-MySpeed = 200
+MySpeed = 350 / room_speed
 
 //Up
 if keyboard_check(ord('W')) {
-physics_apply_force(x,y,0,-MySpeed)
+vspeed = -MySpeed
 }
 
 
 //Down
 if keyboard_check(ord('S')) {
-physics_apply_force(x,y,0,MySpeed)
+vspeed = MySpeed
 }
 
 
 //Left
 if keyboard_check(ord('A')) {
-physics_apply_force(x,y,-MySpeed,0)
+hspeed = -MySpeed
 }
 
 
 //Right
 if keyboard_check(ord('D')) {
-physics_apply_force(x,y,MySpeed,0)
+hspeed = MySpeed
 }
 
-phy_rotation = -point_direction(phy_position_x,phy_position_y,mouse_x,mouse_y)
+
+
+//If there is a Shunt happening, let it happen and then reset.
+hspeed = hspeed + xShunt
+vspeed = vspeed + yShunt
+ResetShunts()
+
+
+image_angle = point_direction(x,y,mouse_x,mouse_y)
+
+
 
 /* ----------------------------------------------------------------------------------------------------------- */
 
@@ -315,6 +360,8 @@ image_alpha = image_alpha - 0.006
 
 x = Owner.x
 y = Owner.y
+vspeed = Owner.vspeed
+hspeed = Owner.hspeed
 direction = Owner.direction
 oRapidFireGun.image_alpha = 0.0
 oBaitGun.image_alpha = 0.0
@@ -355,8 +402,7 @@ if instance_exists(oGrenadeGun){
 oGrenadeGun.depth = -121
 oGrenadeGun.image_alpha = 1.0 
 }
-//Need to work out how to fire in the right direction! Local Force?
-
+speed = 1500 / room_speed
 direction = Owner.image_angle - 180
 image_angle = random(360)
 Owner = noone
@@ -365,6 +411,7 @@ Docked = false
 }
 
 if Undocking = true {
+speed = speed - 0.3
 if speed &lt;= 0 {
 image_blend = c_white
 Undocking = false
@@ -685,23 +732,16 @@ oGrenadeGun.PickUpMessage = false
       </action>
     </event>
   </events>
-  <PhysicsObject>-1</PhysicsObject>
+  <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
-  <PhysicsObjectShape>2</PhysicsObjectShape>
-  <PhysicsObjectDensity>0.200000002980232</PhysicsObjectDensity>
-  <PhysicsObjectRestitution>0.400000005960464</PhysicsObjectRestitution>
+  <PhysicsObjectShape>0</PhysicsObjectShape>
+  <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
+  <PhysicsObjectRestitution>0.100000001490116</PhysicsObjectRestitution>
   <PhysicsObjectGroup>0</PhysicsObjectGroup>
-  <PhysicsObjectLinearDamping>0.600000023841858</PhysicsObjectLinearDamping>
-  <PhysicsObjectAngularDamping>1</PhysicsObjectAngularDamping>
-  <PhysicsObjectFriction>0.400000005960464</PhysicsObjectFriction>
+  <PhysicsObjectLinearDamping>0.100000001490116</PhysicsObjectLinearDamping>
+  <PhysicsObjectAngularDamping>0.100000001490116</PhysicsObjectAngularDamping>
+  <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints>
-    <point>0,36</point>
-    <point>30,0</point>
-    <point>72,16</point>
-    <point>80,40</point>
-    <point>56,68</point>
-    <point>28,68</point>
-  </PhysicsShapePoints>
+  <PhysicsShapePoints/>
 </object>

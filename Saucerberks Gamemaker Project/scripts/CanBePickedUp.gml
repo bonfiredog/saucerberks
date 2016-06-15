@@ -4,9 +4,10 @@
 if instance_exists(Owner) = false {
 
 //...and if the Player object is touching the weapon...
-if instance_exists(oPlayer) {
+if instance_exists(instance_place(x,y,oPlayer)) {
 
 //make player the owner
+audio_play_sound(aItemPickup,1,false)
 Owner = oPlayer.id
 GunOwned = true
 

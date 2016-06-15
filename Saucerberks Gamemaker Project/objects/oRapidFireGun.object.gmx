@@ -59,12 +59,13 @@ SecondsSinceLastShot = SecondsBetweenShots
             <string>//If the gun has been picked up...
 if instance_exists(Owner)
 
+
+
 //Make the gun 'stick' to its owner, and face in the same direction...
 {
 x = Owner.x
 y = Owner.y
-direction = Owner.phy_rotation
-image_angle = Owner.phy_rotation
+image_angle = Owner.image_angle
 SecondsBetweenShots = 1 / 10
 
 
@@ -87,20 +88,22 @@ if mouse_check_button(mb_left) and SecondsSinceLastShot &gt;= SecondsBetweenShot
 
     //Fire a bullet at a certain speed, in the direction we are facing, 
     //play a sound, and create a kickback on the player and the gun.
-    MyBullet = instance_create(Owner.phy_position_x,Owner.phy_position_y,oBullet)
+    MyBullet = instance_create(x,y,oBullet)
     
-    with MyBullet {
-    Spread = random_range(-10,10)
-    phy_rotation = image_angle + Spread
-    direction = point_direction(x,y,mouse_x+Spread,mouse_y+Spread)
-    phy_speed_x = lengthdir_x(600,direction)
-    phy_speed_y = lengthdir_y(600,direction)
-    }
-
-    with Owner {
-    physics_apply_force(x,y,-150,0)
-    }
-      
+    MyBullet.Spread = random_range(-10,10)
+    
+    MyBullet.direction = image_angle + MyBullet.Spread
+    MyBullet.speed = 600 / room_speed
+    MyBullet.image_angle = image_angle
+    
+    Kick = 50 / room_speed
+    KickDirection = image_angle + 180
+    
+    Owner.xShunt = lengthdir_x(Kick,KickDirection)
+    Owner.yShunt = lengthdir_y(Kick,KickDirection)
+    
+    ResetShunts()
+    
     ScreenShake(25)
     
     audio_play_sound(aShoot, 1, false)

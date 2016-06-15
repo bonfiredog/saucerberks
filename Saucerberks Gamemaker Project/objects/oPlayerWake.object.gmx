@@ -25,8 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>direction = -oPlayer.phy_rotation
-image_angle = oPlayer.phy_rotation
+            <string>direction = oPlayer.image_angle - 180
+image_angle = oPlayer.image_angle
 
 speed = 100 / room_speed
 
@@ -57,8 +57,8 @@ image_yscale = image_xscale
           <argument>
             <kind>1</kind>
             <string>if instance_exists(oPlayer) {
-direction = -oPlayer.phy_rotation
-image_angle = oPlayer.phy_rotation
+direction = oPlayer.image_angle - 180
+image_angle = oPlayer.image_angle
 }
 
 /* delete bullet when outside of room */
