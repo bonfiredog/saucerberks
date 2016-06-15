@@ -33,16 +33,14 @@ InPosition = false
 OriginalX = x
 OriginalY = y
 
-SpeedToTake = random_range(350,600)
-
 RotateLeft = random_range(350,500)
 RotateRight = random_range(-350,-500)
 
 direction = point_direction(x,y,random_range(0,room_width),random_range(0,room_height))
 
 physics_apply_torque(choose(RotateLeft,RotateRight))
-phy_speed_x = lengthdir_x(SpeedToTake,direction)
-phy_speed_y = lengthdir_y(SpeedToTake,direction)
+phy_speed_x = lengthdir_x(400,direction)
+phy_speed_y = lengthdir_y(400,direction)
 
 </string>
           </argument>
@@ -71,8 +69,8 @@ if Reassembling = false {
 
 if phy_speed_x = 0 and phy_speed_y = 0 {
 direction = point_direction(x,y,OriginalX,OriginalY)
-phy_speed_x = lengthdir_x(SpeedToTake,direction)
-phy_speed_y = lengthdir_y(SpeedToTake,direction)
+phy_speed_x = lengthdir_x(500,direction)
+phy_speed_y = lengthdir_y(500,direction)
 physics_apply_torque(choose(RotateLeft,RotateRight))
 Reassembling = true
 }
@@ -82,7 +80,7 @@ phy_speed_x = 0
 phy_speed_y = 0
 }
 
-if phy_speed_x &lt; 0 and phy_speed_y &lt; 0 {
+if phy_speed_x = 0 and phy_speed_y = 0 {
 if InPosition = false {
 //Set it to be in position and increase the number of bits reassembled.
 oGame.BitsReassembled = oGame.BitsReassembled + 1 
@@ -90,7 +88,6 @@ InPosition = true
 audio_sound_pitch(aBitUnite, oGame.CurrentPitch)
 audio_play_sound(aBitUnite, 1, false)
 oGame.CurrentPitch = oGame.CurrentPitch + 0.4
-
 }
 }
 
@@ -98,7 +95,6 @@ oGame.CurrentPitch = oGame.CurrentPitch + 0.4
 //destroy all the bits, and set the bits reassembled to 0.
 if oGame.BitsReassembled &gt;= oGame.NumberOfBitsThePlayerIsMadeOf {
 instance_create(x,y,oPlayer)
-instance_create(x,y,oTutSpawn)
 audio_play_sound(aPlayerReform, 1, false)
 oGame.CurrentPitch = 0
 with oBit { instance_destroy() }
