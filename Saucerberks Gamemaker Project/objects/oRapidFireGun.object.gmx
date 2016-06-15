@@ -87,7 +87,7 @@ if mouse_check_button(mb_left) and SecondsSinceLastShot &gt;= SecondsBetweenShot
 
     //Fire a bullet at a certain speed, in the direction we are facing, 
     //play a sound, and create a kickback on the player and the gun.
-    MyBullet = instance_create(Owner.phy_position_x,Owner.phy_position_y,oBullet)
+    MyBullet = instance_create(oPlayer.x,oPlayer.y,oBullet)
     
     with MyBullet {
     Spread = random_range(-10,10)
