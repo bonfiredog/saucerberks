@@ -1,5 +1,5 @@
 //Change anything in the Projectile class into IncomingProjectile if it hits us
-IncomingProjectile = instance_place(x,y,oProjectile)
+IncomingProjectile = instance_place(x + hspeed ,y + vspeed,oProjectile)
 
 //If the IncomingProjectile has been created, do this:
 if instance_exists(IncomingProjectile) {

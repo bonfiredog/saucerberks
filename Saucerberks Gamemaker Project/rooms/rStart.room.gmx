@@ -19,7 +19,8 @@ global.MetHidingDet = false
 InitialiseRoom()
 Difficulty()
 GenerateLevel()
-instance_create(x,y,oLogoScreen)</code>
+instance_create(x,y,oLogoScreen)
+instance_create(x,y,oCursor)</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

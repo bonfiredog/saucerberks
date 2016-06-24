@@ -64,6 +64,7 @@ dist = point_distance(0,0,131,-107)
 angle = point_direction(0,0,131,-107)
 x = Owner.x + lengthdir_x(dist, angle+Owner.image_angle)
 y = Owner.y + lengthdir_y(dist, angle+Owner.image_angle)
+image_angle = Owner.image_angle
 }
 
 </string>
@@ -88,44 +89,13 @@ y = Owner.y + lengthdir_y(dist, angle+Owner.image_angle)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if Hit = true {
-if HitTime &gt; 0 {
-HitTime = HitTime - 1
-image_blend = c_yellow
-} else if HitTime &lt;= 0 {
-image_blend = c_white
-HitTime = 30
-Hit = false
-}
-}
+            <string>HittingBullet = instance_place(x,y,oBullet)
 
-if instance_exists(Owner) {
-x = Owner.x
-y = Owner.y
-vspeed = Owner.vspeed
-hspeed = Owner.hspeed
-image_angle = Owner.image_angle
-}
- 
-if Hit = false {
-if TimeBetweenGlints &lt;= 0 {
-if TimeToGlint &gt; 0 {
-TimeToGlint = TimeToGlint - 1
-image_blend = c_red
-} else if TimeToGlint &lt;= 0 {
-TimeBetweenGlints = 60
-TimeToGlint = 50
-image_blend = c_white
-}
-} else if TimeBetweenGlints &gt; 0 {
-TimeBetweenGlints = TimeBetweenGlints - 1
-}
-}
 
-if HitByProjectile() and Hit = false {
+if instance_exists(HittingBullet) and Hit = false {
 if Damage &lt; DamageTotal {
 audio_play_sound(aGrenadeTargetHit, 1, false)
-ScreenShake(10)
+ScreenShake(30)
 Damage = Damage + 1
 Hit = true
 HitTime = 30
@@ -136,7 +106,56 @@ instance_create(x,y,oGrenadeTargetExplosion)
 with oGrenadeDet2 {instance_destroy()}
 instance_destroy()
 }
+
+with HittingBullet {
+speed = 0
+if PlayHitSound = false {
+audio_play_sound(aWallHit,1,false)
+PlayHitSound = true
 }
+
+sprite_index = sGunExplosion
+if speed = 0 {
+image_alpha = image_alpha - 0.1
+if image_alpha &lt;= 0 {
+instance_destroy()
+}
+}
+}
+}
+
+if Hit = true {
+if HitTime &gt; 0 {
+HitTime = HitTime - 1
+image_blend = c_red
+Owner.image_blend = c_red
+} else if HitTime &lt;= 0 {
+image_blend = c_white
+Owner.image_blend = c_white
+HitTime = 30
+Hit = false
+}
+}
+
+
+if Hit = false and instance_exists(Owner){
+if TimeBetweenGlints &lt;= 0 {
+if TimeToGlint &gt; 0 {
+TimeToGlint = TimeToGlint - 1
+image_blend = c_yellow
+Owner.image_blend = c_yellow
+} else if TimeToGlint &lt;= 0 {
+TimeBetweenGlints = 60
+TimeToGlint = 50
+image_blend = c_white
+Owner.image_blend = c_white
+}
+} else if TimeBetweenGlints &gt; 0 {
+TimeBetweenGlints = TimeBetweenGlints - 1
+}
+}
+
+
 
 
 if instance_exists(Owner) = false {
@@ -144,41 +163,6 @@ if instance_exists(oGrenadeDet2) {
 Owner = oGrenadeDet2
 }
 }
-
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if Hit = true {
-
-posx = x - view_xview[0]
-posy = y - view_yview[0]
-
-draw_set_halign(fa_center)
-draw_set_valign(fa_center)
-draw_set_color(c_yellow)
-draw_circle(posx,posy,45,true)
-
-}
-
 </string>
           </argument>
         </arguments>

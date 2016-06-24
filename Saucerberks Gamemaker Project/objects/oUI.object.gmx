@@ -53,7 +53,9 @@ if oMenu.Mode = "Game" or oMenu.Mode = "Menu" {
     
     draw_text(x,y,"Lives")
     y = y + 35
-    draw_text(x,y,global.PlayerLives)            
+    draw_text(x,y,global.PlayerLives)     
+    
+           
 } 
 }
 </string>

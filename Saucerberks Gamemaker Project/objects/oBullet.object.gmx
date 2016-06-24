@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>depth = -11
+PlayHitSound = false
 
 </string>
           </argument>
@@ -58,9 +59,12 @@ instance_destroy()
 }
 
 //Destroy when hit a wall
-if place_meeting(x,y,oSwarmer) or place_meeting(x,y,oSolid) or place_meeting(x,y,oGrenadeTarget) {
+if place_meeting(x,y,oSwarmer) or place_meeting(x,y,oSolid) {
 speed = 0
+if PlayHitSound = false {
 audio_play_sound(aWallHit,1,false)
+PlayHitSound = true
+}
 sprite_index = sGunExplosion
 }
 

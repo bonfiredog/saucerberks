@@ -106,6 +106,8 @@ CaptionAlpha = 0.0
 
 HidingDetDockedMessage = ""
 
+
+
 </string>
           </argument>
         </arguments>
@@ -202,7 +204,7 @@ direction = direction - random_range(130,220)
 } else if speed &lt;= 0 {
 direction = point_direction(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
 }
-speed = OriginalSpeed
+speed = OriginalSpeed + 300 / room_speed
 Colliding = true
 CollisionSoundPlayed = false
 }
@@ -339,10 +341,7 @@ sprite_index = sPlayerDockedSprite
 oHidingDet.sprite_index = sHidingDetDocked
 Docked = true
 
-with oSwarmer {
-direction = direction - random_range(130,220)
-State = "Idle"
-}
+
 }
 
 
@@ -363,6 +362,7 @@ y = Owner.y
 vspeed = Owner.vspeed
 hspeed = Owner.hspeed
 direction = Owner.direction
+image_angle = Owner.image_angle
 oRapidFireGun.image_alpha = 0.0
 oBaitGun.image_alpha = 0.0
 if instance_exists(oGrenadeGun){
@@ -403,7 +403,7 @@ oGrenadeGun.depth = -121
 oGrenadeGun.image_alpha = 1.0 
 }
 speed = 1500 / room_speed
-direction = Owner.image_angle - 180
+direction = Owner.image_angle
 image_angle = random(360)
 Owner = noone
 Docked = false
@@ -411,7 +411,7 @@ Docked = false
 }
 
 if Undocking = true {
-speed = speed - 0.3
+speed = speed - 0.4
 if speed &lt;= 0 {
 image_blend = c_white
 Undocking = false

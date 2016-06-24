@@ -68,6 +68,12 @@ StayInsideRoom()
 image_angle = image_angle + SpinDirection
 
 
+if oGrenadeTarget.Damage &gt; 2 {
+FadeRate = 0.030
+} else {
+FadeRate = 0.015
+}
+
 /* Emitting */
 if SecondsBetweenEmits &gt; 0 {
 SecondsBetweenEmits = SecondsBetweenEmits - 1 }
@@ -159,17 +165,30 @@ MessageFlash = "Fading"
             <kind>1</kind>
             <string>if TimeToDisplayText &gt; 0 {
 
+if oGrenadeTarget.Damage = 1 {
+DamageMessage = "20% Critical!"
+} else if oGrenadeTarget.Damage = 2 {
+DamageMessage = "40% Critical!!"
+} else if oGrenadeTarget.Damage = 3 {
+DamageMessage = "60% Critical!!!"
+} else if oGrenadeTarget.Damage = 4 {
+DamageMessage = "80% Critical DANGER!!!"
+}
+
 draw_set_alpha(MessageAlpha)
 
 posx = x - view_xview[0]
 posy = y - view_yview[0]
 
 draw_set_font(fHidingText)
+if oGrenadeTarget.Damage &gt; 2 {
+draw_set_color(c_red) } else {
 draw_set_color(c_aqua)
+}
 draw_set_halign(fa_right)
 draw_set_valign(fa_right)
 
-draw_text(posx + 500,posy,"Class 'Multa' Grenade Bay OS v.1.8.4#====================##++ALARM ALARM!++#Payload Arms 1 - 5 Damaged!")
+draw_text(posx + 500,posy,"Class 'Multa' Grenade Bay OS v.1.8.4#====================##++ALARM ALARM!++#" + DamageMessage + "#Payload Arms 1 - 5 Damaged!")
 }
 
 </string>

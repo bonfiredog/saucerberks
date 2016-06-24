@@ -28,11 +28,13 @@
             <string>depth = -130
 image_xscale = 0
 image_yscale = 0
-NumberOfFlashes = random(6)
+NumberOfFlashes = random(10)
 TimeInBetweenFlashes = 5
 Flashing = "Up"
-NewScaleToReach = 1.2
+NewScaleToReach = 1.6
 
+XOffset = random_range(-30,30)
+YOffset = random_range(-30,30)
 </string>
           </argument>
         </arguments>
@@ -55,7 +57,13 @@ NewScaleToReach = 1.2
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>x = oPlayer.x + XOffset
+y = oPlayer.y + YOffset
+vspeed = oPlayer.vspeed
+hspeed = oPlayer.hspeed
+
+
+
 if NumberOfFlashes &gt; 0 {
 
 if Flashing = "Up" {

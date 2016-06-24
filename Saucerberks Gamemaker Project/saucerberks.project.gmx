@@ -143,6 +143,7 @@
       <sprite>sprites\sLogoScreen</sprite>
       <sprite>sprites\sBonfireDogLogo</sprite>
       <sprite>sprites\sInstructLogo</sprite>
+      <sprite>sprites\sCursor</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -168,6 +169,8 @@
     <scripts name="Menus">
       <script>scripts\DrawTextAndUpdateCurrentY.gml</script>
       <script>scripts\ButtonPressed.gml</script>
+      <script>scripts\DrawTextAndNewLine.gml</script>
+      <script>scripts\DrawValueTextAndNewLine.gml</script>
     </scripts>
     <scripts name="Level Generation">
       <script>scripts\GenerateLevel.gml</script>
@@ -185,6 +188,7 @@
       <script>scripts\ClutterGeneration.gml</script>
       <script>scripts\ClutterCollision.gml</script>
       <script>scripts\FindSpriteBoundaries.gml</script>
+      <script>scripts\TurnToTarget.gml</script>
     </scripts>
     <scripts name="Debug Log">
       <script>scripts\DebugLogInitialise.gml</script>
@@ -224,6 +228,7 @@
       <object>objects\oBonfireDogLogo</object>
       <object>objects\oInstructLogo</object>
       <object>objects\oNewDebugText</object>
+      <object>objects\oCursor</object>
     </objects>
     <objects name="Level">
       <object>objects\oStar</object>
