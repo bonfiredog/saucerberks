@@ -86,7 +86,10 @@ direction = oTurretDetTurret.direction
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if image_xscale &lt; 1.5 {
+            <string>image_angle = direction
+
+
+if image_xscale &lt; 1.5 {
 image_alpha = image_alpha + 0.2
 image_xscale = image_xscale + 0.2 
 image_yscale = image_xscale

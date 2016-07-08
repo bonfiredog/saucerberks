@@ -30,11 +30,21 @@ Owner = noone
 SpinDirection = choose(-0.5,0.5)
 State = "Idle"
 TimeBeforeSpinChange = random_range(300,900)
+Cooldown = 0
+DetectionRange = 400
 TimeBetweenFlashes = 120
+TimeUntilFlashDies = 0
+EnemyInRange = noone
 PlayerInRange = noone
-Cooldown = 90
-RatePerStepOfTurn = 2
 TurnedToTarget = false
+AlertType = ""
+DirectionToTarget = 0
+
+
+
+
+
+
 </string>
           </argument>
         </arguments>
@@ -92,18 +102,24 @@ y = Owner.y + lengthdir_y(dist, angle+Owner.image_angle)
             <string>//Point the sprite in the same direction as its attached object.
 image_angle = direction
 
+//Cycle the Cooldown functionality if it has been activated after a shot.
 
-
-
-//Cycle the Cooldown functionality
-if Cooldown &lt;= 0 {
-Cooldown = 90
-} else if Cooldown &gt; 0 {
+if Cooldown &gt; 0 {
 Cooldown = Cooldown - 1
 }
 
-DetectionRange = 400
+
+//If a Swarmer is in range, mark it as targeted. Likewise with the player.
+
+if instance_exists(oSwarmer) {
+if point_distance(x,y,instance_nearest(x,y,oSwarmer).x,instance_nearest(x,y,oSwarmer).y) &lt;= DetectionRange {
 EnemyInRange = instance_nearest(x,y,oSwarmer)
+} else {
+EnemyInRange = noone
+}
+} else {
+EnemyInRange = noone
+}
 
 if instance_exists(oPlayer) {
 if point_distance(x,y,oPlayer.x,oPlayer.y) &lt;= DetectionRange {
@@ -116,87 +132,93 @@ PlayerInRange = noone
 }
 
 
+
+//Set Alert State if either the player or an enemy is in range, giving priority to the player.
+
+
 if PlayerInRange = noone {
 if instance_exists(EnemyInRange) {
-DistanceToNearestEnemy = point_distance(x,y,EnemyInRange.x,EnemyInRange.y)
-if DistanceToNearestEnemy &lt;= DetectionRange {
 State = "Alert"
 AlertType = "Enemy"
-}
+} else {
+State = "Idle"
+TurnedToTarget = false
 }
 } else if instance_exists(oPlayer) and PlayerInRange = oPlayer.id {
 State = "Alert"
 AlertType = "Player"
 } else {
-State = "Idle" }
+State = "Idle" 
+TurnedToTarget = false
+}
+
+
+//If Idle, spin in one direction until the random timer changes the direction, and then spin that way.
+//Flash the turret light, and then destroy it half a second later.
 
 
 if State = "Idle" {
-TurnedToTarget = false
+
 if TimeBeforeSpinChange &gt; 0 {
 TimeBeforeSpinChange = TimeBeforeSpinChange - 1
 } else if TimeBeforeSpinChange &lt;= 0 {
 if SpinDirection = -0.5 {SpinDirection = 0.5 }
-else if SpinDirection = 0.5 {SpinDirection = -0.5 }
+else if SpinDirection = 0.5 {SpinDirection = -0.5}
 TimeBeforeSpinChange = random_range(300,900)
 }
 
 direction = direction + SpinDirection
 
-
 if TimeBetweenFlashes &gt; 0 {
-TimeBetweenFlashes = TimeBetweenFlashes - 1}
-else if TimeBetweenFlashes &lt;= 0 {
+TimeBetweenFlashes = TimeBetweenFlashes - 1
+} else if TimeBetweenFlashes &lt;= 0 {
 instance_create(x,y,oTurretLight)
+TimeUntilFlashDies = 30
 TimeBetweenFlashes = 120
 }
 
-
-
-
-
-
-
-
+if instance_exists(oTurretLight) {
+if TimeUntilFlashDies &gt; 0 {
+TimeUntilFlashDies = TimeUntilFlashDies - 1
+} else if TimeUntilFlashDies &lt;= 0 {
+with oTurretLight {instance_destroy()}
+}
+}
 
 } else if State = "Alert" {
-//If something is in range, turn to face it quickly, and fire upon it if there is line of sight.
 if AlertType = "Enemy" {
-TurnToTarget()
-//If the enemy exists, is in range and we are not cooling down from a previous shot, shoot.
-if instance_exists(EnemyInRange) and Cooldown &lt;= 0 and TurnedToTarget = true {
+if instance_exists(EnemyInRange) {
+/* --------------- DIRECTION CHANGING CODE -------------------------- */
+TurnToTarget(EnemyInRange)
+//direction = point_direction(x,y,EnemyInRange.x,EnemyInRange.y)
+/* ------------------------------------------------------------------ */
+if Cooldown &lt;= 0 and TurnedToTarget = true {
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)
 ThisPulse.direction = direction
 ThisPulse.image_angle = image_angle
+Cooldown = 90
+}
 } 
 } else if AlertType = "Player" {
-if instance_exists(oPlayer) {
 if instance_exists(PlayerInRange) {
-//If the player is in range, first of all work out the angle between the current position and the player's position.
-TurnToTarget()
-//If the player exists, is in range and we are not cooling down from a previous shot, shoot.
-if instance_exists(oPlayer) and instance_exists(PlayerInRange) and Cooldown &lt;= 0 and TurnedToTarget = true {
+/* --------------- DIRECTION CHANGING CODE -------------------------- */
+TurnToTarget(PlayerInRange)
+//direction = point_direction(x,y,PlayerInRange.x,PlayerInRange.y)
+/* ------------------------------------------------------------------ */
+if Cooldown &lt;= 0 and TurnedToTarget = true {
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)
 ThisPulse.direction = direction
 ThisPulse.image_angle = image_angle
+Cooldown = 90
+} 
 }
- 
-}
-}
-}
-
-
-
-
-
-
-
-
-
-
-if instance_exists(oTurretLight) = false{instance_create(x,y,oTurretLight)}
 }
 
+if instance_exists(oTurretLight) = false {
+instance_create(x,y,oTurretLight)
+}
+
+}
 
 
 

@@ -1,9 +1,5 @@
-Name Generator Rejig
 
 Player Being Destroyed Randomly
 Enemy Collision (Swarmer)
-
 Player Collision
 Fix rotation on turretdet
-
-Boomers Not displaying in room

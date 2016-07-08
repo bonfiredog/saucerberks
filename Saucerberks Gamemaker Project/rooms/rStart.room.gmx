@@ -20,7 +20,8 @@ InitialiseRoom()
 Difficulty()
 GenerateLevel()
 instance_create(x,y,oLogoScreen)
-instance_create(x,y,oCursor)</code>
+instance_create(x,y,oCursor)
+instance_create(x,y,oNewDebugText)</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

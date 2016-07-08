@@ -144,6 +144,7 @@
       <sprite>sprites\sBonfireDogLogo</sprite>
       <sprite>sprites\sInstructLogo</sprite>
       <sprite>sprites\sCursor</sprite>
+      <sprite>sprites\sprite76</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -171,6 +172,8 @@
       <script>scripts\ButtonPressed.gml</script>
       <script>scripts\DrawTextAndNewLine.gml</script>
       <script>scripts\DrawValueTextAndNewLine.gml</script>
+      <script>scripts\DrawDebugNormalText.gml</script>
+      <script>scripts\DrawDebugText.gml</script>
     </scripts>
     <scripts name="Level Generation">
       <script>scripts\GenerateLevel.gml</script>
@@ -241,6 +244,7 @@
       <object>objects\oPlayerWake2</object>
       <object>objects\oBit</object>
       <object>objects\oPlayer</object>
+      <object>objects\oContactFlash</object>
     </objects>
     <objects name="Weapons &amp; Combat">
       <object>objects\oBullet</object>
@@ -266,47 +270,52 @@
       <object>objects\oTutSpawn</object>
     </objects>
     <objects name="Furniture">
-      <object>objects\oDetritus10</object>
-      <object>objects\oClutter</object>
-      <object>objects\oDetritus6</object>
-      <object>objects\oSpecialSolid</object>
-      <object>objects\oPlayerDocking</object>
-      <object>objects\oDetritus9</object>
-      <object>objects\oHidingDet</object>
-      <object>objects\oSpecialSpark</object>
-      <object>objects\oSpecialSmoke</object>
-      <object>objects\oSpecialFlame</object>
-      <object>objects\oGrenadeDet2</object>
-      <object>objects\oTurretDet</object>
-      <object>objects\oSolid</object>
-      <object>objects\oDetritus4</object>
-      <object>objects\oTurretDetTurret</object>
-      <object>objects\oDetritus5</object>
-      <object>objects\oDetritus2</object>
-      <object>objects\oDetritus3</object>
-      <object>objects\oDetritus8</object>
-      <object>objects\oDetritus7</object>
-      <object>objects\oSpecialWake</object>
-      <object>objects\oDetritus1</object>
-      <object>objects\oDetritus11</object>
-      <object>objects\oDetritus12</object>
-      <object>objects\oDetritus13</object>
-      <object>objects\oDetritus14</object>
-      <object>objects\oDetritus15</object>
-      <object>objects\oTurretLight</object>
-      <object>objects\oTurretDetTurretPulse</object>
-      <object>objects\oTurretDetTurretBolt</object>
-      <object>objects\oGrenadeTarget</object>
-      <object>objects\oDockingRing</object>
-      <object>objects\oUndockingExplosion</object>
-      <object>objects\oSmokeLauncher</object>
-      <object>objects\oMiniAsteroid</object>
-      <object>objects\oAsteroidExplosion</object>
-      <object>objects\oDockSmoke</object>
-      <object>objects\oParticle</object>
-      <object>objects\oGrenadeTargetExplosion</object>
-      <object>objects\oClutterEmitter</object>
-      <object>objects\oContactFlash</object>
+      <objects name="Clutter">
+        <object>objects\oDetritus2</object>
+        <object>objects\oClutter</object>
+        <object>objects\oDetritus5</object>
+        <object>objects\oDetritus4</object>
+        <object>objects\oDetritus9</object>
+        <object>objects\oDetritus7</object>
+        <object>objects\oDetritus10</object>
+        <object>objects\oDetritus6</object>
+        <object>objects\oDetritus8</object>
+        <object>objects\oDetritus3</object>
+      </objects>
+      <objects name="Larger Clutter">
+        <object>objects\oAsteroidExplosion</object>
+        <object>objects\oMiniAsteroid</object>
+        <object>objects\oSolid</object>
+        <object>objects\oDetritus15</object>
+        <object>objects\oDetritus13</object>
+        <object>objects\oDetritus14</object>
+        <object>objects\oDetritus11</object>
+        <object>objects\oDetritus12</object>
+        <object>objects\oDetritus1</object>
+      </objects>
+      <objects name="Special Clutter">
+        <object>objects\oUndockingExplosion</object>
+        <object>objects\oDockSmoke</object>
+        <object>objects\oParticle</object>
+        <object>objects\oTurretDet</object>
+        <object>objects\oGrenadeTargetExplosion</object>
+        <object>objects\oSpecialSolid</object>
+        <object>objects\oSpecialFlame</object>
+        <object>objects\oGrenadeDet2</object>
+        <object>objects\oClutterEmitter</object>
+        <object>objects\oTurretDetTurret</object>
+        <object>objects\oHidingDet</object>
+        <object>objects\oSpecialSmoke</object>
+        <object>objects\oPlayerDocking</object>
+        <object>objects\oSpecialSpark</object>
+        <object>objects\oSmokeLauncher</object>
+        <object>objects\oDockingRing</object>
+        <object>objects\oGrenadeTarget</object>
+        <object>objects\oTurretDetTurretBolt</object>
+        <object>objects\oTurretDetTurretPulse</object>
+        <object>objects\oTurretLight</object>
+        <object>objects\oSpecialWake</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">

@@ -79,7 +79,7 @@ global.NumberOfBoomersRemaining = NumberOfBoomers
 NumberOfAttempts = NumberOfBoomers * 100
 Attempt = 0
 
-if room != rStart {
+if room = rLevel1 {
 while instance_number(oBoomer) < NumberOfBoomers && Attempt < NumberOfAttempts  {
 
 NewBoomer = instance_create(random(room_width),random(room_height),oBoomer)

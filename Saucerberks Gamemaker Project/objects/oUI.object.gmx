@@ -55,6 +55,7 @@ if oMenu.Mode = "Game" or oMenu.Mode = "Menu" {
     y = y + 35
     draw_text(x,y,global.PlayerLives)     
     
+   
            
 } 
 }
