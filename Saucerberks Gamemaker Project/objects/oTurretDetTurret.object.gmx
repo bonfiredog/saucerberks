@@ -116,9 +116,11 @@ if point_distance(x,y,instance_nearest(x,y,oSwarmer).x,instance_nearest(x,y,oSwa
 EnemyInRange = instance_nearest(x,y,oSwarmer)
 } else {
 EnemyInRange = noone
+TurnedToTarget = false
 }
 } else {
 EnemyInRange = noone
+TurnedToTarget = false
 }
 
 if instance_exists(oPlayer) {
@@ -126,9 +128,11 @@ if point_distance(x,y,oPlayer.x,oPlayer.y) &lt;= DetectionRange {
 PlayerInRange = oPlayer.id
 } else {
 PlayerInRange = noone
+TurnedToTarget = false
 }
 } else {
 PlayerInRange = noone
+TurnedToTarget = false
 }
 
 
@@ -140,6 +144,7 @@ if PlayerInRange = noone {
 if instance_exists(EnemyInRange) {
 State = "Alert"
 AlertType = "Enemy"
+TurnedToTarget = false
 } else {
 State = "Idle"
 TurnedToTarget = false
@@ -147,6 +152,7 @@ TurnedToTarget = false
 } else if instance_exists(oPlayer) and PlayerInRange = oPlayer.id {
 State = "Alert"
 AlertType = "Player"
+TurnedToTarget = false
 } else {
 State = "Idle" 
 TurnedToTarget = false
@@ -190,7 +196,6 @@ if AlertType = "Enemy" {
 if instance_exists(EnemyInRange) {
 /* --------------- DIRECTION CHANGING CODE -------------------------- */
 TurnToTarget(EnemyInRange)
-//direction = point_direction(x,y,EnemyInRange.x,EnemyInRange.y)
 /* ------------------------------------------------------------------ */
 if Cooldown &lt;= 0 and TurnedToTarget = true {
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)
@@ -203,7 +208,6 @@ Cooldown = 90
 if instance_exists(PlayerInRange) {
 /* --------------- DIRECTION CHANGING CODE -------------------------- */
 TurnToTarget(PlayerInRange)
-//direction = point_direction(x,y,PlayerInRange.x,PlayerInRange.y)
 /* ------------------------------------------------------------------ */
 if Cooldown &lt;= 0 and TurnedToTarget = true {
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)

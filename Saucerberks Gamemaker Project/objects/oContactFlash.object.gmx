@@ -57,10 +57,13 @@ YOffset = random_range(-30,30)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = oPlayer.x + XOffset
+            <string>
+if instance_exists(oPlayer) {
+x = oPlayer.x + XOffset
 y = oPlayer.y + YOffset
 vspeed = oPlayer.vspeed
 hspeed = oPlayer.hspeed
+}
 
 
 
