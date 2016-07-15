@@ -183,8 +183,8 @@ if file_exists("HighScore.txt") {
     draw_set_font(fHighScore)
     draw_text(x,y,"Most Dignities Restored:         " )
     draw_set_font(fHighScoreBig)
-    y = 50
-    draw_set_colour(c_red)
+    y = 35
+    draw_set_colour(c_lime)
     HighScoreFlash = draw_text(x,y, global.HighScore)
     }
 

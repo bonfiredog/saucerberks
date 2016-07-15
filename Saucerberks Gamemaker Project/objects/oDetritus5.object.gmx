@@ -46,7 +46,7 @@ depth = 80
 
 
 
-MiniAsteroidsRemaining = irandom_range(5,20)
+MiniAsteroidsRemaining = irandom_range(10,30)
 Hit = false
 </string>
           </argument>

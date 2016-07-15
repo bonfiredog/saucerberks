@@ -30,6 +30,7 @@ InitialiseEnemyCollision(random_range(10,70),360)
 MidstOfColliding = 0
 
 SetSpinning(-1.1,-0.1,0.1,1.1)
+OriginalSpinDirection = SpinDirection
 image_xscale = random_range(0.5,1.2)
 image_yscale = image_xscale
 
@@ -45,7 +46,8 @@ depth = 80
 }
 SetValues = false
 OriginalSpeed = speed
-
+SolidInContact = noone
+PlayerInContact = noone
 </string>
           </argument>
         </arguments>
@@ -82,41 +84,23 @@ SetValues = false
 }
 
 
-ThingInContact = instance_place(x,y,oPlayer)
+SolidInContact = instance_place(x + hspeed,y+vspeed,oSolid) 
+PlayerInConact = instance_place(x + hspeed,y+vspeed,oPlayer) 
 
-if instance_exists(ThingInContact) 
-and image_xscale &gt; 0.5
-and MidstOfColliding &lt;= 0 
-and ThingInContact.image_xscale &gt; 0.5 {
-
-if SetValues = false {
-direction = point_direction(ThingInContact.x,ThingInContact.y,x,y) + random_range(-20,20)
-speed = speed + 5
-MidstOfColliding = 120
-SetValues = true
-}
-}
-
+SolidCollision(SolidInContact)
+SolidCollision(PlayerInContact)
 
 if speed &gt; OriginalSpeed {
-speed = speed - 0.3
+speed = speed - 0.03
 }
 
+if SpinDirection &gt; OriginalSpinDirection {
+SpinDirection = SpinDirection - 0.01
+}
 
-
-
-
-
-
-
-
-
-
-
-/*instance_place(x + hspeed, y + vspeed, oSolid) 
-or instance_place(x + hspeed, y + vspeed, oPlayer) 
-or instance_place(x + hspeed, y + vspeed, oEnemy) 
-or instance_place(x + hspeed, y + vspeed, oProjectile)*/
+if SpinDirection &lt; OriginalSpinDirection {
+SpinDirection = SpinDirection + 0.01
+}
 
 
 </string>

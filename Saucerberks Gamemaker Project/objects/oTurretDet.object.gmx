@@ -148,15 +148,15 @@ MessageFlash = "Fading"
 
 draw_set_alpha(MessageAlpha)
 
-posx = x - view_xview[0]
-posy = y - view_yview[0]
+DETX = x - view_xview[0]
+DETY = y - view_yview[0]
 
 draw_set_font(fHidingText)
 draw_set_color(c_aqua)
 draw_set_halign(fa_right)
 draw_set_valign(fa_right)
 
-draw_text(posx + 500,posy,"/\...if: sys damaged#/\then:attack" + FleetName + "fleet#/\...if: no" + FleetName + "fleet#/\then:revert:hunter-killer-mode#/\executing...")
+draw_text(DETX + 500,DETY,"/\...if: sys damaged#/\then:attack" + FleetName + "fleet#/\...if: no" + FleetName + "fleet#/\then:revert:hunter-killer-mode#/\executing...")
 }
 
 </string>

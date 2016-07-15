@@ -1,5 +1,2 @@
-
-Player Being Destroyed Randomly
 Enemy Collision (Swarmer)
-Player Collision
 

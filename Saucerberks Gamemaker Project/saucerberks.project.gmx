@@ -144,6 +144,7 @@
       <sprite>sprites\sBonfireDogLogo</sprite>
       <sprite>sprites\sInstructLogo</sprite>
       <sprite>sprites\sCursor</sprite>
+      <sprite>sprites\sCursor2</sprite>
       <sprite>sprites\sprite76</sprite>
     </sprites>
   </sprites>
@@ -192,6 +193,7 @@
       <script>scripts\ClutterCollision.gml</script>
       <script>scripts\FindSpriteBoundaries.gml</script>
       <script>scripts\TurnToTarget.gml</script>
+      <script>scripts\SolidCollision.gml</script>
     </scripts>
     <scripts name="Debug Log">
       <script>scripts\DebugLogInitialise.gml</script>

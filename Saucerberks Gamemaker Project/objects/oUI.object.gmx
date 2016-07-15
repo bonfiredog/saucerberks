@@ -29,31 +29,34 @@
 
 if room = rLevel1 {
 
+
 if oMenu.Mode = "Game" or oMenu.Mode = "Menu" {
 
-    x = (view_wport[0] / view_wport[0]) + 15
-    y = view_hport[0] - 120
+
+    UIX = (view_wport[0] / view_wport[0]) + 15
+    UIY = view_hport[0] - 120
     
     draw_set_halign(fa_center)
     draw_set_color(c_lime)
     draw_set_font(fTutorial)
+    draw_set_alpha(1)
     
-    draw_rectangle(x,y,x+90,y+90,true)
-    draw_rectangle(x+110,y,x+200,y+90,true)
+    draw_rectangle(UIX,UIY,UIX+90,UIY+90,true)
+    draw_rectangle(UIX+110,UIY,UIX+200,UIY+90,true)
     
-    x = x + 45
-    y = y + 15
+    UIX = UIX + 45
+    UIY = UIY + 15
     
-    draw_text(x,y,"Score")
-    y = y + 35
-    draw_text(x,y,oCurrentScore.CurrentScore)
+    draw_text(UIX,UIY,"Score")
+    UIY = UIY + 35
+    draw_text(UIX,UIY,oCurrentScore.CurrentScore)
     
-    x = x + 110
-    y = y - 35
+    UIX = UIX + 110
+    UIY = UIY - 35
     
-    draw_text(x,y,"Lives")
-    y = y + 35
-    draw_text(x,y,global.PlayerLives)     
+    draw_text(UIX,UIY,"Lives")
+    UIY = UIY + 35
+    draw_text(UIX,UIY,global.PlayerLives)     
     
    
            

@@ -96,21 +96,21 @@ RunAwaySpeed = false
 
 if HitByProjectile() {
 ScreenShake(15)
-ExplodeIntoANumberOfChunks(35, oSwarmerChunk)
+ExplodeIntoANumberOfChunks(50, oSwarmerChunk)
 audio_play_sound(aDeath,1,false)
 }
 
 if (place_meeting(x + 200,y + 200,oPlayer) and oPlayer.Undocking = true) or (place_meeting (x - 200, y - 200,oPlayer) and oPlayer.Undocking = true)
 {
 ScreenShake(15)
-ExplodeIntoANumberOfChunks(35, oSwarmerChunk)
+ExplodeIntoANumberOfChunks(50, oSwarmerChunk)
 audio_play_sound(aDeath,1,false)
 }
 
 
 if instance_exists(oPlayer) and place_meeting(x + oPlayer.hspeed,y + oPlayer.vspeed,oPlayer) and oPlayer.Undocking = true{
 ScreenShake(15)
-ExplodeIntoANumberOfChunks(35, oSwarmerChunk)
+ExplodeIntoANumberOfChunks(50, oSwarmerChunk)
 audio_play_sound(aDeath,1,false)
 }
  
@@ -118,7 +118,7 @@ audio_play_sound(aDeath,1,false)
     
 if place_meeting(x,y,oGrenadeTargetExplosion) and oGrenadeTargetExplosion.Harmless = false{
 ScreenShake(15)
-ExplodeIntoANumberOfChunks(35, oSwarmerChunk)
+ExplodeIntoANumberOfChunks(50, oSwarmerChunk)
 audio_play_sound(aDeath,1,false)
 }
 
@@ -214,31 +214,7 @@ image_angle = direction
 
 StayInsideRoom()
 
-/* Collision */
-//If a block is about to touch enemy, it's big enough to collide with...
-SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
 
-if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.8 and InCurrentCollision = false{
-//Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
-OriginalSpeed = global.DiffSwarmerSpeed
-OriginalDirection = direction 
-//Change the player's direction to almost the opposite of what they hit, and set them as 'in the process of colliding'.
-if speed &gt; 0 {
-direction = direction - random_range(130,220)
-} else if speed &lt;= 0 {
-direction = point_direction(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
-}
-speed = OriginalSpeed
-InCurrentCollision = true
-}
-
-if InCurrentCollision = true {
-
-if instance_exists(SolidTouching) = false {
-InCurrentCollision = false
-}
-
-}
 
 
 

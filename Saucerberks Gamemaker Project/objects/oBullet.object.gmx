@@ -59,7 +59,7 @@ instance_destroy()
 }
 
 //Destroy when hit a wall
-if place_meeting(x,y,oSwarmer) or place_meeting(x,y,oSolid) {
+if place_meeting(x,y,oSwarmer) or place_meeting(x,y,oSolid) or place_meeting(x,y,oBoomer) {
 speed = 0
 if PlayHitSound = false {
 audio_play_sound(aWallHit,1,false)
@@ -67,6 +67,8 @@ PlayHitSound = true
 }
 sprite_index = sGunExplosion
 }
+
+
 
 if speed = 0 {
 image_alpha = image_alpha - 0.1

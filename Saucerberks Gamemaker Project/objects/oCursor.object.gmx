@@ -49,6 +49,26 @@
             <kind>1</kind>
             <string>x = mouse_x
 y = mouse_y
+
+if room = rStart {
+sprite_index = sCursor
+}
+
+if room = rTutorial and (oMenu.Mode = "Pause" or oMenu.Mode = "Titles") {
+sprite_index = sCursor
+}
+
+if room = rLevel1 and (oMenu.Mode = "Pause" or oMenu.Mode = "Titles") {
+sprite_index = sCursor
+}
+
+if room = rLevel1 and (oMenu.Mode = "Game") {
+sprite_index = sCursor2
+}
+
+if room = rTutorial and (oMenu.Mode = "Game") {
+sprite_index = sCursor2
+}
 </string>
           </argument>
         </arguments>
