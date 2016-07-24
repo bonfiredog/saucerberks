@@ -1,7 +1,4 @@
-
-
-
-/* Screen Bullshit */
+/* Screen Bullshit. I don't understand it very well. */
 
 window_set_fullscreen(true)
 

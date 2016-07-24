@@ -28,6 +28,9 @@
             <string>image_xscale = 0
 image_yscale = image_xscale
 image_alpha = 1
+
+//Create the grenade gun in the middle of the explosion, and set it off
+//in a random direction and speed, spinning randomly.
 ThisGrenadeGun = instance_create(x,y,oGrenadeGun)
 with ThisGrenadeGun {
 direction = random(360)
@@ -76,6 +79,7 @@ instance_destroy()
 }
 }
 
+//Play the explosion sound.
 if image_xscale &gt; 1.0 {
 if SoundPlayed = false {
 audio_play_sound(aGrenadeTargetExplosion,1,false)
@@ -85,7 +89,6 @@ SoundPlayed = true
 
 
 //Explosion creates particles which fling out from its centre at a great speed, before disappearing off the screen and destroying themselves.
-
 if image_xscale &gt; 1.5 {
 if NumberOfParticlesRemaining &gt; 0 {
 ThisParticle = instance_create(x,y,oParticle)

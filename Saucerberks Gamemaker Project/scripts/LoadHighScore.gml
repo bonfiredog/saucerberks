@@ -1,9 +1,12 @@
+
+//Only load the high score from the player's filesystem
+//if it has been created in a previous game.
 if file_exists("HighScore.txt") {
 
-//Read save file on disk
+//Read save file on disk.
 HighScoreFile = file_text_open_read("HighScore.txt")
 
-//Read line and skip it
+//Read line and skip it.
 file_text_readln(HighScoreFile)
 global.HighScore = file_text_read_real(HighScoreFile) //Even though we saved the Room Number as a string, we want to *read* it as a number. Just do it!
 

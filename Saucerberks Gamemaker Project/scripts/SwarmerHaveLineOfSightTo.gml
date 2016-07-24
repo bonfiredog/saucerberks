@@ -1,4 +1,4 @@
-///IHaveLineOfSightTo (Target)
+///SwarmerHaveLineOfSightTo(Target)
 
 Thing = argument0
 Result = false
@@ -13,6 +13,7 @@ FieldOfView = 90
 if image_angle >= point_direction(x,y,Thing.x,Thing.y) and image_angle <= point_direction(x,y,Thing.x,Thing.y) + (FieldOfView/2) 
 or image_angle <= point_direction(x,y,Thing.x,Thing.y) and image_angle >= point_direction(x,y,Thing.x,Thing.y) - (FieldOfView/2)
 and point_distance(x,y,Thing.x,Thing.y) > 800 {  
+//Then we have line of sight!
 Result = true
 }
 }

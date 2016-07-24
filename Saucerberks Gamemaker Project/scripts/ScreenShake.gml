@@ -1,5 +1,4 @@
 ///Screenshake(Amount)
-//This sets the Screenshake amount to the maximum current shaking; 
-//whether this is a previous shake still happening, or the current
-//shake.
+//This sets the Screenshake amount to the current shaking amount,
+//called from whichever object is doing the shaking.
 oGame.ScreenShakeAmount = max(oGame.ScreenShakeAmount,argument0)

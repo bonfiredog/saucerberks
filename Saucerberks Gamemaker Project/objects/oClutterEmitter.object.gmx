@@ -48,15 +48,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ClutterCount &gt; 0 {
+            <string>//Create random clutter until we reach the limit.
+if ClutterCount &gt; 0 {
 ThisDebris = instance_create(x,y,choose(oDetritus3,oDetritus4,oDetritus6,oDetritus7,oDetritus8,oDetritus9,oDetritus10))
 with ThisDebris {
 direction = random(360)
 SetSpinning(-3,-2,2,3)
-//If big clutter, set as a lower speed
 speed = random_range(300, 400) / room_speed
 }
 ClutterCount = ClutterCount - 1
+//Destroy the emitter when it isn't needed any more.
 } else if ClutterCount &lt;= 0 {
 instance_destroy()
 }

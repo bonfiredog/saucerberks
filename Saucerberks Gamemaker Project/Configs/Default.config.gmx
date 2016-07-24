@@ -209,14 +209,14 @@
     <option_androidtv_use_test_ads>false</option_androidtv_use_test_ads>
     <option_argumenterrors>True</option_argumenterrors>
     <option_audioGroupCount>1</option_audioGroupCount>
-    <option_author></option_author>
+    <option_author>Bonfire Dog</option_author>
     <option_backimage>nil</option_backimage>
     <option_borderless>False</option_borderless>
     <option_changed>false</option_changed>
     <option_changeresolution>false</option_changeresolution>
     <option_closeesc>true</option_closeesc>
     <option_colordepth>0</option_colordepth>
-    <option_display_name>GameMaker: Studio</option_display_name>
+    <option_display_name>Saucerberks</option_display_name>
     <option_displayerrors>True</option_displayerrors>
     <option_ecma>0</option_ecma>
     <option_facebook_app_display_name></option_facebook_app_display_name>
@@ -225,9 +225,9 @@
     <option_freeze>false</option_freeze>
     <option_frequency>0</option_frequency>
     <option_frontimage>nil</option_frontimage>
-    <option_fullscreen>False</option_fullscreen>
-    <option_gameguid>{69C0364A-5BED-4AF1-96B9-615A69F2A66B}</option_gameguid>
-    <option_gameid>280236044</option_gameid>
+    <option_fullscreen>True</option_fullscreen>
+    <option_gameguid>{CDC404DF-1952-4946-8441-6BF3525A377E}</option_gameguid>
+    <option_gameid>491692078</option_gameid>
     <option_haptic_effects>0</option_haptic_effects>
     <option_hasloadimage>false</option_hasloadimage>
     <option_helpkey>true</option_helpkey>
@@ -268,7 +268,21 @@
     <option_in_app_purchase_enable>false</option_in_app_purchase_enable>
     <option_in_app_purchase_sandbox_mode>0</option_in_app_purchase_sandbox_mode>
     <option_in_app_purchase_server_url></option_in_app_purchase_server_url>
-    <option_information></option_information>
+    <option_information>This is a game that I created to teach myself to code somewhat properly, or at least less like a child. Cleanse the debris fields of long-resolved space battles of infesting aliens, keeping these places of memorial sacrosanct. 
+
+I did not make as much of this idea as I could have; it is really just an ordinary top-down shooter. This project was started by following Tom Francis' 'Build A Game With No Experience' video tutorials on Youtube, and then extrapolated with new features.
+
+The game functions and is finished: it was my objective to get my first 'proper' (and I do use that term advisedly) game out the door and ready to play. You may encounter small bugs, balancing issues and the like. It may not be all that fun Please feel free to point these out to me in the itch.io comments, via email (rob@bonfiredog.co.uk) or on Twitter (@rob_sherman) for the purpose of teaching me a lesson, but please know that I won't be updating the game anymore. It was solely an educational project. To that end, I've included in the game download the Gamemaker (.gmx) file so that you can peruse my well-commented code. I'm also releasing this under a Creative Commons Free Culture license, so feel free to use any or all of the included code of mine (not necessarily Tom Francis') in commercial or non-commercial projects with or without attribution. 
+
+Thank you for downloading, 
+
+Rob Sherman
+(Bonfire Dog)
+
+itch.io page: http://bonfiredog.itch.io/saucerberks
+Github page: http://github.com/bonfiredog/saucerberks/
+My website: http://bonfiredog.co.uk
+ </option_information>
     <option_interpolate>True</option_interpolate>
     <option_ios_adcolony_enable_V4VC>false</option_ios_adcolony_enable_V4VC>
     <option_ios_advertising_enable>false</option_ios_advertising_enable>
@@ -423,14 +437,14 @@
     <option_scaleprogress>true</option_scaleprogress>
     <option_sci_UseSCI>0</option_sci_UseSCI>
     <option_sci_serverLocation></option_sci_serverLocation>
-    <option_screenkey>False</option_screenkey>
+    <option_screenkey>True</option_screenkey>
     <option_screenshotkey>true</option_screenshotkey>
     <option_shortcircuit>True</option_shortcircuit>
     <option_showcursor>False</option_showcursor>
     <option_showprogress>1</option_showprogress>
-    <option_sizeable>False</option_sizeable>
+    <option_sizeable>True</option_sizeable>
     <option_stayontop>false</option_stayontop>
-    <option_sync_vertex>0</option_sync_vertex>
+    <option_sync_vertex>2147483648</option_sync_vertex>
     <option_textureGroup0_border>2</option_textureGroup0_border>
     <option_textureGroup0_nocropping>0</option_textureGroup0_nocropping>
     <option_textureGroup0_parent>&lt;none&gt;</option_textureGroup0_parent>
@@ -459,14 +473,14 @@
     <option_tizen_usesplash>False</option_tizen_usesplash>
     <option_use_new_audio>True</option_use_new_audio>
     <option_variableerrors>False</option_variableerrors>
-    <option_version>100</option_version>
-    <option_version_build>0</option_version_build>
-    <option_version_company></option_version_company>
-    <option_version_copyright></option_version_copyright>
-    <option_version_description></option_version_description>
+    <option_version>1.0.0</option_version>
+    <option_version_build>1</option_version_build>
+    <option_version_company>Bonfire Dog</option_version_company>
+    <option_version_copyright>Creative Commons A-SA 4.0 International</option_version_copyright>
+    <option_version_description>A game that I made to teach me to code somewhat properly. Purge the debris fields of long-resolved space battles of encroaching aliens.</option_version_description>
     <option_version_major>1</option_version_major>
     <option_version_minor>0</option_version_minor>
-    <option_version_product></option_version_product>
+    <option_version_product>Saucerberks</option_version_product>
     <option_version_release>0</option_version_release>
     <option_win8_advertising_appid></option_win8_advertising_appid>
     <option_win8_advertising_enable>0</option_win8_advertising_enable>
@@ -537,27 +551,27 @@
     <option_windowcolor>clBlack</option_windowcolor>
     <option_windows_alternate_sync_method>False</option_windows_alternate_sync_method>
     <option_windows_build_version>0</option_windows_build_version>
-    <option_windows_company_info></option_windows_company_info>
-    <option_windows_copyright_info></option_windows_copyright_info>
+    <option_windows_company_info>Bonfire Dog</option_windows_company_info>
+    <option_windows_copyright_info>Creative Commons A-SA 4.0 International</option_windows_copyright_info>
     <option_windows_create_textures_on_demand>False</option_windows_create_textures_on_demand>
-    <option_windows_description_info></option_windows_description_info>
+    <option_windows_description_info>A game that I made to teach me to code somewhat properly. Purge the debris fields of long-resolved space battles of encroaching aliens.</option_windows_description_info>
     <option_windows_enable_steam>0</option_windows_enable_steam>
     <option_windows_game_icon>Configs\Default\windows\runner_icon.ico</option_windows_game_icon>
     <option_windows_license>Configs\Default\windows\License.txt</option_windows_license>
     <option_windows_mainor_version>0</option_windows_mainor_version>
     <option_windows_major_version>1</option_windows_major_version>
     <option_windows_nsis_file>Configs\Default\windows\RunnerInstaller.nsi</option_windows_nsis_file>
-    <option_windows_product_info></option_windows_product_info>
+    <option_windows_product_info>Saucerberks</option_windows_product_info>
     <option_windows_release_version>0</option_windows_release_version>
     <option_windows_runner_finished>Configs\Default\windows\Runner_finish.bmp</option_windows_runner_finished>
     <option_windows_runner_header>Configs\Default\windows\Runner_header.bmp</option_windows_runner_header>
-    <option_windows_save_location>0</option_windows_save_location>
+    <option_windows_save_location>1</option_windows_save_location>
     <option_windows_sleep_margin>1</option_windows_sleep_margin>
     <option_windows_splash_background_colour>#000000</option_windows_splash_background_colour>
     <option_windows_splash_screen>Configs\Default\windows\splash.png</option_windows_splash_screen>
     <option_windows_steam_app_id>0</option_windows_steam_app_id>
     <option_windows_texture_page>2048</option_windows_texture_page>
-    <option_windows_use_splash>-1</option_windows_use_splash>
+    <option_windows_use_splash>0</option_windows_use_splash>
     <option_windows_vertex_buffer_method2>1</option_windows_vertex_buffer_method2>
     <option_winphone_480_splash_image>Configs\Default\WinPhone\SplashScreenImage480.jpg</option_winphone_480_splash_image>
     <option_winphone_720_splash_image>Configs\Default\WinPhone\SplashScreenImage720.jpg</option_winphone_720_splash_image>

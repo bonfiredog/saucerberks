@@ -28,12 +28,13 @@
             <string>//Get it going!
 InitialiseEnemyCollision(random_range(10,70),360)
 MidstOfColliding = 0
-
 SetSpinning(-1.1,-0.1,0.1,1.1)
 OriginalSpinDirection = SpinDirection
 image_xscale = random_range(0.5,1.2)
 image_yscale = image_xscale
 
+//Smaller solids are supposed to be farther away; to give the impression of depth, 
+//make them more transparent.
 if image_xscale &lt;= 0.7 {
 image_alpha = 0.9
 image_blend = c_gray
@@ -73,9 +74,15 @@ PlayerInContact = noone
             <string>
 StayInsideRoom()
 
+//Spin the solid.
 image_angle = image_angle + SpinDirection
 
 /* Bouncing */
+
+
+//If the Solid has not collided in the last two seconds,
+//and collides with another solid or the player, bounce away,
+//increasing the speed and the spin.
 
 if MidstOfColliding &gt; 0 {
 MidstOfColliding = MidstOfColliding - 1
@@ -90,6 +97,7 @@ PlayerInConact = instance_place(x + hspeed,y+vspeed,oPlayer)
 SolidCollision(SolidInContact)
 SolidCollision(PlayerInContact)
 
+//Always slow down gently after any collision to the normal speed, both angularly and linearly.
 if speed &gt; OriginalSpeed {
 speed = speed - 0.03
 }

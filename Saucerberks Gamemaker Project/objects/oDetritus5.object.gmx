@@ -28,11 +28,12 @@
             <string>//Get it going!
 InitialiseEnemyCollision(random_range(10,70),360)
 MidstOfColliding = 0
-
 SetSpinning(-1.1,-0.1,0.1,1.1)
 image_xscale = random_range(0.5,1.2)
 image_yscale = image_xscale
 
+//Smaller solid objects are supposed to be farther away;
+//to simulate this, make them slightly transparent.
 if image_xscale &lt;= 0.7 {
 image_alpha = 0.9
 image_blend = c_gray
@@ -75,6 +76,9 @@ image_angle = image_angle + SpinDirection
 
 /* Bouncing */
 
+//If the Solid has not collided in the last two seconds,
+//and collides with another solid or the player, bounce away,
+//increasing the speed and the spin.
 if MidstOfColliding &gt; 0 {
 MidstOfColliding = MidstOfColliding - 1
 }
@@ -101,7 +105,7 @@ StayInsideRoom()
 
 
 
-
+//If shot, explode (with sound) into a certain number of mini-asteroids, and then destroy itself.
 
 if place_meeting(x,y,oProjectile){
 instance_create(x,y,oAsteroidExplosion)

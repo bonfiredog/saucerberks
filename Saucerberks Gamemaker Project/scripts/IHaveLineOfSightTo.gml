@@ -12,6 +12,7 @@ FieldOfView = 90
 if image_angle >= point_direction(x,y,Thing.x,Thing.y) and image_angle <= point_direction(x,y,Thing.x,Thing.y) + (FieldOfView/2) 
 or image_angle <= point_direction(x,y,Thing.x,Thing.y) and image_angle >= point_direction(x,y,Thing.x,Thing.y) - (FieldOfView/2)
 and point_distance(x,y,Thing.x,Thing.y) > 700 {  
+//Then it's in line of sight!
 Result = true
 }
 }

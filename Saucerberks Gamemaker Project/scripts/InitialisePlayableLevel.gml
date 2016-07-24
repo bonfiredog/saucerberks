@@ -1,4 +1,9 @@
-//Create the player in the middle of the room, and the Game object (ONLY IF IT HASN'T ALREADY BEEN LOADED, AS IT IS PERSISTENT!)
+//Create the player in the middle of the room, 
+//and the Game and Score objects 
+//(ONLY IF THEY HAVEN'T ALREADY BEEN LOADED, AS THEY ARE PERSISTENT!)
+//Also, create the two UI elements.
+
+
 if room != rTutorial {instance_create(room_width/2,room_height/2,oPlayer)}
 
 if instance_exists(oGame) = false {

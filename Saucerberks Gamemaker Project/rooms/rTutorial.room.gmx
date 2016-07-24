@@ -8,12 +8,17 @@
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
-  <colour>12632256</colour>
-  <showcolour>0</showcolour>
-  <code>InitialiseRoom()
+  <colour>0</colour>
+  <showcolour>-1</showcolour>
+  <code>//Again, create the room, viewport, UI and Game Controller objects.
+InitialiseRoom()
 InitialisePlayableLevel()
 
+//Set the background to be initially transparent.
 background_alpha[0] = 0
+
+//Create the background tints for the Tutorial Room (which are different
+//from the usual tints, so need to be created here...)
 
 NumberOfTints = 30
 
@@ -25,8 +30,16 @@ NewTint = instance_create(random(room_width),random(room_height),oTint)
 NewTint.image_blend = choose(Colour1,Colour2)
 }
 
+//Create the Tutorial Controller object. 
 instance_create(room_width/2, room_height/2, oTutorial)
-audio_stop_sound(aSaucerberks)</code>
+
+//If the rather long title sound from the Start room is still
+//playing, stop it now, when the Tutorial starts, otherwise there
+//may be a nasty overlap with the tutorial sound.
+audio_stop_sound(aSaucerberks)
+
+//Create the Pause Controller object.
+instance_create(x,y,oPause)</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

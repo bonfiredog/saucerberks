@@ -74,7 +74,7 @@ instance_destroy()
 }
 }
 
-//Positioning relative to Owner
+//Positioning relative to Owner.
 if instance_exists(Owner) {
 x = Owner.x
 y = Owner.y
@@ -86,7 +86,7 @@ image_angle = Owner.image_angle
 
 }
 
-//Attach to the player as soon as created
+//Attach to the player as soon as created.
 if instance_exists(Owner) = false and instance_exists(oPlayerDocking){
 Owner = oPlayerDocking
 }

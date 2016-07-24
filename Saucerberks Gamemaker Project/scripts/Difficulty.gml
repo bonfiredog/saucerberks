@@ -1,3 +1,10 @@
+//Depending on the current score of the players, change certain global variables
+//to make the game harder. The variables are:
+//- Number of Boomers ('Gluttons') spawned;
+//- The speed at which they and the Swarmers travel;
+//- The rate at which the Swarmers spawn;
+//- The number of Swarmers that spawn.
+
 if oCurrentScore.CurrentScore < 3 {
 
 global.DiffNumberOfBoomers = irandom_range(1,3)

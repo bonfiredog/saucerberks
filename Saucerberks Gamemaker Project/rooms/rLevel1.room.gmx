@@ -8,14 +8,25 @@
   <isometric>0</isometric>
   <speed>60</speed>
   <persistent>0</persistent>
-  <colour>12632256</colour>
+  <colour>0</colour>
   <showcolour>-1</showcolour>
-  <code>InitialiseRoom()
+  <code>//Create the room, set the viewport, create a name for the current room randomly
+//and spawn the UI and Game Controller objects.
+InitialiseRoom()
 GalaxyNameGeneration()
 InitialisePlayableLevel()
+
+//Change the difficulty variables, if required.
 Difficulty()
+
+//Spawn enemies, debris, enemies, stars and background gas fields.
 GenerateLevel()
-oUI2.ShowFieldRemaining = true</code>
+
+//Set the name of the room to initially display.
+oUI2.ShowFieldRemaining = true
+
+//Create the Pause Control object.
+instance_create(x,y,oPause)</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

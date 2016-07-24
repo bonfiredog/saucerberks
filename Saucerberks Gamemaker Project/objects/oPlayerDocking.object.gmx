@@ -85,7 +85,9 @@ y = Owner.y + lengthdir_y(dist, angle+Owner.image_angle)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(Owner) {
+            <string>
+//Set the Owner as HidingDet, and face the same way as it.
+if instance_exists(Owner) {
 image_angle = Owner.image_angle
 }
 
@@ -117,7 +119,8 @@ Owner = oHidingDet.id
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(oPlayer) and oPlayer.Docked = true {
+            <string>//If the player is docked, display the randomised docking message.
+if instance_exists(oPlayer) and oPlayer.Docked = true {
 
 posx = x - view_xview[0]
 posy = y - view_yview[0]

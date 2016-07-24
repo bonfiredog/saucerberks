@@ -70,10 +70,6 @@ TurnedToTarget = false
 NearestSwarmer = instance_nearest(x,y,oSwarmer)
 PlayerSpeedIncreaseRange = 200
 
-
-if oMenu.Mode = "Pause" {
-speed = 0 } 
-else {
 if RunAwaySpeed = false {
 if instance_exists(oPlayer) and point_distance(x,y,oPlayer.x,oPlayer.y) &lt;= 200 {
 speed = global.DiffSwarmerSpeed * 1.5 }
@@ -83,7 +79,7 @@ speed = global.DiffSwarmerSpeed
 } else if RunAwaySpeed = true {
 speed = global.DiffSwarmerSpeed * 2.5
 }
-} 
+
 
 if RunAwayCountdown &gt; 0 {
 RunAwayCountdown = RunAwayCountdown - 1

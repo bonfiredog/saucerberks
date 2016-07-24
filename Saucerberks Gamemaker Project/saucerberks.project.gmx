@@ -7,19 +7,14 @@
   <sounds name="sound">
     <sounds name="Enemies">
       <sound>sound\aDeath</sound>
-      <sound>sound\aShrink</sound>
       <sound>sound\aShrinkDestroy</sound>
       <sound>sound\aBoomerDeath</sound>
     </sounds>
     <sounds name="Player">
       <sound>sound\aPlayerDeath</sound>
-      <sound>sound\aPlayerMove</sound>
       <sound>sound\aShoot</sound>
       <sound>sound\aBitUnite</sound>
       <sound>sound\aPlayerReform</sound>
-      <sound>sound\aTutWarp</sound>
-      <sound>sound\aTextChange</sound>
-      <sound>sound\aTutSpawn</sound>
     </sounds>
     <sounds name="Weapons">
       <sound>sound\aLiquidShot</sound>
@@ -37,10 +32,12 @@
       <sound>sound\aMenu</sound>
       <sound>sound\aTutorial</sound>
       <sound>sound\aSaucerberks</sound>
-      <sound>sound\aLose</sound>
       <sound>sound\aVictory</sound>
       <sound>sound\aSelect</sound>
       <sound>sound\aTutWhine</sound>
+      <sound>sound\aTextChange</sound>
+      <sound>sound\aTutWarp</sound>
+      <sound>sound\aTutSpawn</sound>
     </sounds>
     <sounds name="Furniture">
       <sound>sound\aDock</sound>
@@ -50,6 +47,7 @@
       <sound>sound\aGrenadeTargetExplosion</sound>
       <sound>sound\aGrenadeTargetHit</sound>
       <sound>sound\aCollision</sound>
+      <sound>sound\aTurretShoot</sound>
     </sounds>
   </sounds>
   <sprites name="sprites">
@@ -145,7 +143,6 @@
       <sprite>sprites\sInstructLogo</sprite>
       <sprite>sprites\sCursor</sprite>
       <sprite>sprites\sCursor2</sprite>
-      <sprite>sprites\sprite76</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -173,8 +170,6 @@
       <script>scripts\ButtonPressed.gml</script>
       <script>scripts\DrawTextAndNewLine.gml</script>
       <script>scripts\DrawValueTextAndNewLine.gml</script>
-      <script>scripts\DrawDebugNormalText.gml</script>
-      <script>scripts\DrawDebugText.gml</script>
     </scripts>
     <scripts name="Level Generation">
       <script>scripts\GenerateLevel.gml</script>
@@ -186,7 +181,6 @@
     <scripts name="Movement">
       <script>scripts\EnemyCollisionWithSolids.gml</script>
       <script>scripts\StayInsideRoom.gml</script>
-      <script>scripts\ResetShunts.gml</script>
       <script>scripts\InitialiseEnemyCollision.gml</script>
       <script>scripts\SetSpinning.gml</script>
       <script>scripts\ClutterGeneration.gml</script>
@@ -194,11 +188,7 @@
       <script>scripts\FindSpriteBoundaries.gml</script>
       <script>scripts\TurnToTarget.gml</script>
       <script>scripts\SolidCollision.gml</script>
-    </scripts>
-    <scripts name="Debug Log">
-      <script>scripts\DebugLogInitialise.gml</script>
-      <script>scripts\DebugLog.gml</script>
-      <script>scripts\DebugLogDraw.gml</script>
+      <script>scripts\ResetShunts.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -218,7 +208,6 @@
     <font>fonts\fBoomersRemainingBig</font>
     <font>fonts\fFieldNameBig</font>
     <font>fonts\fHidingText</font>
-    <font>fonts\fDebug</font>
   </fonts>
   <objects name="objects">
     <objects name="Meta">
@@ -232,8 +221,8 @@
       <object>objects\oLogoScreen</object>
       <object>objects\oBonfireDogLogo</object>
       <object>objects\oInstructLogo</object>
-      <object>objects\oNewDebugText</object>
       <object>objects\oCursor</object>
+      <object>objects\oPause</object>
     </objects>
     <objects name="Level">
       <object>objects\oStar</object>
@@ -275,7 +264,6 @@
       <objects name="Clutter">
         <object>objects\oDetritus2</object>
         <object>objects\oClutter</object>
-        <object>objects\oDetritus5</object>
         <object>objects\oDetritus4</object>
         <object>objects\oDetritus9</object>
         <object>objects\oDetritus7</object>
@@ -294,6 +282,7 @@
         <object>objects\oDetritus11</object>
         <object>objects\oDetritus12</object>
         <object>objects\oDetritus1</object>
+        <object>objects\oDetritus5</object>
       </objects>
       <objects name="Special Clutter">
         <object>objects\oUndockingExplosion</object>
@@ -316,7 +305,6 @@
         <object>objects\oTurretDetTurretBolt</object>
         <object>objects\oTurretDetTurretPulse</object>
         <object>objects\oTurretLight</object>
-        <object>objects\oSpecialWake</object>
       </objects>
     </objects>
   </objects>

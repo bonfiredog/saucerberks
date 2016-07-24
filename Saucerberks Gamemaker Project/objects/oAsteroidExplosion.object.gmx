@@ -49,7 +49,10 @@ image_yscale = image_xscale
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if image_alpha &gt; 0 {
+            <string>//Grow and fade the explosion until it
+//is invisible, then destroy it.
+
+if image_alpha &gt; 0 {
 image_xscale = image_xscale + 0.3
 image_yscale = image_xscale
 image_alpha = image_alpha - 0.1

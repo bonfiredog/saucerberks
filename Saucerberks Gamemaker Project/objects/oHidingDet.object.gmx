@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>depth = 80
+//Create the docking object.
 instance_create(x + 82,y,oPlayerDocking)
 InitialiseEnemyCollision(random_range(10,30),360)
 image_angle = random(360)
@@ -61,6 +62,9 @@ FadeRate = 0.015
 StayInsideRoom()
 
 /* Emitting */
+
+//Create smokes or sparks from the emitters every certain number
+//of seconds.
 if SecondsBetweenEmits &gt; 0 {
 SecondsBetweenEmits = SecondsBetweenEmits - 1 }
 else if SecondsBetweenEmits &lt;= 0 {
@@ -83,6 +87,9 @@ NumberOfAttempts = NumberOfAttempts - 1
 }
 }
 
+
+//Set the debris' alpha to the same as the players, and flash 
+//the debris red.
 if instance_exists(oPlayer) and oPlayer.Undocking = false {
 if oPlayer.Docked = true {
 image_alpha = oPlayer.image_alpha
@@ -96,6 +103,9 @@ image_blend = c_red
 image_blend = c_white
 }
 
+
+//Only display the text if this is the first time seeing this debris
+//in this playthrough.
 if global.MetHidingDet = false {
 if TimeToDisplayText &gt; 0 {
 TimeToDisplayText = TimeToDisplayText - 1
@@ -104,6 +114,7 @@ global.MetHidingDet = true
 }
 }
 
+//Fade in and out the text.
 if TimeToDisplayText &gt; 0 {
 if MessageFlash = "Fading" {
 if MessageAlpha &gt; 0 {
@@ -150,7 +161,11 @@ MessageFlash = "Fading"
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if TimeToDisplayText &gt; 0 and (instance_exists(oPlayer) and oPlayer.Docked = false) {
+            <string>//Draw the message at the current alpha set by the fading script
+//in the Step event, only if the player is not docked and 
+//the text display countdown has not reached zero.
+
+if TimeToDisplayText &gt; 0 and (instance_exists(oPlayer) and oPlayer.Docked = false) {
 
 draw_set_alpha(MessageAlpha)
 

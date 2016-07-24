@@ -51,7 +51,11 @@ depth = -20
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if image_alpha &gt; 0 {
+            <string>//As with other explosions/emitters, make it 
+//more transparent until it is completely transparent,
+//then destroy it.
+
+if image_alpha &gt; 0 {
 image_alpha = image_alpha - 0.05
 } else if image_alpha &lt;= 0 {
 instance_destroy()

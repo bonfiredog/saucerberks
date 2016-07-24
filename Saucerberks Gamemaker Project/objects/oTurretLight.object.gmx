@@ -52,7 +52,8 @@ image_yscale = image_xscale
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(Owner){
+            <string>//Follow the owner.
+if instance_exists(Owner){
 x = Owner.x
 y = Owner.y
 vspeed = Owner.vspeed
@@ -60,6 +61,8 @@ hspeed = Owner.hspeed
 direction = Owner.direction
 image_angle = Owner.image_angle
 
+
+//Make it grow and fade if the turret is currently idle.
 if Owner.State = "Idle" {
 image_xscale = image_xscale + 0.3
 image_yscale = image_xscale
@@ -71,6 +74,7 @@ instance_destroy()
 
 } else if Owner.State = "Alert" {
 
+//Make it a static larger size if Alert.
 image_xscale = 1.2
 image_yscale = image_xscale
 image_alpha = 0.8
@@ -80,7 +84,7 @@ image_alpha = 0.8
 
 
 
-
+//Set the TurretDetTurret as the Owner.
 if instance_exists(Owner) = false {
 if instance_exists(instance_place(x,y,oTurretDetTurret)) {
 Owner = oTurretDetTurret.id

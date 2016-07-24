@@ -31,7 +31,9 @@ image_xscale = 1.3
 image_yscale = image_xscale
 image_angle = random(360)
 SecondsBetweenEmits = random_range(30,100) / room_speed
+//Create the Greande Target here.
 instance_create(x,y,oGrenadeTarget)
+//Set it spinning in a random direction.
 SetSpinning(-0.8,-0.4,0.4,0.4)
 TimeBetweenClutter = random_range(25,85)
 MSecondsBetweenClutter = random(100)
@@ -68,6 +70,8 @@ StayInsideRoom()
 image_angle = image_angle + SpinDirection
 
 
+//Make the text flash more if it is 
+//damaged.
 if oGrenadeTarget.Damage &gt; 2 {
 FadeRate = 0.030
 } else {
@@ -75,6 +79,9 @@ FadeRate = 0.015
 }
 
 /* Emitting */
+
+//Create smoke, spark or flames from the 
+//emitters every random number of seconds.
 if SecondsBetweenEmits &gt; 0 {
 SecondsBetweenEmits = SecondsBetweenEmits - 1 }
 else if SecondsBetweenEmits &lt;= 0 {
@@ -117,6 +124,10 @@ ClutterToDistribute = random(60)
 }
 }
 
+
+//Only display the text if this is the first time in the playthrough 
+//that we've seen a Grenade Det. Actually, this is redundant, as you only
+//ever meet the Grenade Det once per playthrough.
 if global.MetGrenadeDet = false {
 if TimeToDisplayText &gt; 0 {
 TimeToDisplayText = TimeToDisplayText - 1
@@ -125,6 +136,7 @@ global.MetGrenadeDet = true
 }
 }
 
+//Fade in and out the text.
 if TimeToDisplayText &gt; 0 {
 if MessageFlash = "Fading" {
 if MessageAlpha &gt; 0 {
@@ -163,7 +175,10 @@ MessageFlash = "Fading"
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if TimeToDisplayText &gt; 0 {
+            <string>
+//Display text (if it is currently being displayed),
+//based on the current damage to the module.
+if TimeToDisplayText &gt; 0 {
 
 if oGrenadeTarget.Damage = 1 {
 DamageMessage = "20% Critical!"
@@ -175,11 +190,13 @@ DamageMessage = "60% Critical!!!"
 DamageMessage = "80% Critical DANGER!!!"
 }
 
+//Set its alpha to be the current alpha set in the fading script in the Step event.
 draw_set_alpha(MessageAlpha)
 
 posx = x - view_xview[0]
 posy = y - view_yview[0]
 
+//Change the colour of the text to red if the module is quite damaged!
 draw_set_font(fHidingText)
 if oGrenadeTarget.Damage &gt; 2 {
 draw_set_color(c_red) } else {

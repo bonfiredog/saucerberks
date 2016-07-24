@@ -17,7 +17,7 @@ BitsCreatedSoFar = 0
     BitsCreatedSoFar = BitsCreatedSoFar + 1    
 }    
 
-//Play the death sound
+//Play the death sound.
 audio_play_sound(aDeath, 1, false)
-//Destroy the thing that exploded
+//Destroy the thing that exploded.
 instance_destroy()

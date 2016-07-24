@@ -51,7 +51,10 @@ direction = random(360)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_alpha = image_alpha - random_range(0.01,0.05)
+            <string>//Fade the flame and make it smaller at a random rate.
+//When it is invisible, destroy it.
+
+image_alpha = image_alpha - random_range(0.01,0.05)
 image_xscale = image_xscale + random_range(0.01,0.05)
 image_yscale = image_xscale
 

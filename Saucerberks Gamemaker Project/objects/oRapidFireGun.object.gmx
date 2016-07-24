@@ -73,7 +73,7 @@ SecondsBetweenShots = 1 / 10
 //Increment Timer
 SecondsSinceLastShot = SecondsSinceLastShot + 1/room_speed
 
-if oMenu.Mode != "Pause" and oPlayer.Docked = false {
+if oPlayer.Docked = false {
 //If we are clicking and the timer is ready to fire
 if mouse_check_button(mb_left) and SecondsSinceLastShot &gt;= SecondsBetweenShots {
 

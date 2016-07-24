@@ -51,7 +51,12 @@ TextAlpha = 1.0
           <argument>
             <kind>1</kind>
             <string>if ShowBoomersRemaining = true {
+
+if global.NumberOfBoomersRemaining &lt;= 0 {
+TextAlpha = TextAlpha - 0.007
+} else {
 TextAlpha = TextAlpha - 0.01
+}
 
 if TextAlpha &lt;= 0 {
 TextAlpha = 1

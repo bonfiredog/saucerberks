@@ -91,14 +91,20 @@ image_angle = Owner.image_angle
             <kind>1</kind>
             <string>HittingBullet = instance_place(x,y,oBullet)
 
-
+//If it is hit by a bullet, update the damage, play 
+//a warning sound of increasing pitch, and 
+//don't allow it to be hit for another half second.
 if instance_exists(HittingBullet) and Hit = false {
 if Damage &lt; DamageTotal {
+audio_sound_pitch(aGrenadeTargetHit, 0.8 * Damage)
 audio_play_sound(aGrenadeTargetHit, 1, false)
 ScreenShake(30)
 Damage = Damage + 1
 Hit = true
 HitTime = 30
+//if Damage has reached the DamageTotal, destroy the Target,
+//the GrenadeDet, create an Emitter to shove out loads of clutter,
+//and create an explosion.
 } else if Damage &gt;= DamageTotal {
 ScreenShake(100)
 instance_create(x,y,oClutterEmitter)
@@ -107,6 +113,8 @@ with oGrenadeDet2 {instance_destroy()}
 instance_destroy()
 }
 
+//Stop and destroy the hitting bullet,
+//as well as playing the 'Hit' sound.
 with HittingBullet {
 speed = 0
 if PlayHitSound = false {
@@ -124,6 +132,8 @@ instance_destroy()
 }
 }
 
+//While it is 'hit', make the entire GrenadeDet red,
+//before returning it to its normal colour.
 if Hit = true {
 if HitTime &gt; 0 {
 HitTime = HitTime - 1
@@ -138,6 +148,8 @@ Hit = false
 }
 
 
+//Make the GrenadeDet and the Target flash yellow,
+//if it hasn't been hit.
 if Hit = false and instance_exists(Owner){
 if TimeBetweenGlints &lt;= 0 {
 if TimeToGlint &gt; 0 {
@@ -157,7 +169,7 @@ TimeBetweenGlints = TimeBetweenGlints - 1
 
 
 
-
+//Make the GrenadeDet the owner.
 if instance_exists(Owner) = false {
 if instance_exists(oGrenadeDet2) {
 Owner = oGrenadeDet2

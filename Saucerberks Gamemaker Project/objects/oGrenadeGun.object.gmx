@@ -101,7 +101,7 @@ x = Owner.x
 y = Owner.y
 image_angle = Owner.image_angle - 180
 
-if oMenu.Mode != "Pause" and oPlayer.Docked = false{
+if oPlayer.Docked = false{
 //Fire a bullet, and send it out into the room, kick the gun back and the owner, as well as playing a sound.
 if mouse_check_button_pressed(mb_middle) {
         

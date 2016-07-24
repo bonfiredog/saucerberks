@@ -1,3 +1,7 @@
+//Find the edges of an object. This useful code
+//was given to me on Stack Overflow:
+//(https://gamedev.stackexchange.com/questions/109022/spawning-object-1-within-object-2s-collision-box-gamemaker)
+
 // top left point
 a = point_direction(0, 0, -sprite_xoffset, -sprite_yoffset) + image_angle;
 d = point_distance(0, 0, -sprite_xoffset, -sprite_yoffset);

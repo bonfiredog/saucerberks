@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_xscale = 0.0
+            <string>//Set the explosion to be initially without dimension.
+image_xscale = 0.0
 image_yscale = image_xscale
 depth = -10
 </string>
@@ -50,7 +51,10 @@ depth = -10
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if image_alpha &gt; 0 {
+            <string>//Increase the size and decrease the transparency in tandem.
+//When it is invisible, destroy the object.
+
+if image_alpha &gt; 0 {
 image_xscale = image_xscale + 0.5
 image_yscale = image_xscale
 image_alpha = image_alpha - 0.1

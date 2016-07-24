@@ -89,6 +89,8 @@ direction = oTurretDetTurret.direction
             <string>image_angle = direction
 
 
+//Make it bigger until it reaches a certain size, create a laserbolt and fire it in the direction
+//that the turret is pointing, before destroying the pulse.
 if image_xscale &lt; 1.5 {
 image_alpha = image_alpha + 0.2
 image_xscale = image_xscale + 0.2 

@@ -1,4 +1,4 @@
-//Reset the current galaxy name.
+//Reset the current level name.
 global.CurrentGalaxyName = ""
 
 //Choose the 'grammar set' of the eventual name to be generated, corresponding to the construction code below.
@@ -42,7 +42,7 @@ Result = FirstWord + Spacer + "\#" + SecondWord
 
 }
 
-//Set the global variable from our result, and add a random ending, or nothing.
+//Set the global variable from our result.
 
 global.CurrentGalaxyName = Result
 

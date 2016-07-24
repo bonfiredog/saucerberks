@@ -109,7 +109,7 @@ Cooldown = Cooldown - 1
 }
 
 
-//If a Swarmer is in range, mark it as targeted. Likewise with the player.
+//If a Swarmer is in range, mark it as targeted. Likewise with the player. 
 
 if instance_exists(oSwarmer) {
 if point_distance(x,y,instance_nearest(x,y,oSwarmer).x,instance_nearest(x,y,oSwarmer).y) &lt;= DetectionRange {
@@ -198,6 +198,7 @@ if instance_exists(EnemyInRange) {
 TurnToTarget(EnemyInRange)
 /* ------------------------------------------------------------------ */
 if Cooldown &lt;= 0 and TurnedToTarget = true {
+audio_play_sound(aTurretShoot,1,false)
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)
 ThisPulse.direction = direction
 ThisPulse.image_angle = image_angle
@@ -210,6 +211,7 @@ if instance_exists(PlayerInRange) {
 TurnToTarget(PlayerInRange)
 /* ------------------------------------------------------------------ */
 if Cooldown &lt;= 0 and TurnedToTarget = true {
+audio_play_sound(aTurretShoot,1,false)
 ThisPulse = instance_create(x + lengthdir_x(62,image_angle),y + lengthdir_y(62,image_angle),oTurretDetTurretPulse)
 ThisPulse.direction = direction
 ThisPulse.image_angle = image_angle
@@ -218,6 +220,7 @@ Cooldown = 90
 }
 }
 
+//Create the turret light if the turret is alert, if it has not already. This is failsafe code, really.
 if instance_exists(oTurretLight) = false {
 instance_create(x,y,oTurretLight)
 }
@@ -226,7 +229,7 @@ instance_create(x,y,oTurretLight)
 
 
 
-
+//Make the TurretDet the Owner.
 if instance_exists(Owner) = false {
 if instance_exists(oTurretDet) {
 Owner = oTurretDet.id 

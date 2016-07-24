@@ -113,19 +113,6 @@ audio_play_sound(aMenu,1,false)
 }
 }
 
-if keyboard_check_pressed(ord('P')) {
-if Mode = "Titles" {   } 
-
-else if Mode = "Victory" {    }
-
-else if Mode = "Pause" { Mode = "Game" if room = rLevel1 or room = rTutorial {
-audio_play_sound(aMenu,1,false)
-} }
-
-else if Mode = "Game" { Mode = "Pause" if room = rLevel1 or room = rTutorial {
-audio_play_sound(aMenu,1,false)
-} }
-}
 }
 
 
@@ -138,7 +125,6 @@ Mode = "Victory"
 
 
 if global.PlayerLives &lt;= 0 {
-if Mode != "Lose" {audio_play_sound(aLose,1,false)}
 Mode = "Lose"
 }
 
@@ -211,6 +197,7 @@ if file_exists("HighScore.txt") {
     draw_set_color(c_green)
     
     if ButtonPressed("Start") {
+    audio_play_sound(aSelect,1,false)
     oCurrentScore.CurrentScore = 0 
     global.GrenadeGunGot = false
     audio_stop_sound(aSaucerberks)
@@ -220,8 +207,8 @@ if file_exists("HighScore.txt") {
     }
     
     if ButtonPressed("Tutorial First?") {
+    audio_play_sound(aSelect,1,false)
     oCurrentScore.CurrentScore = 0 
-    audio_play_sound(aLose,1,false)
     global.PlayerLives = 3
     global.GrenadeGunGot = false
     Mode = "Game"
@@ -234,21 +221,6 @@ if file_exists("HighScore.txt") {
 } else if Mode = "Game" {
 
 with oTitle {instance_destroy() }
-
-} else if Mode = "Pause" {
-
-   x = view_wport[0] / 2
-    y = view_hport[0] / 2
-    
-    CurrentY = y
-    Margin = 10
-    
-    draw_set_halign(fa_center)
-    draw_set_color(c_lime)
-    
-    draw_set_font(fTitle)
-    DrawTextAndUpdateCurrentY("PAUSED")
-
 
 } else if Mode = "Victory" {
 
@@ -281,6 +253,7 @@ with oTitle {instance_destroy() }
     draw_set_colour(c_green)
     
     if ButtonPressed("Next?") {
+    audio_play_sound(aSelect,1,false)
     if room = rLevel1 {
     if oCurrentScore.CurrentScore &gt; global.HighScore {
     SaveHighScore()
@@ -325,6 +298,7 @@ with oTitle {instance_destroy() }
     draw_set_color(c_lime)
     
     if ButtonPressed("Any Other Pilots?") {
+    audio_play_sound(aSelect,1,false)
     oCurrentScore.CurrentScore = 0 
     global.PlayerLives = 3
     Mode = "Game"
@@ -332,6 +306,7 @@ with oTitle {instance_destroy() }
     }
     
     if ButtonPressed("Brush Up On The Controls?") {
+    audio_play_sound(aSelect,1,false)
     oCurrentScore.CurrentScore = 0 
     global.PlayerLives = 3
     Mode = "Game"

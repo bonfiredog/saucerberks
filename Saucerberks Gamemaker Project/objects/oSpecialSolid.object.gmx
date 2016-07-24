@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>NumberOfEmitters = random_range(3,8)
+            <string>//Each special solid has a random number of emitters for smoke and sparks.
+
+NumberOfEmitters = random_range(3,8)
 
 while NumberOfEmitters &gt; 0 {
 instance_create(x,y,oEmitter)

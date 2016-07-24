@@ -1,5 +1,7 @@
 ///DrawValueTextAndNewLine(String,Value)
 
+//This is also self-explanatory?
+
 Text = argument0
 Value = argument1
 

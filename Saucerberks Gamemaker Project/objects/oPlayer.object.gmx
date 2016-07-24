@@ -135,13 +135,8 @@ DriftSpeed = 8 / room_speed
 speed = speed - DriftSpeed
 }
 
-//No matter whether the player is docked or not, stop immediately if the game is paused.
-if oMenu.Mode = "Pause" {
-oPlayer.speed = 0
-} 
 
-
-if oMenu.Mode != "Pause" and Docked = false and Undocking = false {
+if Docked = false and Undocking = false {
 if instance_exists(oRapidFireGun) and mouse_check_button(mb_left) {
 sprite_index = sPlayerFireGun
 } else if instance_exists(oBaitGun) and mouse_check_button(mb_right) {
@@ -179,7 +174,7 @@ if y &gt; room_height {y = room_height}
 /* -------------------------------------------------------------------------------------------------------- */
 
 //The following only occurs if the game is not paused and the player is not docked.
-if oMenu.Mode != "Pause" and Undocking = false and Docked = false {
+if Undocking = false and Docked = false {
 
 
 /* Collision */
@@ -226,7 +221,7 @@ Colliding = false
 
 
 //The following only occurs if the game is not paused, and the player is not 'in the process of colliding', and they are not docked.
-if oMenu.Mode != "Pause" and Colliding = false and Undocking = false and Docked = false{
+if Colliding = false and Undocking = false and Docked = false{
 
 /* Movement */
 //Speed
@@ -454,7 +449,7 @@ draw_set_valign(fa_center)
 if Stage = "Controls" {
 
 
-if WPressed = false and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
+if WPressed = false and oMenu.Mode != "Titles" {
 draw_set_colour(c_red)
 draw_circle(posx,posy - 120,40,true)
 draw_set_colour(c_lime)
@@ -465,7 +460,7 @@ audio_play_sound(aTextChange,1,false)
 WPressed = true }
 }
 
-if SPressed = false and oMenu.Mode != "Pause" and oMenu.Mode != "Titles"{
+if SPressed = false and oMenu.Mode != "Titles"{
 draw_set_colour(c_red)
 draw_circle(posx,posy + 120,40,true)
 draw_set_colour(c_lime)
@@ -476,7 +471,7 @@ audio_play_sound(aTextChange,1,false)
 SPressed = true }
 }
 
-if APressed = false and oMenu.Mode != "Pause" and oMenu.Mode != "Titles"{
+if APressed = false and oMenu.Mode != "Titles"{
 draw_set_colour(c_red)
 draw_circle(posx - 200,posy,40,true)
 draw_set_colour(c_lime)
@@ -487,7 +482,7 @@ audio_play_sound(aTextChange,1,false)
 APressed = true }
 }
 
-if DPressed = false and oMenu.Mode != "Pause" and oMenu.Mode != "Titles"{
+if DPressed = false and oMenu.Mode != "Titles"{
 draw_set_colour(c_red)
 draw_circle(posx + 200,posy,40,true)
 draw_set_colour(c_lime)
@@ -498,7 +493,7 @@ audio_play_sound(aTextChange,1,false)
 DPressed = true }
 }
 
-if WPressed and SPressed and APressed and DPressed = true and LeftClicked = false and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
+if WPressed and SPressed and APressed and DPressed = true and LeftClicked = false and oMenu.Mode != "Titles" {
 draw_set_colour(c_red)
 draw_circle(posx + 300, posy + 120, 130, true)
 draw_text(posx + 300,posy + 50,"Left Click")
@@ -521,7 +516,7 @@ if LeftClicked = true {
 
 //SWARMERS STAGE
 
-if Stage ="Swarmers" and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
+if Stage ="Swarmers" and oMenu.Mode != "Titles" {
 
 if SoundPlay1 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
@@ -538,11 +533,11 @@ TutorialBoomer = instance_create(x - 400, y + 200, oBoomer)
 }
 }
 
-if Stage = "Boomers" and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
+if Stage = "Boomers" and oMenu.Mode != "Titles" {
 
 if instance_exists(TutorialBoomer) {
 if BoomerStage = "First" {
-if oBoomer.BoomerShot = false and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
+if oBoomer.BoomerShot = false and oMenu.Mode != "Titles" {
 
 if SoundPlay2 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
@@ -550,7 +545,7 @@ audio_play_sound(aTextChange,1,false)
 SoundPlay2 = true
 }
 
-} else if oBoomer.BoomerShot = true and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
+} else if oBoomer.BoomerShot = true and oMenu.Mode != "Titles" {
 if SoundPlay3 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
@@ -565,7 +560,7 @@ BoomerStage = "Second"
 } 
 } else if BoomerStage = "Second" {
 
-if TutorialBoomer.ThingsEaten = 0 and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
+if TutorialBoomer.ThingsEaten = 0 and oMenu.Mode != "Titles" {
 if SoundPlay4 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
@@ -573,7 +568,7 @@ SoundPlay4 = true
 }
 
 
-} else if TutorialBoomer.ThingsEaten = 1 and oMenu.Mode != "Pause" and oMenu.Mode != "Titles" {
+} else if TutorialBoomer.ThingsEaten = 1 and oMenu.Mode != "Titles" {
 
 if SoundPlay5 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
@@ -582,7 +577,7 @@ SoundPlay5 = true
 }
 }
 
-if RightClicked = false and oMenu.Mode != "Pause" and oMenu.Mode != "Titles"  {
+if RightClicked = false and oMenu.Mode != "Titles"  {
 
 draw_set_colour(c_red)
 draw_circle(posx - 180, posy - 110, 90, true)

@@ -54,17 +54,20 @@ MidstOfColliding = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>while speed &gt; UltimateSpeed {
+            <string>//Gradually slow down after creation to a normal speed.
+while speed &gt; UltimateSpeed {
 speed = speed - 1
 }
 
+//Spin around the room.
 image_angle = image_angle + SpinDirection
 
 if MidstOfColliding &gt; 0 {
 MidstOfColliding = MidstOfColliding - 1
 }
 
-
+//If the mini asteroid touches anything else, and it has not collided in the last two seconds,
+// send it off in a different direction.
 ThingInContact = place_meeting(x + hspeed, y + vspeed, oSolid) or place_meeting(x + hspeed, y + vspeed, oSpecialSolid) or place_meeting(x + hspeed, y + vspeed, oPlayer) 
 or place_meeting(x + hspeed, y + vspeed, oEnemy) or place_meeting(x + hspeed, y + vspeed, oProjectile) 
 

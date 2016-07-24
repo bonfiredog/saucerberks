@@ -1,3 +1,6 @@
+//I think this is identical to the FindBounds() script. I don't
+//know why they both exist. I'm sure I had a good reason for it at the time.
+
 // top left point
 var a = point_direction(0, 0, -sprite_xoffset, -sprite_yoffset) + image_angle;
 var d = point_distance(0, 0, -sprite_xoffset, -sprite_yoffset);

@@ -25,7 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_angle = random(360)
+            <string>//Set the smoke to a random direction, a random travel speed
+//and to be initially dimensionless.
+
+//Set it to be a certain sprite depending on whether the player 
+//is undocking or not.
+
+
+image_angle = random(360)
 image_xscale = 0.0
 image_yscale = image_xscale
 direction = random(360)
@@ -60,7 +67,11 @@ sprite_index = sDockSmokeUndocking
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if image_alpha &gt; 0 {
+            <string>//As with other explosions/emitters, make it bigger 
+//and more transparent until it is completely transparent,
+//then destroy it.
+
+if image_alpha &gt; 0 {
 image_xscale = image_xscale + 0.7
 image_yscale = image_xscale
 image_alpha = image_alpha - 0.1

@@ -1,4 +1,4 @@
-//The enemy's speed is set to the room's normal speed, defined elsewhere
+//The enemy's speed is set to the room's normal speed, defined elsewhere.
 speed = NormalSpeed
 
 //Bounce off solid objects - when we will touch a solid object in the next frame at our current
@@ -24,4 +24,5 @@ if place_meeting(x + hspeed + xShunt, y + vspeed + yShunt, oSolid) {
 hspeed = hspeed + xShunt
 vspeed = vspeed + xShunt
 
+//Now, reset the shunts. Again, I've no idea what this does anymore.
 ResetShunts()

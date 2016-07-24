@@ -57,14 +57,16 @@ instance_destroy()
 
 }
 
-//Destroy when hit a wall
-if place_meeting(x,y,oSwarmer)
+//Destroy when hit a Swarmer, Player, or Wall, stop it, change
+//it to look like an explosion, then fade and destroy it.
+if instance_exists(oPlayer) {
+if place_meeting(x,y,oSwarmer) or place_meeting(x,y,oPlayer) or place_meeting(x,y,oSolid)
 {
 speed = 0
 audio_play_sound(aWallHit,1,false)
 sprite_index = sTurretGunExplosion
 }
-
+}
 
 if speed = 0 {
 image_alpha = image_alpha - 0.01

@@ -1,4 +1,9 @@
 /* Pick up weapons */
+//This script is actually no longer required, but it's sort of woven 
+//through the game and I can't be arsed to remove it.
+
+
+
 
 //If this weapon does not have an 'Owner'...
 if instance_exists(Owner) = false {
@@ -7,7 +12,6 @@ if instance_exists(Owner) = false {
 if instance_exists(instance_place(x,y,oPlayer)) {
 
 //make player the owner
-audio_play_sound(aItemPickup,1,false)
 Owner = oPlayer.id
 GunOwned = true
 

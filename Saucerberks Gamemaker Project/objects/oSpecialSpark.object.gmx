@@ -51,7 +51,10 @@ NumberOfFlashes = random_range(30,60)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if NumberOfFlashes &gt; 0 {
+            <string>
+//Flash the spark a certain number of times, setting the scale randomly, 
+//before destroying the spark itself.
+if NumberOfFlashes &gt; 0 {
 image_xscale = random_range(0.6,1.8)
 image_yscale = image_xscale
 NumberOfFlashes = NumberOfFlashes - 1

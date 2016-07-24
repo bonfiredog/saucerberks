@@ -51,13 +51,15 @@ NumberOfSmokesRemaining = irandom_range(30,70)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(Owner) {
+            <string>//Follow the Owner.
+if instance_exists(Owner) {
 x = Owner.x
 y = Owner.y
 vspeed = Owner.vspeed
 hspeed = Owner.hspeed
 }
 
+//Create DockSmokes, and then destroy the Launcher.
 if NumberOfSmokesRemaining &gt; 0 {
 instance_create(x,y,oDockSmoke)
 NumberOfSmokesRemaining = NumberOfSmokesRemaining - 1
@@ -65,6 +67,7 @@ NumberOfSmokesRemaining = NumberOfSmokesRemaining - 1
 instance_destroy()
 }
 
+//Make oPlayerDocking the Owner.
 if Owner = noone {
 if instance_exists(oPlayerDocking) {
 Owner = oPlayerDocking

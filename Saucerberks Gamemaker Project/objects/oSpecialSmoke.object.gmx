@@ -51,7 +51,9 @@ direction = random(360)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_alpha = image_alpha - random_range(0.01,0.05)
+            <string>//Grow and fade the smoke, until it is invisible, and then
+//destroy it.
+image_alpha = image_alpha - random_range(0.01,0.05)
 image_xscale = image_xscale + random_range(0.01,0.05)
 image_yscale = image_xscale
 

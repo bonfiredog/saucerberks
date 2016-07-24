@@ -54,11 +54,11 @@ if room = rStart {
 sprite_index = sCursor
 }
 
-if room = rTutorial and (oMenu.Mode = "Pause" or oMenu.Mode = "Titles") {
+if room = rTutorial and oMenu.Mode = "Titles" {
 sprite_index = sCursor
 }
 
-if room = rLevel1 and (oMenu.Mode = "Pause" or oMenu.Mode = "Titles") {
+if room = rLevel1 and oMenu.Mode = "Titles" {
 sprite_index = sCursor
 }
 
