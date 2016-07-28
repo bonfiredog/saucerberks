@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = -200
+            <string>//Create the logo screen nice and big,
+//Create the two logo items as well.
+depth = -200
 image_xscale = 20.0
 image_yscale = image_xscale
 instance_create(x,y,oInstructLogo)
@@ -54,10 +56,12 @@ TimeUntilFadeInStart = 220
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = room_width / 2
+            <string>//Put it in the centre of the screen.
+x = room_width / 2
 y = room_height / 2
 
-
+//Fade out the logo screen after a slight delay to display the logos. When it's gone, 
+//play the Saucerberks sound, then destroy it.
 if TimeUntilFadeInStart &gt; 0 {
 TimeUntilFadeInStart = TimeUntilFadeInStart - 1
 } else if TimeUntilFadeInStart &lt;= 0 {

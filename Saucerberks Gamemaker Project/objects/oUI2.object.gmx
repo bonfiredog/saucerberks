@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>ShowBoomersRemaining = false
+            <string>//Initial values
+ShowBoomersRemaining = false
 ShowFieldRemaining = false
 TextAlpha = 1.0
 </string>
@@ -50,7 +51,11 @@ TextAlpha = 1.0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if ShowBoomersRemaining = true {
+            <string>//If a Boomer has been destroyed, show the Boomer text, before fading it out. To allow you to read 
+//the text when there are no Boomers left, it lasts a bit longer before fading.
+
+//Do the same for the name of the level at the start of each level, fading out more slowly.
+if ShowBoomersRemaining = true {
 
 if global.NumberOfBoomersRemaining &lt;= 0 {
 TextAlpha = TextAlpha - 0.007
@@ -94,7 +99,8 @@ ShowFieldRemaining = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//When a boomer dies, flash up how many boomers remaining in the middle of the screen.
+            <string>//This draws the actual text, with the variables included for number of boomers left
+//and the current level name.
 
 if ShowBoomersRemaining = true {
 

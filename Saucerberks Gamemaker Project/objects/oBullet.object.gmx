@@ -58,7 +58,7 @@ instance_destroy()
 
 }
 
-//Destroy when hit a wall
+//Destroy when hit a wall, after playing a sound and changing the sprite to an explosion.
 if place_meeting(x,y,oSwarmer) or place_meeting(x,y,oSolid) or place_meeting(x,y,oBoomer) {
 speed = 0
 if PlayHitSound = false {
@@ -67,7 +67,6 @@ PlayHitSound = true
 }
 sprite_index = sGunExplosion
 }
-
 
 
 if speed = 0 {

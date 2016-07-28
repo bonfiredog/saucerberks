@@ -47,14 +47,17 @@ surface_resize(application_surface, ScreenWidth, ScreenHeight)
 //Tell the menu that we are on the title screen.
 Mode = "Titles"
 
+//This is self-explanatory.
 if file_exists("HighScore.txt") {
 LoadHighScore()
 } else {
 global.HighScore = 0
 }
 
+//Set the player's lives.
 global.PlayerLives = 3
 
+//Start the titles as invisible.
 TitleAlpha = 0
 image_alpha = 0
 
@@ -84,26 +87,20 @@ global.PlayedSoundYet = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//If we press the escape key, bring up the title screen, or remove it. 
-
-
-if room = rStart and TitlePageFadeIn = true {
-if TitleAlpha &lt; 1 {
-image_alpha = TitleAlpha + 0.01 
-}
-}
-
-
+            <string>//Slowly fade in the title in the Start Room.
 if room = rStart and TitlePageFadeIn = true {
 if TitleAlpha &lt; 1 {
 TitleAlpha = TitleAlpha + 0.01 
 }
 } 
 
+//Only fade in the title in the Start Room
 if room = rLevel1 or room = rTutorial {
 TitleAlpha = 1.0
 }
 
+
+//If we press the escape key in any room other than the Start room, toggle the menu with a sound.
 if room != rStart {
 if keyboard_check_pressed(vk_escape) {
 if Mode = "Game" {Mode = "Titles"} else {Mode = "Game" }
@@ -115,6 +112,7 @@ audio_play_sound(aMenu,1,false)
 
 }
 
+//Bring up the Victory level if all the enemies are dead in the game level, increasing the current score.
 
 if instance_number(oEnemy) &lt; 1 and room = rLevel1 {
 if Mode != "Victory" {audio_play_sound(aVictory,1,false)}
@@ -123,7 +121,7 @@ Mode = "Victory"
 }
 
 
-
+//Bring it the 'Lose' menu up if the player runs out of Lives.
 if global.PlayerLives &lt;= 0 {
 Mode = "Lose"
 }
@@ -151,8 +149,9 @@ Mode = "Lose"
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-//In titles mode, show it always. In game mode, show the bar.
+            <string>//This draws the high score (if present), the title, subtitle and buttons,
+//as well as the Lose and Victory screens.
+//This is where the button functionality is called from.
 
 if Mode = "Titles" {
 

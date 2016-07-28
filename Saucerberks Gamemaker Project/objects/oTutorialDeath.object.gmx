@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = -400
+            <string>//Set up the initial values, make it dimensionless.
+depth = -400
 CountdownToLeave = 15
 image_xscale = 0
 image_yscale = image_xscale
@@ -52,7 +53,12 @@ image_yscale = image_xscale
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(oPlayer){oPlayer.image_alpha = 0.0}
+            <string>
+//When this object is created, make the player invisible 
+//(as they have a low depth, and would be seen on top of this object_exists
+//then grow this object quickly, turn it white, wait one second and then 
+//reload the tutorial room.
+if instance_exists(oPlayer){oPlayer.image_alpha = 0.0}
 image_alpha = 1.0
 if image_xscale &lt; 150.0 {
 image_xscale = image_xscale + 2.0

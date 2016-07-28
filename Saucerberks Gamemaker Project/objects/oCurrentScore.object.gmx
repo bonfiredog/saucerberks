@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>CurrentScore = 0
+            <string>//Why couldn't this be a global variable? A whole object for it? Oh dear...
+CurrentScore = 0
 </string>
           </argument>
         </arguments>

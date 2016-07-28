@@ -101,8 +101,9 @@ x = Owner.x
 y = Owner.y
 image_angle = Owner.image_angle - 180
 
+//Disable this functionality if the player is docked.
 if oPlayer.Docked = false{
-//Fire a bullet, and send it out into the room, kick the gun back and the owner, as well as playing a sound.
+//Press the middle mouse button to fire a grenade within a slight 30 degree random spread, at a random speed, and play a sound.
 if mouse_check_button_pressed(mb_middle) {
         
 MyGrenade = instance_create(x,y,oGrenade)
@@ -113,6 +114,7 @@ MyGrenade.image_angle = MyGrenade.direction
 audio_play_sound(aGrenadeLaunch, 1, false)    
 }
 
+//Make the gun itself flash when the middle mouse button is pressed.
 if mouse_check_button_pressed(mb_middle) {
 sprite_index = sGrenadeGunFlash
 } else {
@@ -120,6 +122,8 @@ sprite_index = sGrenadeGun
 }
 }
 
+
+//Destroy it if the player is destroyed, and make sure that the GrenadeDet can spawn again by resetting the global variable.
 if global.PlayerLives &lt;= 0 {
 instance_destroy()
 global.GrenadeGunGot = false
@@ -127,7 +131,7 @@ global.GrenadeGunGot = false
 }
 
 
-//If not picked up, flash yellow.
+//If not picked up, flash yellow intermittently.
 
 if instance_exists(Owner) = false {
 image_angle = image_angle + SpinDirection
@@ -146,6 +150,8 @@ TimeOfEachFlash = 30
 }
 }
 
+
+//If picked up by the player, stop the flashing, make the player flash and make the player the owner.
 if instance_exists(Owner) = false and place_meeting(x,y,oPlayer) {
 global.GrenadeGunGot = true
 audio_play_sound(aGrenadeGunPickup, 1, false)
@@ -153,6 +159,7 @@ oPlayer.GrenadePickUpFlash = true
 image_blend = c_white
 PickUpMessage = true
 Owner = oPlayer.id
+//This makes sure that it is in front of the player sprite.
 depth = -121
 }
 
@@ -179,7 +186,10 @@ StayInsideRoom()
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if Owner = noone {
+            <string>//This draws a circle around the Grenade gun while floating in space,
+//to make it easier to spot.
+
+if Owner = noone {
 
 posx = x - view_xview[0]
 posy = y - view_yview[0]

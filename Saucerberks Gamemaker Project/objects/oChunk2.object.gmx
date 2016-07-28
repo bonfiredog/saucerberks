@@ -29,6 +29,7 @@
 speed = random_range(1000,2000) / room_speed
 direction = random(360)
 
+//Make it slightly bigger.
 image_xscale =  1.2
 image_yscale = image_xscale
 </string>
@@ -53,7 +54,7 @@ image_yscale = image_xscale
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Set its decleration.
+            <string>//Set its decleration value relative to room speed.
 Deceleration = 2000 / (room_speed * room_speed)
 
 

@@ -25,11 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>direction = oPlayer.image_angle - 180
+            <string>
+//Make it face the opposite direction to the player, but display the *sprite* in the same
+//direction of the player. Confusing, I know.
+direction = oPlayer.image_angle - 180
 image_angle = oPlayer.image_angle
 
 speed = 100 / room_speed
 
+//This variable is redundant.
 SecondsUntilFadeOut = 3
 
 image_xscale = 1.5
@@ -56,12 +60,13 @@ image_yscale = image_xscale
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(oPlayer) {
+            <string>//Keep the strange configuration from the Create event.
+if instance_exists(oPlayer) {
 direction = oPlayer.image_angle - 180
 image_angle = oPlayer.image_angle
 }
 
-/* delete bullet when outside of room */
+/* delete if outside of room */
 
 if x &lt; 0 or y &lt; 0 or x &gt; room_width or y &gt; room_height {
 
@@ -69,12 +74,6 @@ instance_destroy()
 
 }
 
-//If we are ABOUT to hit a block, stop.
-if place_meeting(x + hspeed, y + vspeed, oSolid) {
-
-instance_destroy()
-
-}
 
 
 
@@ -85,6 +84,11 @@ speed = speed - Deceleration
 } else {
 speed = 0
 }
+
+//If it has stopped, grow and fade it out 
+//until it is invisible, then destroy it. Again, 
+//the variable that was supposed to control this is
+//redundant.
 
 if speed = 0 and instance_exists(self.id) {
 SecondsUntilFadeOut = SecondsUntilFadeOut - 1/room_speed

@@ -59,8 +59,6 @@ SecondsSinceLastShot = SecondsBetweenShots
             <string>//If the gun has been picked up...
 if instance_exists(Owner)
 
-
-
 //Make the gun 'stick' to its owner, and face in the same direction...
 {
 x = Owner.x
@@ -112,12 +110,14 @@ if mouse_check_button(mb_left) and SecondsSinceLastShot &gt;= SecondsBetweenShot
 }
 }
 
-
+//Destroy the gun if the player has been destroyed, 
+//to make sure that there is not more than one instances active
 if global.PlayerLives &lt;= 0 {
 instance_destroy()
 }
 
 
+//I'm pretty certain that this script is redundant now.
 CanBePickedUp()
 </string>
           </argument>

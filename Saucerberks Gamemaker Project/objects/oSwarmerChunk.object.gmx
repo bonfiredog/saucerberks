@@ -29,6 +29,7 @@
 speed = random_range(750,1500) / room_speed
 direction = random(360)
 
+//Set it to be smaller than the initial sprite.
 image_xscale = 0.5
 image_yscale = image_xscale
 </string>

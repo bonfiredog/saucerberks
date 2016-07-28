@@ -47,9 +47,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = mouse_x
+            <string>
+//Make this object follow the mouse coordinates.
+x = mouse_x
 y = mouse_y
 
+
+//Change between the 'menu' and 'game' cursor depending on the room 
+//and menu mode.
 if room = rStart {
 sprite_index = sCursor
 }

@@ -31,7 +31,7 @@ image_speed = 5/room_speed
 //Get it going!
 InitialiseEnemyCollision(100,360)
 
-//Make them half the normal size
+//Make them normal size.
 image_xscale = 1.0
 image_yscale = image_xscale
 
@@ -41,6 +41,7 @@ depth = -11
 
 ThingsEaten = 0
 
+//These are initial variables. They don't really need explanation at this point.
 HasBeenHit = false
 Flashing = false
 NumberOfFlashes = irandom_range(3,6)
@@ -71,7 +72,8 @@ BoomerShot = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>speed = global.DiffBoomerSpeed
+            <string>//Set the speed to the variable set by the Difficulty script.
+speed = global.DiffBoomerSpeed
 image_speed = 5 / room_speed
 
 
@@ -88,7 +90,8 @@ if instance_exists(NearestGlob) {
 DistanceToGlob = point_distance(x,y,NearestGlob.x,NearestGlob.y)
 
 if DistanceToGlob &lt; DetectionRange {
-//Can I reach it?
+//Can I reach it? (This code is legacy as well; the Boomers no longer 
+//need line of sight.
 
 if BoomerHaveLineOfSightTo(NearestGlob) {
     //Go towards it!
@@ -102,21 +105,18 @@ if BoomerHaveLineOfSightTo(NearestGlob) {
     NearestGlob.Host.Eater = id
     ThingsEaten = ThingsEaten + 1
 
+    //Grow the Boomer if it has eaten something, but shrink 
         GrowthRate = 0.05
         MaximumSize = 1.4
         if image_xscale &lt; MaximumSize {
         image_xscale = image_xscale + GrowthRate
         image_yscale = image_yscale + GrowthRate
-        if place_meeting(x,y,oSolid) {
-        image_xscale = image_xscale - GrowthRate
-        image_yscale = image_yscale - GrowthRate
-        }
         
         }
         
         }
         
-         
+         //Destroy the glob when it has been eaten.
         with NearestGlob { instance_destroy() }
         
              }
@@ -136,19 +136,24 @@ StayInsideRoom()
 
 /* Damage */
 
+//This is a variable relating to whether the Boomer in the tutorial has been shot,
+//which marks the text there for display. There really should be a proper Tutorial script,
+//rather than having everything spread all over the game objects.
 if instance_exists(oPlayer) and oPlayer.Stage = "Boomers" and place_meeting(x,y,oBullet) {
 BoomerShot = true
 }
 
 
-
+//This marks it for flashing if the player has shot it but it has not eaten anything (i.e. it is still invulnerable).
 if place_meeting(x,y,oBullet) and ThingsEaten &lt;= 0 and HasBeenHit = false {
 HasBeenHit = true
 Flashing = true
 }
 
-
-
+//This is a very long flashing script that makes it grow and turn blue,
+//then turn back to normal, a certain number of times.
+//The script is reset when it reaches its end so that it can occur 
+//again when the Boomer is next shot.
 if Flashing = true and NumberOfFlashes &gt; 0 {
 if TimeBetweenFlashes &gt; 0 {
 TimeBetweenFlashes = TimeBetweenFlashes - 1
@@ -183,6 +188,9 @@ if HitByProjectile(){
      //If we have a swarmer inside us, explode
      if ThingsEaten &gt; 0 {
      audio_play_sound(aBoomerDeath, 1, false)
+     //Show the number of Boomers remaining in the room. Which, 
+     //now I come to think of it, didn't need a global value, but
+     //could have been done with instance_count()
      global.NumberOfBoomersRemaining = global.NumberOfBoomersRemaining - 1
         if room != rTutorial {
       oUI2.ShowBoomersRemaining = true
@@ -191,10 +199,14 @@ if HitByProjectile(){
 }
 }
 
+//If the player is 'undocking' (i.e. is a missile)
 if place_meeting(x,y,oPlayer) and oPlayer.Undocking = true {
     //If we have a swarmer inside us, explode
      if ThingsEaten &gt; 0 {
      audio_play_sound(aBoomerDeath, 1, false)
+     //Show the number of Boomers remaining in the room. Which, 
+     //now I come to think of it, didn't need a global value, but
+     //could have been done with instance_count()
      global.NumberOfBoomersRemaining = global.NumberOfBoomersRemaining - 1
         if room != rTutorial {
       oUI2.ShowBoomersRemaining = true
@@ -203,10 +215,15 @@ if place_meeting(x,y,oPlayer) and oPlayer.Undocking = true {
 }
 }
 
+//If the Boomer is hit by the GrenadeDet explosion and it has not become non-lethal
 if place_meeting(x,y,oGrenadeTargetExplosion) and oGrenadeTargetExplosion.Harmless = false{
     //If we have a swarmer inside us, explode
      if ThingsEaten &gt; 0 {
      audio_play_sound(aBoomerDeath, 1, false)
+     
+     //Show the number of Boomers remaining in the room. Which, 
+     //now I come to think of it, didn't need a global value, but
+     //could have been done with instance_count()
      global.NumberOfBoomersRemaining = global.NumberOfBoomersRemaining - 1
         if room != rTutorial {
       oUI2.ShowBoomersRemaining = true
@@ -236,8 +253,14 @@ if place_meeting(x,y,oGrenadeTargetExplosion) and oGrenadeTargetExplosion.Harmle
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_self()
+            <string>//Remember this! For some reason, it's important.
+draw_self()
 
+//Display the text next to the Boomer in the Tutorial section. I really can't
+//be bothered to comment this all; it basically displays a different bit of text
+//in a red circle depending on what stage of the Tutorial you are at.
+//At one point, a funky little line connects the Swarmer and the Boomer, letting 
+//you know the relationship between the two of them.
 if room = rTutorial and instance_exists(oPlayer) {
 if oPlayer.Stage = "Boomers" {
 

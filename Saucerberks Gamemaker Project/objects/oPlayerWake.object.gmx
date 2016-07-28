@@ -25,11 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>direction = oPlayer.image_angle - 180
+            <string>//Point it out the back of the player, but face the *sprite* in the direction of the player.
+//Confusing, I know.
+direction = oPlayer.image_angle - 180
 image_angle = oPlayer.image_angle
 
 speed = 100 / room_speed
 
+//This is how long each instance lasts.
 SecondsUntilFadeOut = 3
 
 image_xscale = 1.5
@@ -56,26 +59,19 @@ image_yscale = image_xscale
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(oPlayer) {
+            <string>//Maintain the strange configuration from the Create event.
+if instance_exists(oPlayer) {
 direction = oPlayer.image_angle - 180
 image_angle = oPlayer.image_angle
 }
 
-/* delete bullet when outside of room */
+/* delete it if outside of room */
 
 if x &lt; 0 or y &lt; 0 or x &gt; room_width or y &gt; room_height {
 
 instance_destroy()
 
 }
-
-//If we are ABOUT to hit a block, stop.
-if place_meeting(x + hspeed, y + vspeed, oSolid) {
-
-instance_destroy()
-
-}
-
 
 
 //Make it decelerate.
@@ -86,7 +82,10 @@ speed = speed - Deceleration
 speed = 0
 }
 
+//If it has stopped, make it bigger and fade it out before destroying it.
 if speed = 0 and instance_exists(self.id) {
+//Wait, is this variable even needed? It just relies on image_alpha to know when
+//to destroy it.
 SecondsUntilFadeOut = SecondsUntilFadeOut - 1/room_speed
 image_alpha = image_alpha - 0.03
 image_xscale = image_xscale + 0.08

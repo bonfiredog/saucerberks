@@ -28,6 +28,8 @@
             <string>image_alpha = 0
 Mode = "Growing"
 depth = -12
+
+//Play the spawn sound at a random pitch.
 audio_sound_pitch(aTutSpawn,random_range(0.6,1.4))
 audio_play_sound(aTutSpawn,1,false)
 </string>
@@ -52,7 +54,9 @@ audio_play_sound(aTutSpawn,1,false)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if Mode = "Growing" {
+            <string>
+//First of all the spawn grows and then shrinks, before being destroyed.
+if Mode = "Growing" {
 if image_alpha &lt; 1 {
 image_alpha = image_alpha + 0.1
 image_xscale = image_xscale + 0.1

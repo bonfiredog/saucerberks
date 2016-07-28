@@ -28,10 +28,14 @@
             <string>//Set the Screenshake to nothing
 ScreenShakeAmount = 0
 
+//Reset the enemy spawn.
 SecondsSinceLastEnemySpawn = 0
 
 /*Global Constants */
 
+//These need to be here, rather than with the Player, as they
+//are only called when the Player has been destroyed, and no longer
+//exists!
 BitsReassembled = 0
 NumberOfBitsThePlayerIsMadeOf = 9
 
@@ -60,6 +64,9 @@ CurrentPitch = random_range(0.1, 1.5)
           <argument>
             <kind>1</kind>
             <string>/*Enemy Spawning */
+
+//This is the spawnng code for Swarmers. A new Swarmer is spawned at a random point in the 
+//room at a rate set by the difficulty (the 'Diff' variables).
 SecondsSinceLastEnemySpawn = SecondsSinceLastEnemySpawn + 1/room_speed
 
 if SecondsSinceLastEnemySpawn &gt;= global.DiffSecondsBetweenEnemySpawns {

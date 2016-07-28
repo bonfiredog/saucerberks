@@ -68,17 +68,23 @@ if oPlayer.Docked = false {
 if mouse_check_button_pressed(mb_right) {
 
      
-      MyFlash = instance_create(x,y,oMFGun)
+//I'm also certain that I'm not using this anymore, having decided to change the Player sprite
+//to simulate a flash instead. Still, let's leave it in for fun, why don't we? It's not as if
+//this is a rigourous piece of programming.
+    MyFlash = instance_create(x,y,oMFGun)
     MyFlash.direction = image_angle
     MyFlash.speed = 200 / room_speed
     MyFlash.image_angle = image_angle
     
-    MyBullet = instance_create(x,y,oGlob)
-    
-    MyBullet.direction = image_angle + random_range(-1,1)
+
+//Create the blob and send it out with a slight.. 
+    MyBullet = instance_create(x,y,oGlob)    
+    MyBullet.direction = image_angle + random_range(-1,1)//...(randomised 2 degree)...
     MyBullet.speed = random_range (500,700) / room_speed
     MyBullet.image_angle = MyBullet.direction
-    
+    //...wobble.
+   
+//Kick the player back slightly.    
     Kick = 200 / room_speed
     KickDirection = image_angle + 180
     
@@ -89,7 +95,7 @@ if mouse_check_button_pressed(mb_right) {
     
     ScreenShake(30)
     
-    
+    //Play the shot sound.
     
     audio_play_sound(aLiquidShot, 1, false)
 }
@@ -103,7 +109,8 @@ if mouse_check_button_pressed(mb_right) {
 
 
 
-
+//Destroy if the player is destroyed, to make sure that only one instance
+//is active at any one time.
 
 if global.PlayerLives &lt;= 0 {
 instance_destroy()

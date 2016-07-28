@@ -25,10 +25,15 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = -10000
+            <string>//Make sure it's bloody above everything else!
+depth = -10000
+
+//Make it massive.
 image_xscale = 80
 x = room_width / 2
 y = room_height / 2
+
+//Initially invisible.
 image_alpha = 0
 Paused = false
 </string>
@@ -53,7 +58,15 @@ Paused = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check_pressed(ord('P')) {
+            <string>
+//Press P, play the sound, and then choose
+//a random dream title.
+//Make the Pause object visible, and 
+//make the background invisible (as it interferes 
+//with the Pause object displaying).
+
+
+if keyboard_check_pressed(ord('P')) {
 audio_play_sound(aMenu,1,false)
 
 if Paused = false {
@@ -87,9 +100,11 @@ DreamChoice = choose(
 image_alpha = 1
 background_alpha[0] = 0
 
+//Deactivate everything to pause it!
 instance_deactivate_all(true)
 
 } else if Paused = true {
+//Unpause, make the Pause object invisible and activate everything again.
 Paused = false
 image_alpha = 0
 background_alpha[0] = 1

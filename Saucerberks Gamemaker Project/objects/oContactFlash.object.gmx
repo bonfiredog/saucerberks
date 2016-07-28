@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = -130
+            <string>//A random number of flashes at a random position within a 60 x 60 square of the Player sprite.
+depth = -130
 image_xscale = 0
 image_yscale = 0
 NumberOfFlashes = random(10)
@@ -58,6 +59,7 @@ YOffset = random_range(-30,30)
           <argument>
             <kind>1</kind>
             <string>
+//Keep pace with the Player's movement.
 if instance_exists(oPlayer) {
 x = oPlayer.x + XOffset
 y = oPlayer.y + YOffset
@@ -67,6 +69,9 @@ hspeed = oPlayer.hspeed
 
 
 
+
+//Create a certain number of flashes, increasing and then decreasing the size of each one rapidly to create a flash effect.
+//Destroy the object when all the flashes have completed.
 if NumberOfFlashes &gt; 0 {
 
 if Flashing = "Up" {

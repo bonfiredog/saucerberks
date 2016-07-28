@@ -25,14 +25,12 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//In titles mode, show it always. In game mode, show the bar.
-
+            <string>//Show the bottom-left UI in the game level.
 if room = rLevel1 {
-
 
 if oMenu.Mode = "Game" or oMenu.Mode = "Menu" {
 
-
+//Set it to draw in the bottom left.
     UIX = (view_wport[0] / view_wport[0]) + 15
     UIY = view_hport[0] - 120
     
@@ -41,11 +39,15 @@ if oMenu.Mode = "Game" or oMenu.Mode = "Menu" {
     draw_set_font(fTutorial)
     draw_set_alpha(1)
     
+    
+    //Draw the rectangles around the text.
     draw_rectangle(UIX,UIY,UIX+90,UIY+90,true)
     draw_rectangle(UIX+110,UIY,UIX+200,UIY+90,true)
     
     UIX = UIX + 45
     UIY = UIY + 15
+    
+    //Draw the score, and lives, with their corresponding variables.
     
     draw_text(UIX,UIY,"Score")
     UIY = UIY + 35

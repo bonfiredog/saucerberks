@@ -50,11 +50,12 @@ image_yscale = image_xscale
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_alpha = image_alpha - 0.01 
+            <string>//Make it larger and more transparent every step.
+image_alpha = image_alpha - 0.01 
 image_xscale = image_xscale + 0.2
 image_yscale = image_xscale
 
-if image_alpha &lt;= 0 {
+if image_alpha &lt;= 0 {//When its completely transparent, destroy it.
 instance_destroy()
 }
 

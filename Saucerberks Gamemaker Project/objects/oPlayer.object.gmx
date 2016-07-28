@@ -25,39 +25,42 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Set the player's WeaponCount to 0.
+            <string>//Set the player's WeaponCount to 0. (defunct)
 WeaponCount = 0
 
-//Set The WeaponIndex to the default.
+//Set The WeaponIndex to the default. (defunct)
 SelectedWeaponIndex = 0
 
 depth = -11
 image_xscale = 0.8
 image_yscale = image_xscale
 
-//Set initial power to 5, define the maximum
+//Set initial power to 5, define the maximum (defunct)
 Power = 5
 PowerMax = 50
 
 Countdown = 120
 
-//Make sure there is no shunt on the player
+//Make sure there is no shunt on the player. 
 ResetShunts()
 
+//Create the weapons and the spawn flash.
 instance_create(x,y,oRapidFireGun)
 instance_create(x,y,oBaitGun)
 instance_create(x,y,oTutSpawn)
 
+//Special Debris variables.
+
 Docked = false
-
 Owner = noone
-
 TimeBetweenFlashes = 120
-
-Colliding = false
-
 Undocking = false
+CaptionAlpha = 0.0
 
+HidingDetDockedMessage = ""
+
+
+//Tutorial variables.
 WPressed = false
 SPressed = false
 APressed = false
@@ -65,12 +68,6 @@ DPressed = false
 LeftClicked = false
 Stage = "Controls"
 RightClicked = false
-
-
-WDrifting = false
-SDrifting = false
-ADrifting  = false
-DDrifting = false
 
 BoomerStage = "First"
 
@@ -90,21 +87,28 @@ SoundPlay7 = false
 SoundPlay8 = false
 SoundPlay9 = false
 
+//Collision variables.
+WDrifting = false
+SDrifting = false
+ADrifting  = false
+DDrifting = false
+Colliding = false
+CollisionSoundPlayed = false
+
+
+//Make the player a bit larger than the initial sprite.
+
 image_xscale = 1.5
 image_yscale = image_xscale
 
+
+//Weapon variables.
 GrenadePickUpFlash = false
 NumberOfFlashes = 3
 TimeInBetweenFlashes = 15
 TimeOfEachFlash = 6
-
 TimeToDisplay = 180
 
-CollisionSoundPlayed = false
-
-CaptionAlpha = 0.0
-
-HidingDetDockedMessage = ""
 
 
 
@@ -130,12 +134,15 @@ HidingDetDockedMessage = ""
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if keyboard_check(ord('W')) = false and keyboard_check(ord('S')) = false and keyboard_check(ord('A')) = false and keyboard_check(ord('D')) = false and speed &gt; 0 and Undocking = false and Docked = false {
+            <string>
+//If there is no input and the player has moved (i.e. a speed of more than zero) and they aren't docked or undocking,
+//drift in the current direction, slowing down all the time.
+if keyboard_check(ord('W')) = false and keyboard_check(ord('S')) = false and keyboard_check(ord('A')) = false and keyboard_check(ord('D')) = false and speed &gt; 0 and Undocking = false and Docked = false {
 DriftSpeed = 8 / room_speed
 speed = speed - DriftSpeed
 }
 
-
+//Change the sprite to suit the gun being fired, giving the impression of lighting on the sprite.
 if Docked = false and Undocking = false {
 if instance_exists(oRapidFireGun) and mouse_check_button(mb_left) {
 sprite_index = sPlayerFireGun
@@ -145,9 +152,6 @@ sprite_index = sPlayerFireBait
 sprite_index = sPlayerJets
 }
 }
-
-
-
 
 
 /* ------------------------------------------------------------------------------------------------------ */
@@ -176,9 +180,7 @@ if y &gt; room_height {y = room_height}
 //The following only occurs if the game is not paused and the player is not docked.
 if Undocking = false and Docked = false {
 
-
 /* Collision */
-
 
 //If a block is about to touch us, it's big enough to collide with, and we aren't already colliding with something else...
 SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
@@ -187,11 +189,13 @@ if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.8 and Co
 //Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
 OriginalSpeed = 350 / room_speed
 ScreenShake(25)
+//Play the collision sound.
 if CollisionSoundPlayed = false {
 audio_sound_pitch(aCollision,random_range(0.8,2))
 audio_play_sound(aCollision,1,false)
 CollisionSoundPlayed = true
 }
+//Create the spark.
 instance_create(x + hspeed,y + vspeed,oContactFlash)
 //Change the player's direction to almost the opposite of what they hit, and set them as 'in the process of colliding'.
 if speed &gt; 0 {
@@ -199,6 +203,7 @@ direction = direction - random_range(130,220)
 } else if speed &lt;= 0 {
 direction = point_direction(x,y,SolidTouching.x,SolidTouching.y) - random_range(130,220)
 }
+//speed them up to simulate a 'bash' and 'shunt'
 speed = OriginalSpeed + 300 / room_speed
 Colliding = true
 CollisionSoundPlayed = false
@@ -257,7 +262,7 @@ hspeed = hspeed + xShunt
 vspeed = vspeed + yShunt
 ResetShunts()
 
-
+//face the direction of the mouse.
 image_angle = point_direction(x,y,mouse_x,mouse_y)
 
 
@@ -271,28 +276,32 @@ image_angle = point_direction(x,y,mouse_x,mouse_y)
 EnemyTouchingMe = instance_place(x,y,oEnemy)
 if instance_exists(EnemyTouchingMe) or (place_meeting(x,y,oGrenadeTargetExplosion) and oGrenadeTargetExplosion.Harmless = false) or place_meeting(x,y,oGrenadeBit) or place_meeting(x,y,oTurretDetTurretBolt) {
 ScreenShake(80)
+//Have the Swarmers all turn around and run away if they have destroyed the player.
 with oSwarmer {
 direction = point_direction(oPlayer.x,oPlayer.y,x,y)
 RunAwaySpeed = true
 RunAwayCountdown = random_range(120,240)
 }
 //...Explode into chunks, with how many bits the player is made of, using the player chunk object.
+//Lower the live total.
 global.PlayerLives = global.PlayerLives - 1
+//Destroy the player's weapons.
 with oBaitGun { instance_destroy() }
 with oRapidFireGun { instance_destroy() }
 if instance_exists(oGrenadeGun) and oGrenadeGun.Owner = oPlayer.id { with oGrenadeGun { instance_destroy() } } 
 ExplodeIntoANumberOfChunks(oGame.NumberOfBitsThePlayerIsMadeOf, oBit)  
+//Reset the tutorial if in the tutorial room.
 if room = rTutorial {
 instance_create(x,y,oTutorialDeath)
 }
 //Play the player death sound.
 audio_play_sound(aPlayerDeath, 1, false) 
+//Create an explosion object.
 instance_create(x,y,oPlayerExplosion)
 }
 }
 
-//If not picked up, flash yellow.
-
+//If the player picks up the Grenade fun, flash green a certain number of times and beep.
 if GrenadePickUpFlash = true {
 if NumberOfFlashes &gt; 0 {
 if TimeInBetweenFlashes &gt; 0 {
@@ -323,6 +332,7 @@ GrenadePickUpFlash = false
 MyDock = instance_place(x,y,oPlayerDocking)
 if instance_exists(MyDock) and Undocking = false and Docked = false {
 Owner = MyDock
+//Play the docking sound and create the Docking ring, with a randomised UI message.
 audio_play_sound(aDock, 1, false)
 instance_create(x,y,oDockingRing)
 HidingDetDockedMessage = choose(
@@ -331,6 +341,7 @@ HidingDetDockedMessage = choose(
 "I don't think they can see us anymore...##How do we get out of here?##There aren't any buttons!##Just this sign on the wall!##It says, 'What's the first letter##of the seventh planet?'" 
 )
 
+//Create a load of smoke, change the player sprite and the HidingDet sprite.
 instance_create(x,y,oSmokeLauncher)
 sprite_index = sPlayerDockedSprite
 oHidingDet.sprite_index = sHidingDetDocked
@@ -340,18 +351,21 @@ Docked = true
 }
 
 
-
+/*All of this only applies if the player is currently docked with the HidingDet.*/
 
 } else if Docked = true {
 
+//Fade up the caption.
 if CaptionAlpha &lt; 1 {
 CaptionAlpha = CaptionAlpha + 0.005
 }
 
+//Fade out the player slightly.
 if image_alpha &gt; 0.6 {
 image_alpha = image_alpha - 0.006
 }
 
+//Follow the HidingDet, and hide the player's weapons (which woould show up because the player is slightly faded out.
 x = Owner.x
 y = Owner.y
 vspeed = Owner.vspeed
@@ -365,9 +379,10 @@ oGrenadeGun.depth = 82
 oGrenadeGun.image_alpha = 0.0
 }
 
+//Change the depth to make sure the player displays underneath the Hiding Det.
 depth = 81
 
-
+//Flash red and beep.
 if TimeBetweenFlashes &gt; 0 {
 image_blend = c_white
 TimeBetweenFlashes = TimeBetweenFlashes - 1
@@ -377,6 +392,8 @@ TimeBetweenFlashes = 120
 audio_play_sound(aBeep, 1, false)
 }
 
+//If the U button is pressed, fire the Player out, shrink and destroy the docking ring, reset
+//all alphas, sprites and variables, and give the player a high speed and direction to fire out into the level.
 if keyboard_check(ord('U')) {
 Undocking = true
 sprite_index = sPlayerJets
@@ -405,6 +422,7 @@ Docked = false
 }
 }
 
+//Deccelerate the player, and eventually stop the 'undocking' (i.e. missile) state, returning them to normal.
 if Undocking = true {
 speed = speed - 0.4
 if speed &lt;= 0 {
@@ -434,8 +452,12 @@ Undocking = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if instance_exists(oTutorial) and oTutorial.TutMode = "NoTitles" {
+            <string>/* This is the tutorial control, for some reason kept in the player's draw event. Don't ask me why.*/
 
+//In the presence of the Tutorial control object, go ahead with all of this.
+if instance_exists(oTutorial) and oTutorial.TutMode = "NoTitles" {
+
+//Have all text follow the current viewport.
 posx = x - (view_xview[0])
 posy = y - (view_yview[0])
 
@@ -448,7 +470,7 @@ draw_set_valign(fa_center)
 
 if Stage = "Controls" {
 
-
+//Press W, and then delete the UI tip.
 if WPressed = false and oMenu.Mode != "Titles" {
 draw_set_colour(c_red)
 draw_circle(posx,posy - 120,40,true)
@@ -460,6 +482,8 @@ audio_play_sound(aTextChange,1,false)
 WPressed = true }
 }
 
+
+//Press S, and then delete the UI tip.
 if SPressed = false and oMenu.Mode != "Titles"{
 draw_set_colour(c_red)
 draw_circle(posx,posy + 120,40,true)
@@ -471,6 +495,8 @@ audio_play_sound(aTextChange,1,false)
 SPressed = true }
 }
 
+
+//Press A, and then delete the UI tip.
 if APressed = false and oMenu.Mode != "Titles"{
 draw_set_colour(c_red)
 draw_circle(posx - 200,posy,40,true)
@@ -482,6 +508,8 @@ audio_play_sound(aTextChange,1,false)
 APressed = true }
 }
 
+
+//Press D, and then delete the UI tip.
 if DPressed = false and oMenu.Mode != "Titles"{
 draw_set_colour(c_red)
 draw_circle(posx + 200,posy,40,true)
@@ -493,6 +521,7 @@ audio_play_sound(aTextChange,1,false)
 DPressed = true }
 }
 
+//If all buttons pressed, left click to end the section.
 if WPressed and SPressed and APressed and DPressed = true and LeftClicked = false and oMenu.Mode != "Titles" {
 draw_set_colour(c_red)
 draw_circle(posx + 300, posy + 120, 130, true)
@@ -506,6 +535,7 @@ LeftClicked = true }
 }
 
 
+//Create a swarmer to shoot near the player, with its own little message (contained in its own Draw event).
 if LeftClicked = true {
     Stage = "Swarmers"
     instance_create(x + 400, y - 200, oTutSpawn)
@@ -526,6 +556,7 @@ SoundPlay1 = true
 
 //BOOMERS STAGE
 
+//If the swarmer is destroyed, create a Boomer near the player with its own DrawGUI event.
 if instance_number(oSwarmer) &lt; 1 {
 Stage = "Boomers"
 instance_create(x - 400, y + 200, oTutSpawn)
@@ -536,6 +567,7 @@ TutorialBoomer = instance_create(x - 400, y + 200, oBoomer)
 if Stage = "Boomers" and oMenu.Mode != "Titles" {
 
 if instance_exists(TutorialBoomer) {
+//Shoot it once.
 if BoomerStage = "First" {
 if oBoomer.BoomerShot = false and oMenu.Mode != "Titles" {
 
@@ -559,7 +591,7 @@ BoomerStage = "Second"
 }
 } 
 } else if BoomerStage = "Second" {
-
+//Laying bait for it.
 if TutorialBoomer.ThingsEaten = 0 and oMenu.Mode != "Titles" {
 if SoundPlay4 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
@@ -569,7 +601,7 @@ SoundPlay4 = true
 
 
 } else if TutorialBoomer.ThingsEaten = 1 and oMenu.Mode != "Titles" {
-
+//Finally destroying it.
 if SoundPlay5 = false {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
@@ -577,6 +609,8 @@ SoundPlay5 = true
 }
 }
 
+
+//This controls the 'right-click' hint that disappears if the right mosue button is pressed.
 if RightClicked = false and oMenu.Mode != "Titles"  {
 
 draw_set_colour(c_red)
@@ -587,6 +621,8 @@ draw_text(posx - 180,posy - 100,"Shoot bait?")
 if mouse_check_button(mb_right) {RightClicked = true }
 }
 
+
+//make sure there is always one Swarmer in the room for this section.
 if instance_number(oSwarmer) &lt; 1 {
 instance_create(x + 400, y - 500, oTutSpawn)
 instance_create(x + 400, y - 500 , oSwarmer)
@@ -595,6 +631,9 @@ instance_create(x + 400, y - 500 , oSwarmer)
 
 }
 
+
+//Spawn some swarmers and boomers to practice, updating the text in line with the Countdown, which runs throughout this section.
+//Once it has finished, everything has spawned, and the Player can do what they like until they decide to fly into the TutEnd object.
 } else {
 Countdown = Countdown - 0.09
 BoomerStage = "Third"
@@ -652,7 +691,7 @@ draw_text(posx + 300,posy + 120,"You're going to be seeing#a lot of mess...")
 
 
 
-
+//Create a load of randomly placed debris.
 if TutDebrisSpawn = false {
 if TutDebCount &gt; 0 {
 ThisDebrisSpawnyNegative = random_range(-30,-800)
@@ -673,7 +712,7 @@ TutDebrisSpawn = true
 }
 
 
-
+//Create the TutEnd object, and update the text to encourage the player to fly into it.
 if Countdown &lt; 60 and Countdown &gt; 40 {
 if TutEndSpawn = false {
 instance_create(oPlayer.x + 480, oPlayer.y + 200, oTutSpawn)
@@ -699,7 +738,7 @@ draw_text(posx + 300,posy + 110,"Fly into that little#purple number when#you're 
 }
 }
 
-
+//This bit below is not to do with tutorial.
 
 //When first picked up, display a message about the GrenadeGun.
 

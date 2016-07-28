@@ -52,7 +52,15 @@ depth = -10
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if MSecondsUntilFade &gt; 0 {
+            <string>
+//I think that I'm no longer actually using this code, but
+//I'm going to leave it in anyway. This is such a simplistic game
+//I've got the cycles to spare. I can be free and easy with my cycles.
+
+//Anyway, wait to fade out, and then fade out while making the sprite bigger.
+//Destroy when fully transparent.
+
+if MSecondsUntilFade &gt; 0 {
 MSecondsUntilFade = MSecondsUntilFade - 1
 image_alpha = image_alpha - (1 / OriginalMSecondsUntilFade) 
 image_xscale = image_xscale + 0.1

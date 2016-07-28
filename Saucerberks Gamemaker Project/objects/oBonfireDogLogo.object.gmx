@@ -51,9 +51,12 @@ image_yscale = image_xscale
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = 500
+            <string>
+//Position it precisely in the room.
+x = 500
 y = 600
 
+//Fade it at the same rate as the logo screen, then destroy it when invisible.
 image_alpha = oLogoScreen.image_alpha
 
 if image_alpha &lt;= 0 {

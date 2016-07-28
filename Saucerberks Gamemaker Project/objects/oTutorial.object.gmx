@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>TutMode = "Titles"
+            <string>
+//This is a object just to fade in and out the 
+//tutorial titles. All the other code, stupidly,
+//is spread across different object's Draw events.
+TutMode = "Titles"
 MSecondsUntilTitleDisappear = 120
 TutTitleAlpha = 0
 Spawned = false
@@ -55,10 +59,14 @@ WhinePlayed = false
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if background_alpha[0] &lt; 1 {
+            <string>
+//Fade in the Title image and the background.
+if background_alpha[0] &lt; 1 {
 TutTitleAlpha = TutTitleAlpha + 0.005
 background_alpha[0] = background_alpha[0] + 0.004
 
+//Play the sound with a slight delay, controlled by the fadimg-in
+//of the  background.
 if background_alpha[0] &gt; 0.4 {
 if SoundPlayed = false {
 audio_play_sound(aTutorial, 1, false)
@@ -68,6 +76,8 @@ SoundPlayed = true
 
 } else if background_alpha[0] &gt;= 1 {
 
+//Once it has faded in, this object spwans the player
+//(with a little flash), and then...
 if TutTitleAlpha &gt;= 1 {
 if Spawned = false {
 instance_create(room_width/2, room_height/2, oTutSpawn)
@@ -78,6 +88,7 @@ FadeOutTitle = true
 }
 }
 
+//Fades out the title! Did I really need a separate object for this?
 if FadeOutTitle = true {
 if TutTitleAlpha &gt; 0 {
 TutTitleAlpha = TutTitleAlpha - 0.01
@@ -110,7 +121,9 @@ TutMode = "NoTitles"
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if TutMode = "Titles" {
+            <string>
+//This is the actual Draw event for the title text.
+if TutMode = "Titles" {
 
 x = view_wport[0] / 2
 y = 300

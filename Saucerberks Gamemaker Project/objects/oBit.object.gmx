@@ -62,11 +62,7 @@ OriginalY = y
 Acceleration = 5 / room_speed
 Deceleration = 25 / room_speed
 
-
-
-
-
-
+//Only do this if the player has more than 0 lives. if they have 0 lives, the level is over, and they dont need to reassemble.
 if global.PlayerLives &gt; 0 {
 
 //If the bit has not started reassembling yet,
@@ -117,6 +113,7 @@ if Reassembling = false {
 
 } else {
 
+//If the player has no lives left, just decelerate the bits and spin them; no reassemblage required.
  if speed &gt; Deceleration {
     speed = speed - Deceleration
     image_angle = random(360)
