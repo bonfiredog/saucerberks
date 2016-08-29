@@ -1,15 +1,13 @@
 <p align="center">
-<img src="http://bonfiredog.co.uk/ooo/saucerberks/sbgithubheader.png" />
+<img src="https://bonfiredog.co.uk/ooo/saucerberks/sbgithubheader.png">
 </p>
 
 #Saucerberks
-*A 2D shooting game for PC & Mac that I made in order to learn how to code properly. It concerns the shooting of aliens, with an additional, translucent veneer of pathos.*
+*A very average, but importantly complete, 2D space heritage military-industrial management simulator, built in order to teach myself to code. It really concerns the shooting of aliens, but with a flimsy, translucent veneer of pathos.*
 
-You are a **Saucerberk**, some sort of commissioned official in a lime-green spaceship. I'm not sure what that regalia represents, or who commissioned you officially. Your job is to **maintain those sectors of space where great battles, awful disasters and interstellar wrecks once occurred**. These dangerous zones of open vacuum are littered with debris from these tragedies. Your most important foe, however, is not momentum, entropy or jagged hunks of floating steel, but instead the **alien creatures that infest these sites**. These are symbolic places, memorials to those who died, and the alien's presence desecrates those memories. You must **get rid of them at all costs**.<br /><br />
+You are a complete and utter **Saucerberk**, a pan-galactic official in a lime-green spaceship shaped like a computer mouse. Until you are obliterated, or until the funding runs out, you are commissioned to **patrol and maintain those sectors of space which were the site of great battles, awful disasters and interstellar wrecks** for the enjoyment and education of tourists, grieving family members and visiting dignitaries alike. Despite their high visitor turnover, these zones of open vacuum are dangerous places; however, it is not momentum, entropy or jagged hunks of floating gigasteel, but instead the **peculiar alien algae-beasts which seem to infest these sites.** These are sacred places of remembrance, as well as turning a pretty space-penny, and the aliens' presence is upsetting the relatives of the dead, and your superiors. You must get rid of them as quickly as possible, and be THE BIGGEST SAUCERBERK OF ALL. Or something similar. 
 
-**Download Latest PC Version:**&nbsp;&nbsp;[`.exe`](http://bonfiredog.co.uk)&nbsp;&nbsp;&nbsp;&nbsp;[`installer`](http://bonfiredog.co.uk)
-
-**Download Latest Mac Version:**&nbsp;&nbsp;[`application`](http://bonfiredog.co.uk)&nbsp;&nbsp;&nbsp;&nbsp;[`.dmg`](http://bonfiredog.co.uk)<br /><br />
+[**Download Latest Version (Windows Only)**](http://bonfiredog.itch.io/saucerberks)<br /><br />
 
 ###How To Play
 
@@ -17,23 +15,23 @@ You are a **Saucerberk**, some sort of commissioned official in a lime-green spa
  
  * Move the ship with `W` `A` `S` `D`. 
  
- * Fire the Rapid Blaster with `Left Mouse Button`.
+ * Fire the Rapid Finetooth Orb Blastoid with `Left Mouse Button`.
 
- * Fire the Pheromone Gun with `Right Mouse Button`.
+ * Fire the Pheromone Seeder with `Right Mouse Button`.
  
  * Turn the ship by turning the `Mouse`.
    
  * Each level takes place at a different memorial site: the level is completed when every alien is destroyed. You have three lives.
  
- * There are two types of alien infesting the wrecks: at the risk of exposing the design, let's call these the **Vandal** and the **Glutton**. The swarming Vandals, which are antagonistic to the Saucerberk, can be easily destroyed by the Blaster. However, the Glutton cannot be harmed until **it has swallowed at least one Vandal**. The only way to do this is to **use the Pheromone Gun to lay a trail of delicious chemicals to a Vandal**, inducing the Glutton to swallow it and become vulnerable to the Blaster, and explosive bursting. The more Vandals are swallowed, the larger the burst will be.
+ * There are two types of alien infesting the wrecks: at the risk of exposing the design, let's call these the **Vandal** and the **Glutton**. The swarming Vandals, which are antagonistic to the Saucerberk, can be easily destroyed by the Blaster. However, the Glutton cannot be harmed until **it has swallowed at least one Vandal**. The only way to do this is to **use the Pheromone Seeder to lay a trail of delicious chemicals to a Vandal**, inducing the Glutton to swallow it and become vulnerable to the Blastoid, and satisfying, explosive bursting. The more Vandals are swallowed, the larger the burst will be.
  
- * Until all the Gluttons are dead, more and more Vandals will be drawn to the memorial site. 
+ * Until all the Gluttons are dead, more and more Vandals will be drawn to the memorial site. I haven't yet decided on the intricacies of the ecosystem that this is all supposed to represent. I don't suppose I ever will.
  
- * The debris fields hold other hazards and boons, but discovering these is all part of the frantic, hyperventilated fun of being a Saucerberk.
-
+ * The debris fields hold other hazards and boons, amongst the ancient wreckage of old starships. What is that beeping? Why is it suddenly very warm? I've lost control of my ship! All of these confusing questions are part of the frantic, brief fun of being a Saucerberk.
+  
 ###Development
 
-The game emerged from a tutorial video series which I followed in 2015, called [*How To Make A Game With No Experience*](https://www.youtube.com/watch?v=DN6dZWXUEzA) by [Tom Francis](http://pentadact.com), the developer of [*Gunpoint*](http://www.gunpointgame.com/). It is a calm, well-structured introduction to building a videogame from scratch in a proprietary-yet-powerful coding language. By the end of the series, I understood a lot more about conditional logic, dependencies, trigonometry and debugging, amongst lots of other things. After the tutorial series finished I began adding features, tweaks and new aesthetics tentatively, slowly puzzling out each technique as I went.
+The game was developed from the tutorial series [*How To Make A Game With No Experience*](https://www.youtube.com/watch?v=DN6dZWXUEzA) by [Tom Francis](http://pentadact.com), the developer of [*Gunpoint*](http://www.gunpointgame.com/). It is one of those calm, well-structured introductions to a complex subject that seem to take me ages, and many false starts to find. It covers building a top-down shooter game from scratch in the proprietary-yet-powerful Gamemaker development environment. By the end of the series, I understood a lot more about conditional logic, [OOO](https://en.wikipedia.org/wiki/Object-oriented_programming), dependencies, trignometry, debugging, and lots of other aspects of actually making and finishing a game. The base mechanics (particularly the gastronomic relationship between the Vandals and the Gluttons) are part of Francis' base game; the extraterrestrial setting, and some of the more minor mechanics, I fudged together afterwards. I've included the week-by-week files that were bundled with the video series, for no other reason than to make them more widely available. 
 
 ###Tools Used
 
@@ -42,15 +40,15 @@ The game emerged from a tutorial video series which I followed in 2015, called [
   * MS Paint
 
 ###License
-This game was a means to an end. I improved my coding abilities, and in the end had something to show people for it. As such, I have no desire to license it or restrict its use or dissection in any way, shape or form; please do whatever you want with it. If you own **Gamemaker: Studio**, you can open the `.gmx` project file and play around with the code directly; I have commented it fairly rigourously. 
+This game was a means to an end. I improved my coding abilities, and eventually had something to show people for it. As such, I have no desire to license it or restrict its use or dissection in any way, shape or form; please do whatever you want with it. If you own **Gamemaker: Studio**, you can open the `.gmx` project file in this repository and play around with the code directly; I have commented it fairly rigourously. 
 
-For more details, see the [`License.MD`](https://github.com/bonfiredog/saucerberks/blob/master/LICENSE.md) file in the repository.
+For more details, see the [`License.MD`](https://github.com/bonfiredog/saucerberks/blob/master/LICENSE.md) file in this repository.
 
 ###System Requirements
 I'm fairly certain that the game should run on any Windows PC or Mac built in the last five or six years. However, if you have any performance problems, please see the *Bugs* section below.
 
 ###Bugs
-If you experience any issues of performance, crashes, odd behaviour or the like, *please* do send me a bug report [via email](mailto:admin@bonfiredog.co.uk) with as much detail as you can manage. It really helps me see my many and deceptive mistakes.
+If you experience any issues of performance, crashes, odd behaviour or the like, *please* do send me a bug report [via email](mailto:admin@bonfiredog.co.uk) with as much detail as you can manage.
 
 ###Contact
-Feel free to follow me here on [Github](http://github.com/bonfiredog), on [Twitter](http://twitter.com/rob_sherman) or do send me an [email](mailto:rob@bonfiredog.co.uk).
+Feel free to follow me here on [Github](http://github.com/bonfiredog), on [Twitter](http://twitter.com/rob_sherman) or do send me an [email](mailto:rob@bonfiredog.co.uk). I will happily, and with some camaraderie and relief, pass on the advice and patiently-gifted code blocks that other developers have given me during the development of this game. I'm just pleased that I finally understand how arrays work.
