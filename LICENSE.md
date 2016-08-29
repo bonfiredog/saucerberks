@@ -13,4 +13,6 @@ In order to decompile this game you will need [Gamemaker: Studio](http://yoyogam
   
     
     
-<p align="center"><img style = "text-align:center;width:100%;display:block;margin-left:auto;margin-right:auto;" src="https://creativecommons.org/images/deed/seal.png" /></p>
+<p align="center"><img style = "text-align:center;width:100%;display:block;margin-left:auto;margin-right:auto;" src="https://creativecommons.org/images/deed/seal.png" />
+
+</p>
