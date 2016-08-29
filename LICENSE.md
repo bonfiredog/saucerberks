@@ -7,9 +7,9 @@ This assurance translates into a [Creative Commons Attribution-ShareAlike 4.0 In
 
 This project was based on the [*Make A Game With No Experience*](http://www.pentadact.com/2015-01-09-video-tutorial-make-a-game-with-no-experience/) video tutorial series by [Tom Francis](http://pentadact.com), a.k.a **Pentadact**. I don't believe that I have directly used any of his assets or code, only his spoken guidance in the videos. However, if you do find any code or assets which are not mine in this project, please be advised that their licensing is the purview of Tom Francis; having said this, he doesn't seem to apply any stricture at all. 
 
-The sounds in *Saucerberks* were generated using [bfxr](http://bfxr.net), a tool authored by the mystic [increpare](http://increpare.net). Thankfully, *"you have full rights to all sounds made with bfxr, and are free to use them for any purposes, commercial or otherwise."* Oh, good!
+The sounds in *Saucerberks* were generated using [bfxr](http://bfxr.net), a tool authored by the mystic [increpare](http://increpare.net). Thankfully, *"you have full rights to all sounds made with bfxr, and are free to use them for any purposes, commercial or otherwise."* Lucky us!
 
-In order to decompile this game you will need [Gamemaker: Studio](http://yoyogames.com), which is a commercial product by Yoyo Games. Any licensing terms relating to that software will be found either within the program itself or on the [website](http://www.yoyogames.com/studio).
+In order to decompile this game you will need [Gamemaker: Studio](http://yoyogames.com), which is a commercial product by Yoyo Games. Any licensing terms relating to that software will be found either within the program itself or on the [Yoyo Games website](http://www.yoyogames.com/studio).
   
     
     
