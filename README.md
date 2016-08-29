@@ -27,7 +27,7 @@ You are a complete and utter **Saucerberk**, a pan-galactic official in a lime-g
  
  * Until all the Gluttons are dead, more and more Vandals will be drawn to the memorial site. I haven't yet decided on the intricacies of the ecosystem that this is all supposed to represent. I don't suppose I ever will.
  
- * The debris fields hold other hazards and boons, amongst the ancient wreckage of old starships. What is that beeping? Why is it suddenly very warm? I've lost control of my ship! All of these confusing questions are part of the frantic, brief fun of being a Saucerberk.
+ * The debris fields hold other hazards and boons, amongst the ancient wreckage of long-archived starships. What is that beeping? Why is it suddenly very warm? I've lost control of my ship! All of these confusing exclamations are part of the frantic, brief fun of being a Saucerberk.
   
 ###Development
 
