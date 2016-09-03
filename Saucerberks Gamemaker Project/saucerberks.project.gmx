@@ -189,6 +189,7 @@
       <script>scripts\TurnToTarget.gml</script>
       <script>scripts\SolidCollision.gml</script>
       <script>scripts\ResetShunts.gml</script>
+      <script>scripts\StayInsideRoomSpecial.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">

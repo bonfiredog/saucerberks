@@ -41,6 +41,31 @@ FadeRate = 0.015
         </arguments>
       </action>
     </event>
+    <event eventtype="1" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>with oPlayerDocking {
+instance_destroy()
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -59,7 +84,7 @@ FadeRate = 0.015
           <argument>
             <kind>1</kind>
             <string>/* Bouncing */
-StayInsideRoom()
+StayInsideRoomSpecial()
 
 /* Emitting */
 
@@ -169,15 +194,15 @@ if TimeToDisplayText &gt; 0 and (instance_exists(oPlayer) and oPlayer.Docked = f
 
 draw_set_alpha(MessageAlpha)
 
-posx = x - view_xview[0]
-posy = y - view_yview[0]
+posxHid = x - view_xview[0]
+posyHid = y - view_yview[0]
 
 draw_set_font(fHidingText)
 draw_set_color(c_aqua)
 draw_set_halign(fa_right)
 draw_set_valign(fa_right)
 
-draw_text(posx + 500,posy,"://ERROR DETECTED#://Please Reboot Your#://v.47h ARK-class Docking Module#://For Full Functionality")
+draw_text(posxHid + 500,posyHid,"://ERROR DETECTED#://Please Reboot Your#://v.47h ARK-class Docking Module#://For Full Functionality")
 }
 
 </string>

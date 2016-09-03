@@ -104,8 +104,8 @@ ShowFieldRemaining = false
 
 if ShowBoomersRemaining = true {
 
-UIX = view_wview[0] / 2
-UIY = view_hview[0] / 2
+UIX2 = view_wview[0] / 2
+UIY2 = view_hview[0] / 2
 
 draw_set_alpha(TextAlpha)
 draw_set_font(fBoomersRemaining)
@@ -115,19 +115,19 @@ draw_set_halign(fa_center)
 
 if global.NumberOfBoomersRemaining &gt; 0 {
 if global.NumberOfBoomersRemaining &gt; 1 {
-draw_text(UIX,UIY,"There are") }
+draw_text(UIX2,UIY2,"There are") }
 else if global.NumberOfBoomersRemaining = 1 {
-draw_text(UIX,UIY,"There is") }
-UIY = UIY + 100
+draw_text(UIX2,UIY2,"There is") }
+UIY2 = UIY2 + 100
 draw_set_color(c_yellow)
 draw_set_font(fBoomersRemainingBig)
-draw_text(UIX,UIY,global.NumberOfBoomersRemaining)
-UIY = UIY + 100
+draw_text(UIX2,UIY2,global.NumberOfBoomersRemaining)
+UIY2 = UIY2 + 100
 draw_set_color(c_yellow)
 draw_set_font(fBoomersRemaining) 
-draw_text(UIX,UIY,"remaining!")
+draw_text(UIX2,UIY2,"remaining!")
 } else if global.NumberOfBoomersRemaining &lt;= 0 {
-draw_text(UIX,UIY,"No 'Gluttons' Remaining!##" + "Clear The Field!")
+draw_text(UIX2,UIY2,"No 'Gluttons' Remaining!##" + "Clear The Field!")
 }
 }
 
@@ -137,20 +137,20 @@ draw_text(UIX,UIY,"No 'Gluttons' Remaining!##" + "Clear The Field!")
 
 if ShowFieldRemaining = true {
 
-UIX = view_wport[0] / 2
-UIY = view_hport[0] / 2
+UIX3 = view_wport[0] / 2
+UIY3 = view_hport[0] / 2
 
 draw_set_alpha(TextAlpha)
 
 draw_set_font (fFieldName)
 draw_set_color(c_yellow)
 draw_set_halign(fa_center)
-draw_text(UIX,UIY,"Now Entering")
-UIY = UIY + 100
+draw_text(UIX3,UIY3,"Now Entering")
+UIY3 = UIY3 + 100
 draw_set_color(c_yellow)
 draw_set_halign(fa_center)
 draw_set_font(fFieldNameBig)
-draw_text(UIX,UIY,global.CurrentGalaxyName)
+draw_text(UIX3,UIY3,global.CurrentGalaxyName)
 
 }
 </string>

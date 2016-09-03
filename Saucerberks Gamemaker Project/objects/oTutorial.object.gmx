@@ -125,15 +125,15 @@ TutMode = "NoTitles"
 //This is the actual Draw event for the title text.
 if TutMode = "Titles" {
 
-x = view_wport[0] / 2
-y = 300
+posxTut = view_wport[0] / 2
+posyTut = 300
 
 draw_set_alpha(TutTitleAlpha)
 
 draw_set_colour(c_lime)
 draw_set_font(fTutorialTitle)
 draw_set_halign(fa_center) 
-draw_text(x,y,"Learn To Be A Saucerberk")
+draw_text(posxTut,posyTut,"Learn To Be A Saucerberk")
 
 }
 

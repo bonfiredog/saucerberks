@@ -159,36 +159,36 @@ draw_set_alpha(TitleAlpha)
 
 
 if file_exists("HighScore.txt") {
-    x = room_width - 200
-    y = 50
+    MenuX = (view_xport[0] + port_wport[0]) - 200
+    MenuY = view_yport[0] + 50
     
     draw_set_halign(fa_right)
     draw_set_color(c_white)
     
     draw_set_font(fHighScore)
-    draw_text(x,y,"Most Dignities Restored:         " )
+    draw_text(MenuX,MenuY,"Most Dignities Restored:         " )
     draw_set_font(fHighScoreBig)
-    y = 35
+    MenuY = view_yport[0] + 35
     draw_set_colour(c_lime)
-    HighScoreFlash = draw_text(x,y, global.HighScore)
+    HighScoreFlash = draw_text(MenuX,MenuY, global.HighScore)
     }
 
-    x = view_wport[0] / 2
-    y = 300
+    MenuX = view_wport[0] / 2
+    MenuY = view_yport[0] + 300
     
-    CurrentY = y
-    Margin = 10
+    CurrentY = MenuY
+    Margin = 15
     draw_set_colour(c_lime)
     draw_set_halign(fa_center)
-    if room = rStart {instance_create(x,y,oTitle)}
+    if room = rStart {instance_create(MenuX,MenuY,oTitle)}
     
-    y = y + 150
+    MenuY = MenuY + 150
     
     draw_set_font(fSubtitle)
     if room = rStart {draw_set_color(c_lime)} else if room = rLevel1 or room = rTutorial {draw_set_color(c_yellow)}
-    draw_text(x,y,"Detritus of battles and wrecks past litter the spaceways... memorials to the dead.")
-    y = y + 50
-    draw_text(x,y,"Restore their dignity, Saucerberk! Remove the alien desecration!!")
+    draw_text(MenuX,MenuY,"Detritus of battles and wrecks past litter the spaceways... memorials to the dead.")
+    MenuY = MenuY + 50
+    draw_text(MenuX,MenuY,"Restore their dignity, Saucerberk! Remove the alien desecration!!")
 
     CurrentY = CurrentY + 280
     
@@ -223,11 +223,11 @@ with oTitle {instance_destroy() }
 
 } else if Mode = "Victory" {
 
-    x = view_wport[0] / 2
-    y = 200
+    MenuX = view_wport[0] / 2
+    MenuY = view_yport[0] - 200
     
-    CurrentY = y
-    Margin = 10
+    CurrentY = MenuY
+    Margin = 15
     
     draw_set_halign(fa_center)
     draw_set_font(fTitle)
@@ -240,12 +240,12 @@ with oTitle {instance_destroy() }
     
     DrawTextAndUpdateCurrentY("Dignities Restored Today:")
     draw_set_font(fHighScoreBig)
-    draw_text(x,CurrentY,oCurrentScore.CurrentScore)
+    draw_text(MenuX,CurrentY,oCurrentScore.CurrentScore)
     CurrentY = CurrentY + 90
     draw_set_font(fHighScore)
     DrawTextAndUpdateCurrentY("Most Dignities Restored Ever Ever:")
     draw_set_font(fHighScoreBig)
-    draw_text(x,CurrentY,global.HighScore)
+    draw_text(MenuX,CurrentY,global.HighScore)
     CurrentY = CurrentY + 90
     
     draw_set_font(fMenu)
@@ -274,11 +274,11 @@ with oTitle {instance_destroy() }
     
    } else if Mode = "Lose" {
    
-    x = view_wport[0] / 2
-    y = 150
+    MenuX = view_wport[0] / 2
+    MenuY = view_yport + 150
     
-    CurrentY = y
-    Margin = 10
+    CurrentY = MenuY
+    Margin = 15
     
     draw_set_halign(fa_center)
     draw_set_colour(c_red)

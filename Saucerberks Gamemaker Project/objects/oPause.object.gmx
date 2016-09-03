@@ -4,7 +4,7 @@
   <solid>0</solid>
   <visible>-1</visible>
   <depth>0</depth>
-  <persistent>0</persistent>
+  <persistent>-1</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
@@ -66,7 +66,7 @@ Paused = false
 //with the Pause object displaying).
 
 
-if keyboard_check_pressed(ord('P')) {
+if keyboard_check_pressed(ord('P')) and room != rStart {
 audio_play_sound(aMenu,1,false)
 
 if Paused = false {
@@ -78,7 +78,7 @@ FleetName = choose(
 "Irontongue sour-beef",
 "Welchian whelk salad",
 "Morganian gravity-fed beest cutlets",
-"Rekentish simmerpunch"
+"Rekentish simmerlunch"
 )
 
 DreamChoice = choose(
@@ -89,12 +89,12 @@ DreamChoice = choose(
 "about playing pinball with your favourite aunt...",
 "about going to school wearing every pair of trousers that you own...",
 "about elephants in Georgian swimwear...",
-"about rivers of Mexican hot chocolate...",
+"about rivers of pseudo-Mexican hot chocolate...",
 "about eating " + FleetName + " on holiday...",
 "about that Neo-Mondrian specimen you saw in the bar last night...",
-"flying in Old Earth air...",
-"real gravity...",
-"horses. Real horses, not vat-grown...",
+"about flying in Old Earth air...",
+"about real gravity...",
+"of horses. Real horses, not vat-grown...",
 "swimming through black holes like sunken ships..."
 )
 image_alpha = 1
@@ -136,17 +136,17 @@ instance_activate_all()
             <string>draw_self()
 
 if Paused = true {
-posx = view_wport[0] / 2
-posy = view_hport[0] / 2
+posxPaused = view_wview[0] / 2
+posyPaused = view_hview[0] / 2
 draw_set_font(fFieldNameBig)
 draw_set_alpha(1)
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
 draw_set_color(c_lime)
-draw_text(posx,posy,"Paused")
-posy = posy + 50
+draw_text(posxPaused,posyPaused,"Paused")
+posyPaused = posyPaused + 50
 draw_set_font(fFieldName)
-draw_text(posx,posy,"Press P to wake from a lovely dream " + DreamChoice)
+draw_text(posxPaused,posyPaused,"Press P to wake from a lovely dream " + DreamChoice)
 }
 </string>
           </argument>

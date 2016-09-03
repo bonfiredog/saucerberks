@@ -32,7 +32,7 @@ WeaponCount = 0
 SelectedWeaponIndex = 0
 
 depth = -11
-image_xscale = 0.8
+image_xscale = 0.9
 image_yscale = image_xscale
 
 //Set initial power to 5, define the maximum (defunct)
@@ -183,9 +183,9 @@ if Undocking = false and Docked = false {
 /* Collision */
 
 //If a block is about to touch us, it's big enough to collide with, and we aren't already colliding with something else...
-SolidTouching = instance_place(x + hspeed, y + vspeed, oSolid)
+SolidTouching = instance_place(x, y, oSolid)
 
-if instance_exists(SolidTouching) and SolidTouching.image_xscale &gt; 0.8 and Colliding = false {
+if instance_exists(SolidTouching) and SolidTouching.Collidable = true and Colliding = false {
 //Remember the player's speed just before the collision. If they were not moving, set the speed to the standard player speed.
 OriginalSpeed = 350 / room_speed
 ScreenShake(25)
@@ -288,6 +288,7 @@ global.PlayerLives = global.PlayerLives - 1
 //Destroy the player's weapons.
 with oBaitGun { instance_destroy() }
 with oRapidFireGun { instance_destroy() }
+if instance_exists(oContactFlash){with oContactFlash {instance_destroy()}}
 if instance_exists(oGrenadeGun) and oGrenadeGun.Owner = oPlayer.id { with oGrenadeGun { instance_destroy() } } 
 ExplodeIntoANumberOfChunks(oGame.NumberOfBitsThePlayerIsMadeOf, oBit)  
 //Reset the tutorial if in the tutorial room.
@@ -458,9 +459,10 @@ Undocking = false
 if instance_exists(oTutorial) and oTutorial.TutMode = "NoTitles" {
 
 //Have all text follow the current viewport.
-posx = x - (view_xview[0])
-posy = y - (view_yview[0])
+posxPlay = x - (view_xview[0])
+posyPlay = y - (view_yview[0])
 
+draw_set_alpha(1)
 draw_set_font(fTutorial)
 draw_set_colour(c_lime)
 draw_set_halign(fa_center)
@@ -473,9 +475,9 @@ if Stage = "Controls" {
 //Press W, and then delete the UI tip.
 if WPressed = false and oMenu.Mode != "Titles" {
 draw_set_colour(c_red)
-draw_circle(posx,posy - 120,40,true)
+draw_circle(posxPlay,posyPlay - 120,40,true)
 draw_set_colour(c_lime)
-draw_text(posx, posy - 120,"W")
+draw_text(posxPlay, posyPlay - 120,"W")
 if keyboard_check(ord('W')) {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
@@ -486,9 +488,9 @@ WPressed = true }
 //Press S, and then delete the UI tip.
 if SPressed = false and oMenu.Mode != "Titles"{
 draw_set_colour(c_red)
-draw_circle(posx,posy + 120,40,true)
+draw_circle(posxPlay,posyPlay + 120,40,true)
 draw_set_colour(c_lime)
-draw_text(posx,posy + 120,"S")
+draw_text(posxPlay,posyPlay + 120,"S")
 if keyboard_check(ord('S')) {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
@@ -499,9 +501,9 @@ SPressed = true }
 //Press A, and then delete the UI tip.
 if APressed = false and oMenu.Mode != "Titles"{
 draw_set_colour(c_red)
-draw_circle(posx - 200,posy,40,true)
+draw_circle(posxPlay - 200,posyPlay,40,true)
 draw_set_colour(c_lime)
-draw_text(posx - 200,posy,"A")
+draw_text(posxPlay - 200,posyPlay,"A")
 if keyboard_check(ord('A')) {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
@@ -512,9 +514,9 @@ APressed = true }
 //Press D, and then delete the UI tip.
 if DPressed = false and oMenu.Mode != "Titles"{
 draw_set_colour(c_red)
-draw_circle(posx + 200,posy,40,true)
+draw_circle(posxPlay + 200,posyPlay,40,true)
 draw_set_colour(c_lime)
-draw_text(posx + 200,posy,"D")
+draw_text(posxPlay + 200,posyPlay,"D")
 if keyboard_check(ord('D')) {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
@@ -524,10 +526,10 @@ DPressed = true }
 //If all buttons pressed, left click to end the section.
 if WPressed and SPressed and APressed and DPressed = true and LeftClicked = false and oMenu.Mode != "Titles" {
 draw_set_colour(c_red)
-draw_circle(posx + 300, posy + 120, 130, true)
-draw_text(posx + 300,posy + 50,"Left Click")
+draw_circle(posxPlay + 300, posyPlay + 120, 130, true)
+draw_text(posxPlay + 300,posyPlay + 50,"Left Click")
 draw_set_colour(c_lime)
-draw_text(posx + 300,posy + 140,"Shoot a little yellow #ball. It's deadly!#Sometimes.")
+draw_text(posxPlay + 300,posyPlay + 140,"Shoot a little yellow #ball. It's deadly!#Sometimes.")
 if mouse_check_button(mb_left) {
 audio_sound_pitch(aTextChange,random_range(0.3,1.5))
 audio_play_sound(aTextChange,1,false)
@@ -611,14 +613,12 @@ SoundPlay5 = true
 
 
 //This controls the 'right-click' hint that disappears if the right mosue button is pressed.
-if RightClicked = false and oMenu.Mode != "Titles"  {
-
-draw_set_colour(c_red)
-draw_circle(posx - 180, posy - 110, 90, true)
-draw_text(posx - 180,posy - 130, "Right Click")
-draw_set_colour(c_lime)
-draw_text(posx - 180,posy - 100,"Shoot bait?")
-if mouse_check_button(mb_right) {RightClicked = true }
+if BoomerStage = "Second" and TutorialBoomer.ThingsEaten = 0 and oMenu.Mode != "Titles"  {
+draw_set_colour(c_fuchsia)
+draw_circle(posxPlay - 180, posyPlay - 110, 90, true)
+draw_text(posxPlay - 180,posyPlay - 130, "Right Click")
+draw_set_colour(c_fuchsia)
+draw_text(posxPlay - 180,posyPlay - 100,"Shoot bait?")
 }
 
 
@@ -646,9 +646,9 @@ SoundPlay6 = true
 }
 
 draw_set_colour(c_red)
-draw_circle(posx + 300, posy + 120, 150, true)
+draw_circle(posxPlay + 300, posyPlay + 120, 150, true)
 draw_set_colour(c_yellow)
-draw_text(posx + 300, posy + 115, "That's it! You're#nearly ready to#tackle the debris fields...")
+draw_text(posxPlay + 300, posyPlay + 115, "That's it! You're#nearly ready to#tackle the debris fields...")
 }
 
 if Countdown &lt; 100 and Countdown &gt; 70 {
@@ -659,9 +659,9 @@ SoundPlay7 = true
 }
 
 draw_set_colour(c_red)
-draw_circle(posx + 300, posy + 120, 165, true)
+draw_circle(posxPlay + 300, posyPlay + 120, 165, true)
 draw_set_colour(c_lime)
-draw_text(posx + 300, posy + 110, "Feel free to practice#until you are ready#to go. Just keep#something in mind...")
+draw_text(posxPlay + 300, posyPlay + 110, "Feel free to practice#until you are ready#to go. Just keep#something in mind...")
 }
 
 if Countdown &lt; 100 {
@@ -685,9 +685,9 @@ SoundPlay8 = true
 }
 
 draw_set_colour(c_red)
-draw_circle(posx + 300, posy + 120, 145, true)
+draw_circle(posxPlay + 300, posyPlay + 120, 145, true)
 draw_set_colour(c_lime)
-draw_text(posx + 300,posy + 120,"You're going to be seeing#a lot of mess...")
+draw_text(posxPlay + 300,posyPlay + 120,"You're going to be seeing#a lot of mess...")
 
 
 
@@ -728,8 +728,8 @@ SoundPlay9 = true
 }
 if instance_exists(oTutEnd) and oTutEnd.PlayerTouch = false {
 draw_set_colour(16711935)
-draw_circle(posx + 300, posy + 120, 150, true)
-draw_text(posx + 300,posy + 110,"Fly into that little#purple number when#you're ready to go!")
+draw_circle(posxPlay + 300, posyPlay + 120, 150, true)
+draw_text(posxPlay + 300,posyPlay + 110,"Fly into that little#purple number when#you're ready to go!")
 
 }
 }
@@ -744,14 +744,14 @@ draw_text(posx + 300,posy + 110,"Fly into that little#purple number when#you're 
 
 if instance_exists(oGrenadeGun) and oGrenadeGun.PickUpMessage = true {
 
-posx = x - view_xview[0]
-posy = y - view_yview[0]
+posxPlay = x - view_xview[0]
+posyPlay = y - view_yview[0]
 
 if TimeToDisplay &gt; 0 {
 TimeToDisplay = TimeToDisplay - 1 
 draw_set_font(fTutorial)
 draw_set_colour(c_lime)
-draw_text(posx,posy - 100,"A Reaper bomb module! Ooh! I saw#one on Grandma's wall once...")
+draw_text(posxPlay,posyPlay - 100,"A Reaper bomb module! Ooh! I saw#one on Grandma's wall once...")
 } else if TimeToDisplay &lt;= 0 {
 TimeToDisplay = 180
 oGrenadeGun.PickUpMessage = false

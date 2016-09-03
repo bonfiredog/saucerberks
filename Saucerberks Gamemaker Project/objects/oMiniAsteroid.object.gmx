@@ -61,24 +61,6 @@ speed = speed - 1
 
 //Spin around the room.
 image_angle = image_angle + SpinDirection
-
-if MidstOfColliding &gt; 0 {
-MidstOfColliding = MidstOfColliding - 1
-}
-
-//If the mini asteroid touches anything else, and it has not collided in the last two seconds,
-// send it off in a different direction.
-ThingInContact = place_meeting(x + hspeed, y + vspeed, oSolid) or place_meeting(x + hspeed, y + vspeed, oSpecialSolid) or place_meeting(x + hspeed, y + vspeed, oPlayer) 
-or place_meeting(x + hspeed, y + vspeed, oEnemy) or place_meeting(x + hspeed, y + vspeed, oProjectile) 
-
-
-if instance_exists(ThingInContact)
-and image_xscale &gt; 0.9 
-and MidstOfColliding &lt;= 0 
-and ThingInContact.image_xscale &gt; 0.9 {
-    direction = choose(direction - random_range(130,220),direction + random_range(130,220))
-    MidstOfColliding = 120
-    }    
     
 
 StayInsideRoom()

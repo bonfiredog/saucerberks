@@ -8,8 +8,8 @@ BoxTop = CurrentY
 TextTop = BoxTop + Margin
 BoxBottom = BoxTop + Margin + string_height(ButtonText) + Margin
 HalfTextWidth = string_width(ButtonText) / 2
-BoxLeft =  x - HalfTextWidth - (Margin * 2)
-BoxRight = x + HalfTextWidth + (Margin * 2)
+BoxLeft =  MenuX - HalfTextWidth - (Margin * 2)
+BoxRight = MenuX + HalfTextWidth + (Margin * 2)
 
 //Set text color to grey.
 draw_set_colour(c_green)

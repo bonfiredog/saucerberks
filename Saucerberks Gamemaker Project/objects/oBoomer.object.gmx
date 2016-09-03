@@ -179,7 +179,7 @@ Flashing = false
 sprite_index = sEnemy
 image_xscale = 1.0
 image_yscale = image_xscale
-NumberOfFlashes = irandom_range(3,6)
+NumberOfFlashes = 3
 TimeBetweenFlashes = 900 / room_speed
 TimeOfFlash = 450 / room_speed
 }
@@ -267,8 +267,8 @@ if oPlayer.Stage = "Boomers" {
 if oPlayer.BoomerStage = "First" {
 
 if oBoomer.BoomerShot = false {
-posx = x
-posy = y
+posxBoom = x
+posyBoom = y
 
 draw_set_font(fTutorial)
 draw_set_halign(fa_center)
@@ -277,14 +277,14 @@ draw_set_valign(fa_center)
 draw_self()
 
 draw_set_colour(c_red)
-draw_circle(posx,posy, 150, true)
+draw_circle(posxBoom,posyBoom, 150, true)
 draw_set_colour(c_lime)
-draw_text(posx, posy + 180, "There's another nasty customer.#Why don't you try and off her?")
+draw_text(posxBoom, posyBoom + 180, "There's another nasty customer.#Why don't you try and off her?")
 
 } else {
 
-posx = x
-posy = y
+posxBoom = x
+posyBoom = y
 
 draw_set_font(fTutorial)
 draw_set_halign(fa_center)
@@ -293,9 +293,9 @@ draw_set_valign(fa_center)
 draw_self()
 
 draw_set_colour(c_red)
-draw_circle(posx,posy, 150, true)
+draw_circle(posxBoom,posyBoom, 150, true)
 draw_set_colour(c_lime)
-draw_text(posx, posy + 180, "That won't work! You'll have to#persuade her to eat her friends...")
+draw_text(posxBoom, posyBoom + 180, "That won't work! You'll have to#persuade her to eat her friends...")
 
 }
 } else if oPlayer.BoomerStage = "Second" {
@@ -303,8 +303,8 @@ draw_text(posx, posy + 180, "That won't work! You'll have to#persuade her to eat
 if instance_exists(oPlayer.TutorialBoomer) and oPlayer.TutorialBoomer.ThingsEaten &lt; 1 {
 if instance_exists(oSwarmer) {
 
-posx = x
-posy = y
+posxBoom = x
+posyBoom = y
 
 draw_set_font(fTutorial)
 draw_set_halign(fa_center)
@@ -313,19 +313,19 @@ draw_set_valign(fa_center)
 draw_self()
 
 draw_set_colour(c_red)
-draw_circle(posx, posy, 150, true)
+draw_circle(posxBoom, posyBoom, 150, true)
 draw_set_colour(c_lime)
-draw_text(posx ,posy + 180,"You'll need to attach some bait to her friend first.")
-
-draw_line(posx,posy,oSwarmer.x,oSwarmer.y)
+draw_text(posxBoom ,posyBoom + 180,"You'll need to attach some bait to her friend first.")
+draw_set_colour(c_fuchsia)
+draw_line_width(posxBoom,posyBoom,oSwarmer.x,oSwarmer.y,3)
 draw_text(oSwarmer.x, oSwarmer.y + 180, "You may need to lay a#trail of bait to#attract the 'Glutton'!")
 draw_set_colour(c_red)
 draw_circle(oSwarmer.x,oSwarmer.y,140, true)
 }
 
 } else {
-posx = x
-posy = y
+posxBoom = x
+posyBoom = y
 
 draw_set_font(fTutorial)
 draw_set_halign(fa_center)
@@ -334,9 +334,9 @@ draw_set_valign(fa_center)
 draw_self()
 
 draw_set_colour(c_red)
-draw_circle(posx, posy, 150, true)
+draw_circle(posxBoom, posyBoom, 150, true)
 draw_set_colour(c_lime)
-draw_text(posx,posy + 180,"Now give her a shot!")
+draw_text(posxBoom,posyBoom + 180,"Now give her a shot!")
 }
 } else {
 draw_self()

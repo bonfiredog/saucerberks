@@ -21,7 +21,7 @@ NewBlock.y = (NewBlock.y div BlockSize) * BlockSize
 with NewBlock {
 
 //If it touches a player, an Enemy or another piece of debris on creation (which would mess with collision), destroy it.
-if place_meeting(x,y,oPlayer) { instance_destroy() }
+if distance_to_object(oPlayer) < 100 {instance_destroy() }
 if place_meeting(x,y,oSolid) {instance_destroy() }
 if place_meeting(x,y,oEnemy) {instance_destroy() }
 }
@@ -66,7 +66,7 @@ SpawnOrNot = choose(true,false)
 if room != rStart {
 if SpawnOrNot = true {
 //Only spawn one Special Debris per room.
-while instance_number(oSpecialSolid) < 1 {
+while instance_number(oSpecialSolid) < 1 and SAttempt < NumberOfSAttempts {
 //Only spawn the Grenade Special Debris if the player has not yet picked up the Grenade Gun. In either case, spawn one of the available Special Debris.
 if global.GrenadeGunGot = false {
 NewSpecial = instance_create(random_range(0 + SBlockSize,room_width - SBlockSize),random_range(0 + SBlockSize,room_height - SBlockSize), choose(oGrenadeDet2,oHidingDet,oTurretDet))
@@ -74,12 +74,12 @@ NewSpecial = instance_create(random_range(0 + SBlockSize,room_width - SBlockSize
 NewSpecial = instance_create(random_range(0 + SBlockSize,room_width - SBlockSize),random_range(0 + SBlockSize,room_height - SBlockSize), choose(oHidingDet, oTurretDet))
 }
 NewSpecial.x = (NewSpecial.x div SBlockSize) * SBlockSize
-NewCBlock.y = (NewCBlock.y div SBlockSize) * SBlockSize
-with NewCBlock {
+NewSpecial.y = (NewSpecial.y div SBlockSize) * SBlockSize
+with NewSpecial {
 
 //Destroy the Special Debris if... blah blah blah. It's the same bloody code. I should have made a better script.
-if place_meeting(x,y,oPlayer) or place_meeting(x,y,oEnemy) or place_meeting(x,y,oSolid) {
-instance_destroy() }
+if distance_to_object(oPlayer) < 100 {
+instance_destroy()} 
 }
 SAttempt = SAttempt +1
 }
@@ -99,7 +99,7 @@ while instance_number(oBoomer) < NumberOfBoomers && Attempt < NumberOfAttempts  
 
 NewBoomer = instance_create(random(room_width),random(room_height),oBoomer)
 with NewBoomer {
-if place_meeting(x,y,oPlayer) { instance_destroy() }
+if distance_to_object(oPlayer) < 400 { instance_destroy() }
 if place_meeting(x,y,oSolid) { instance_destroy() }
 }
 Attempt = Attempt + 1

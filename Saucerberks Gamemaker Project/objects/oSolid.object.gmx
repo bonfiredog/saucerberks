@@ -33,22 +33,29 @@ OriginalSpinDirection = SpinDirection
 image_xscale = random_range(0.5,1.2)
 image_yscale = image_xscale
 
+if image_xscale &gt; 0.8 {
+Collidable = true 
+} else {
+Collidable = false
+}
+
 //Smaller solids are supposed to be farther away; to give the impression of depth, 
 //make them more transparent.
-if image_xscale &lt;= 0.7 {
+if Collidable = false {
 image_alpha = 0.9
-image_blend = c_gray
+image_blend = c_dkgray
 depth = 101
-} else if image_xscale &lt;= 0.9 {
+} else if Collidable = true {
 image_alpha = 0.9
 depth = 100
-} else {
-depth = 80
+image_blend = c_ltgray
 }
 SetValues = false
 OriginalSpeed = speed
 SolidInContact = noone
 PlayerInContact = noone
+MiniAsteroidsRemaining = irandom_range(10,30)
+Hit = false
 </string>
           </argument>
         </arguments>
@@ -77,6 +84,11 @@ StayInsideRoom()
 //Spin the solid.
 image_angle = image_angle + SpinDirection
 
+//Always slow down gently after any collision to the normal speed, both angularly and linearly.
+if speed &gt; OriginalSpeed {
+speed = speed - 0.25
+}
+
 /* Bouncing */
 
 
@@ -92,24 +104,44 @@ SetValues = false
 
 
 SolidInContact = instance_place(x + hspeed,y+vspeed,oSolid) 
-PlayerInConact = instance_place(x + hspeed,y+vspeed,oPlayer) 
+PlayerInContact = instance_place(x,y,oPlayer) 
+ProjectileInContact = instance_place(x + hspeed, y + vspeed,oProjectile)
 
 SolidCollision(SolidInContact)
 SolidCollision(PlayerInContact)
-
-//Always slow down gently after any collision to the normal speed, both angularly and linearly.
-if speed &gt; OriginalSpeed {
-speed = speed - 0.03
-}
+SolidCollision(ProjectileInContact)
 
 if SpinDirection &gt; OriginalSpinDirection {
-SpinDirection = SpinDirection - 0.01
+SpinDirection = SpinDirection - 0.05
 }
 
 if SpinDirection &lt; OriginalSpinDirection {
-SpinDirection = SpinDirection + 0.01
+SpinDirection = SpinDirection + 0.05
 }
 
+
+with oDetritus5 {
+//If shot, explode (with sound) into a certain number of mini-asteroids, and then destroy itself.
+
+if place_meeting(x,y,oProjectile){
+instance_create(x,y,oAsteroidExplosion)
+audio_play_sound(aRockBreak, 1, false)
+ScreenShake(5)
+image_alpha = 0.0
+Hit = true
+}
+
+if Hit = true {
+while MiniAsteroidsRemaining &gt; 0 {
+MiniAsteroid = instance_create(x,y,oMiniAsteroid) 
+MiniAsteroidsRemaining = MiniAsteroidsRemaining - 1
+}
+if MiniAsteroidsRemaining &lt;= 0{
+instance_destroy()
+}
+}
+
+}
 
 </string>
           </argument>

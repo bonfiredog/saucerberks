@@ -191,13 +191,13 @@ StayInsideRoom()
 
 if Owner = noone {
 
-posx = x - view_xview[0]
-posy = y - view_yview[0]
+posxGred = x - view_xview[0]
+posyGred = y - view_yview[0]
 
 draw_set_halign(fa_center)
 draw_set_valign(fa_center)
 draw_set_color(c_lime)
-draw_circle(posx,posy,45,true)
+draw_circle(posxGred,posyGred,45,true)
 
 }
 

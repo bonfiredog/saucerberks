@@ -31,8 +31,8 @@ if room = rLevel1 {
 if oMenu.Mode = "Game" or oMenu.Mode = "Menu" {
 
 //Set it to draw in the bottom left.
-    UIX = (view_wport[0] / view_wport[0]) + 15
-    UIY = view_hport[0] - 120
+    UIX = view_xport[0] + 15
+    UIY = (view_yport + view_hport[0]) - 120
     
     draw_set_halign(fa_center)
     draw_set_color(c_lime)
@@ -45,7 +45,7 @@ if oMenu.Mode = "Game" or oMenu.Mode = "Menu" {
     draw_rectangle(UIX+110,UIY,UIX+200,UIY+90,true)
     
     UIX = UIX + 45
-    UIY = UIY + 15
+    UIY = UIY + 35
     
     //Draw the score, and lives, with their corresponding variables.
     
@@ -59,9 +59,7 @@ if oMenu.Mode = "Game" or oMenu.Mode = "Menu" {
     draw_text(UIX,UIY,"Lives")
     UIY = UIY + 35
     draw_text(UIX,UIY,global.PlayerLives)     
-    
-   
-           
+              
 } 
 }
 </string>
