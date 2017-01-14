@@ -125,4 +125,18 @@ NumberOfStars = irandom_range (1000,1600)
 
 while instance_number(oStar) < NumberOfStars {
 NewStar = instance_create(random(room_width),random(room_height),oStar)
+NewStar.ParallaxLevel = choose(1,2,3)
+switch NewStar.ParallaxLevel {
+case 1:
+NewStar.image_xscale = random_range(0.4,0.5);
+NewStar.image_yscale = NewStar.image_xscale ;
+break;
+case 2:
+NewStar.image_xscale = random_range (0.7,0.8);
+NewStar.image_yscale = NewStar.image_xscale;
+break;
+case 3:
+NewStar.image_xscale = random_range(1,1.1);
+NewStar.image_yscale = NewStar.image_xscale;
+}
 }

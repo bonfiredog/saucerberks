@@ -263,7 +263,6 @@
     </objects>
     <objects name="Furniture">
       <objects name="Clutter">
-        <object>objects\oDetritus2</object>
         <object>objects\oClutter</object>
         <object>objects\oDetritus4</object>
         <object>objects\oDetritus9</object>
@@ -279,6 +278,7 @@
         <object>objects\oSolid</object>
         <object>objects\oDetritus15</object>
         <object>objects\oDetritus13</object>
+        <object>objects\oDetritus2</object>
         <object>objects\oDetritus14</object>
         <object>objects\oDetritus11</object>
         <object>objects\oDetritus12</object>

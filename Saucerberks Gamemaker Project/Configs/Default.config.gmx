@@ -474,7 +474,7 @@ My website: http://bonfiredog.co.uk
     <option_use_new_audio>True</option_use_new_audio>
     <option_variableerrors>False</option_variableerrors>
     <option_version>1.0.0</option_version>
-    <option_version_build>3</option_version_build>
+    <option_version_build>6</option_version_build>
     <option_version_company>Bonfire Dog</option_version_company>
     <option_version_copyright>Creative Commons A-SA 4.0 International</option_version_copyright>
     <option_version_description>A game that I made to teach me to code somewhat properly. Purge the debris fields of long-resolved space battles of encroaching aliens.</option_version_description>
@@ -550,7 +550,7 @@ My website: http://bonfiredog.co.uk
     <option_winUAP_wide_logo>Configs\Default\WindowsUAP\logos\WideLogo.scale-100.png</option_winUAP_wide_logo>
     <option_windowcolor>clBlack</option_windowcolor>
     <option_windows_alternate_sync_method>False</option_windows_alternate_sync_method>
-    <option_windows_build_version>1</option_windows_build_version>
+    <option_windows_build_version>5</option_windows_build_version>
     <option_windows_company_info>Bonfire Dog</option_windows_company_info>
     <option_windows_copyright_info>Creative Commons A-SA 4.0 International</option_windows_copyright_info>
     <option_windows_create_textures_on_demand>False</option_windows_create_textures_on_demand>
